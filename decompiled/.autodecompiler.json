@@ -1,5 +1,6 @@
 {
   "tool": "dotnet-autodecompiler",
+  "schemaVersion": 2,
   "decompilerVersion": "10.1.1.8388",
   "languageVersion": "CSharp10_0",
   "resources": "none",
@@ -13,38 +14,218 @@
       "sha256": "aac1bda55ed6de5d715e23adfbd07f8fad8f8a8315e02bad986d74aa5d1744e6",
       "sourceUrl": "https://github.com/creaturefeaturelarry/casualties-together/releases/tag/v4.0.1",
       "sourceRef": "v4.0.1",
-      "unresolvedReferences": [
-        "0Harmony",
-        "Assembly-CSharp",
-        "BepInEx",
-        "DiscordRPC",
-        "LiteNetLib",
-        "Mono.Security",
-        "MonoMod.Utils",
-        "Newtonsoft.Json",
-        "OpusSharp.Core",
-        "Steamworks.NET",
-        "Unity.Burst",
-        "Unity.RenderPipelines.Core.Runtime",
-        "Unity.RenderPipelines.Universal.Runtime",
-        "Unity.TextMeshPro",
-        "Unity.VisualScripting.Core",
-        "UnityEngine.AnimationModule",
-        "UnityEngine.AssetBundleModule",
-        "UnityEngine.AudioModule",
-        "UnityEngine.CoreModule",
-        "UnityEngine.GridModule",
-        "UnityEngine.IMGUIModule",
-        "UnityEngine.ImageConversionModule",
-        "UnityEngine.InputLegacyModule",
-        "UnityEngine.ParticleSystemModule",
-        "UnityEngine.Physics2DModule",
-        "UnityEngine.ScreenCaptureModule",
-        "UnityEngine.TextRenderingModule",
-        "UnityEngine.TilemapModule",
-        "UnityEngine.UI",
-        "UnityEngine.UIModule",
-        "UnityEngine.UnityWebRequestModule"
+      "sourceFileCount": 394,
+      "references": [
+        {
+          "name": "0Harmony",
+          "version": "2.7.0.0",
+          "resolved": false,
+          "framework": false
+        },
+        {
+          "name": "Assembly-CSharp",
+          "version": "0.0.0.0",
+          "resolved": false,
+          "framework": false
+        },
+        {
+          "name": "BepInEx",
+          "version": "5.4.23.5",
+          "resolved": false,
+          "framework": false
+        },
+        {
+          "name": "DiscordRPC",
+          "version": "1.0.0.0",
+          "resolved": false,
+          "framework": false
+        },
+        {
+          "name": "LiteNetLib",
+          "version": "1.3.5.0",
+          "resolved": false,
+          "framework": false
+        },
+        {
+          "name": "Mono.Security",
+          "version": "4.0.0.0",
+          "resolved": false,
+          "framework": false
+        },
+        {
+          "name": "MonoMod.Utils",
+          "version": "21.12.13.1",
+          "resolved": false,
+          "framework": false
+        },
+        {
+          "name": "Multiupdater",
+          "version": "1.0.0.0",
+          "resolved": true,
+          "framework": false
+        },
+        {
+          "name": "Newtonsoft.Json",
+          "version": "13.0.0.0",
+          "resolved": false,
+          "framework": false
+        },
+        {
+          "name": "OpusSharp.Core",
+          "version": "1.0.0.0",
+          "resolved": false,
+          "framework": false
+        },
+        {
+          "name": "Steamworks.NET",
+          "version": "2025.163.0.0",
+          "resolved": false,
+          "framework": false
+        },
+        {
+          "name": "System",
+          "version": "4.0.0.0",
+          "resolved": true,
+          "framework": true
+        },
+        {
+          "name": "System.Core",
+          "version": "4.0.0.0",
+          "resolved": true,
+          "framework": true
+        },
+        {
+          "name": "Unity.Burst",
+          "version": "0.0.0.0",
+          "resolved": false,
+          "framework": false
+        },
+        {
+          "name": "Unity.RenderPipelines.Core.Runtime",
+          "version": "0.0.0.0",
+          "resolved": false,
+          "framework": false
+        },
+        {
+          "name": "Unity.RenderPipelines.Universal.Runtime",
+          "version": "0.0.0.0",
+          "resolved": false,
+          "framework": false
+        },
+        {
+          "name": "Unity.TextMeshPro",
+          "version": "0.0.0.0",
+          "resolved": false,
+          "framework": false
+        },
+        {
+          "name": "Unity.VisualScripting.Core",
+          "version": "0.0.0.0",
+          "resolved": false,
+          "framework": false
+        },
+        {
+          "name": "UnityEngine.AnimationModule",
+          "version": "0.0.0.0",
+          "resolved": false,
+          "framework": false
+        },
+        {
+          "name": "UnityEngine.AssetBundleModule",
+          "version": "0.0.0.0",
+          "resolved": false,
+          "framework": false
+        },
+        {
+          "name": "UnityEngine.AudioModule",
+          "version": "0.0.0.0",
+          "resolved": false,
+          "framework": false
+        },
+        {
+          "name": "UnityEngine.CoreModule",
+          "version": "0.0.0.0",
+          "resolved": false,
+          "framework": false
+        },
+        {
+          "name": "UnityEngine.GridModule",
+          "version": "0.0.0.0",
+          "resolved": false,
+          "framework": false
+        },
+        {
+          "name": "UnityEngine.IMGUIModule",
+          "version": "0.0.0.0",
+          "resolved": false,
+          "framework": false
+        },
+        {
+          "name": "UnityEngine.ImageConversionModule",
+          "version": "0.0.0.0",
+          "resolved": false,
+          "framework": false
+        },
+        {
+          "name": "UnityEngine.InputLegacyModule",
+          "version": "0.0.0.0",
+          "resolved": false,
+          "framework": false
+        },
+        {
+          "name": "UnityEngine.ParticleSystemModule",
+          "version": "0.0.0.0",
+          "resolved": false,
+          "framework": false
+        },
+        {
+          "name": "UnityEngine.Physics2DModule",
+          "version": "0.0.0.0",
+          "resolved": false,
+          "framework": false
+        },
+        {
+          "name": "UnityEngine.ScreenCaptureModule",
+          "version": "0.0.0.0",
+          "resolved": false,
+          "framework": false
+        },
+        {
+          "name": "UnityEngine.TextRenderingModule",
+          "version": "0.0.0.0",
+          "resolved": false,
+          "framework": false
+        },
+        {
+          "name": "UnityEngine.TilemapModule",
+          "version": "0.0.0.0",
+          "resolved": false,
+          "framework": false
+        },
+        {
+          "name": "UnityEngine.UI",
+          "version": "1.0.0.0",
+          "resolved": false,
+          "framework": false
+        },
+        {
+          "name": "UnityEngine.UIModule",
+          "version": "0.0.0.0",
+          "resolved": false,
+          "framework": false
+        },
+        {
+          "name": "UnityEngine.UnityWebRequestModule",
+          "version": "0.0.0.0",
+          "resolved": false,
+          "framework": false
+        },
+        {
+          "name": "mscorlib",
+          "version": "4.0.0.0",
+          "resolved": true,
+          "framework": true
+        }
       ]
     },
     {
@@ -56,15 +237,80 @@
       "sha256": "9045c420c407ab4eef3a84295953898e66ef6e0d6a11b72e23850aa50101828c",
       "sourceUrl": "https://github.com/creaturefeaturelarry/casualties-together/releases/tag/v4.0.1",
       "sourceRef": "v4.0.1",
-      "unresolvedReferences": [
-        "0Harmony",
-        "Assembly-CSharp",
-        "BepInEx",
-        "Newtonsoft.Json",
-        "System.Net.Http",
-        "Unity.VisualScripting.Core",
-        "UnityEngine.CoreModule",
-        "UnityEngine.IMGUIModule"
+      "sourceFileCount": 9,
+      "references": [
+        {
+          "name": "0Harmony",
+          "version": "2.7.0.0",
+          "resolved": false,
+          "framework": false
+        },
+        {
+          "name": "Assembly-CSharp",
+          "version": "0.0.0.0",
+          "resolved": false,
+          "framework": false
+        },
+        {
+          "name": "BepInEx",
+          "version": "5.4.23.5",
+          "resolved": false,
+          "framework": false
+        },
+        {
+          "name": "KrokoshaCasualtiesMP",
+          "version": "3.1.2.0",
+          "resolved": true,
+          "framework": false
+        },
+        {
+          "name": "Newtonsoft.Json",
+          "version": "13.0.0.0",
+          "resolved": false,
+          "framework": false
+        },
+        {
+          "name": "System",
+          "version": "4.0.0.0",
+          "resolved": true,
+          "framework": true
+        },
+        {
+          "name": "System.IO.Compression.FileSystem",
+          "version": "4.0.0.0",
+          "resolved": true,
+          "framework": true
+        },
+        {
+          "name": "System.Net.Http",
+          "version": "4.2.0.0",
+          "resolved": false,
+          "framework": true
+        },
+        {
+          "name": "Unity.VisualScripting.Core",
+          "version": "0.0.0.0",
+          "resolved": false,
+          "framework": false
+        },
+        {
+          "name": "UnityEngine.CoreModule",
+          "version": "0.0.0.0",
+          "resolved": false,
+          "framework": false
+        },
+        {
+          "name": "UnityEngine.IMGUIModule",
+          "version": "0.0.0.0",
+          "resolved": false,
+          "framework": false
+        },
+        {
+          "name": "mscorlib",
+          "version": "4.0.0.0",
+          "resolved": true,
+          "framework": true
+        }
       ]
     },
     {
@@ -76,9 +322,28 @@
       "sha256": "6483d2f71cd5daeadc8ec11aeec98b1170454199e822f56b5389340b8aa94796",
       "sourceUrl": "https://github.com/creaturefeaturelarry/casualties-together/releases/tag/v4.0.1",
       "sourceRef": "v4.0.1",
-      "unresolvedReferences": [
-        "Mono.Cecil"
+      "sourceFileCount": 2,
+      "references": [
+        {
+          "name": "Mono.Cecil",
+          "version": "0.11.6.0",
+          "resolved": false,
+          "framework": false
+        },
+        {
+          "name": "System.Core",
+          "version": "4.0.0.0",
+          "resolved": true,
+          "framework": true
+        },
+        {
+          "name": "mscorlib",
+          "version": "4.0.0.0",
+          "resolved": true,
+          "framework": true
+        }
       ]
     }
-  ]
+  ],
+  "notDecompiled": []
 }
