@@ -9,6 +9,7 @@
 name: Decompile
 
 on:
+  push:
   schedule:
     # Weekly, Sunday 04:17 UTC. The offset from the hour is deliberate: runs
     # scheduled on the hour queue behind everyone else's and get delayed.
