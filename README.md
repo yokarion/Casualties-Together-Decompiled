@@ -3,7 +3,7 @@
 Decompiled source mirror of **KrokMP**/**Casualties Together**, the multiplayer mod for Casualties:
 Unknown, published at [creaturefeaturelarry/casualties-together](https://github.com/creaturefeaturelarry/casualties-together).
 
-Everything under `decompiled/` is generated automatically from the released DLLs
+Everything under [decompiled](/decompiled) is generated automatically from the released DLLs
 by [dotnet-autodecompiler](https://github.com/Yokarion/dotnet-autodecompiler)
 and is overwritten on every update. Do not edit it by hand and do not open pull
 requests against it.
