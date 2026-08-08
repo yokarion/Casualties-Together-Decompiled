@@ -1,0 +1,43 @@
+# Watches KrokMP (Casualties: Together) and mirrors it here as decompiled source.
+#
+# The mod is published as a single zip laid out for dropping into the game
+# directory, so the assemblies are pulled out of the release archive. Only the
+# author's own DLLs are listed below - the archive also bundles LiteNetLib,
+# Steamworks.NET and OpusSharp.Core, which are third party libraries and not
+# part of this mod.
+
+name: Decompile
+
+on:
+  schedule:
+    # Weekly, Sunday 04:17 UTC. The offset from the hour is deliberate: runs
+    # scheduled on the hour queue behind everyone else's and get delayed.
+    - cron: "17 4 * * 0"
+  workflow_dispatch:
+    inputs:
+      source-ref:
+        description: "Specific release tag to decompile (empty = latest)"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+jobs:
+  decompile:
+    uses: Yokarion/dotnet-autodecompiler/.github/workflows/decompile.yml@master
+    with:
+      source-repo: creaturefeaturelarry/casualties-together
+      source-mode: release
+
+      patterns: |
+        KrokoshaCasualtiesMP.dll
+        Multiupdater.dll
+        autoupdater_patcher.dll
+
+      output-dir: decompiled
+
+      # The decompiler repository's default branch is master, not main.
+      decompiler-ref: master
+
+      source-ref: ${{ inputs.source-ref }}

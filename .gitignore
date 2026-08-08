@@ -1,0 +1,13 @@
+# This repository commits its decompiled/ tree - that is the whole point - so
+# nothing in there is ignored. This only keeps stray local files out.
+
+*.dll
+*.pdb
+*.exe
+*.zip
+
+.vs/
+.vscode/
+.idea/
+*.swp
+.DS_Store
