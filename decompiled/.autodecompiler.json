@@ -1,0 +1,84 @@
+{
+  "tool": "dotnet-autodecompiler",
+  "decompilerVersion": "10.1.1.8388",
+  "languageVersion": "CSharp10_0",
+  "resources": "none",
+  "assemblies": [
+    {
+      "outputDirectory": "KrokoshaCasualtiesMP",
+      "fileName": "KrokoshaCasualtiesMP.dll",
+      "assemblyName": "KrokoshaCasualtiesMP",
+      "assemblyVersion": "4.0.1.0",
+      "targetFramework": ".NETFramework,Version=v4.8",
+      "sha256": "aac1bda55ed6de5d715e23adfbd07f8fad8f8a8315e02bad986d74aa5d1744e6",
+      "sourceUrl": "https://github.com/creaturefeaturelarry/casualties-together/releases/tag/v4.0.1",
+      "sourceRef": "v4.0.1",
+      "unresolvedReferences": [
+        "0Harmony",
+        "Assembly-CSharp",
+        "BepInEx",
+        "DiscordRPC",
+        "LiteNetLib",
+        "Mono.Security",
+        "MonoMod.Utils",
+        "Newtonsoft.Json",
+        "OpusSharp.Core",
+        "Steamworks.NET",
+        "Unity.Burst",
+        "Unity.RenderPipelines.Core.Runtime",
+        "Unity.RenderPipelines.Universal.Runtime",
+        "Unity.TextMeshPro",
+        "Unity.VisualScripting.Core",
+        "UnityEngine.AnimationModule",
+        "UnityEngine.AssetBundleModule",
+        "UnityEngine.AudioModule",
+        "UnityEngine.CoreModule",
+        "UnityEngine.GridModule",
+        "UnityEngine.IMGUIModule",
+        "UnityEngine.ImageConversionModule",
+        "UnityEngine.InputLegacyModule",
+        "UnityEngine.ParticleSystemModule",
+        "UnityEngine.Physics2DModule",
+        "UnityEngine.ScreenCaptureModule",
+        "UnityEngine.TextRenderingModule",
+        "UnityEngine.TilemapModule",
+        "UnityEngine.UI",
+        "UnityEngine.UIModule",
+        "UnityEngine.UnityWebRequestModule"
+      ]
+    },
+    {
+      "outputDirectory": "Multiupdater",
+      "fileName": "Multiupdater.dll",
+      "assemblyName": "Multiupdater",
+      "assemblyVersion": "1.0.0.0",
+      "targetFramework": ".NETFramework,Version=v4.8",
+      "sha256": "9045c420c407ab4eef3a84295953898e66ef6e0d6a11b72e23850aa50101828c",
+      "sourceUrl": "https://github.com/creaturefeaturelarry/casualties-together/releases/tag/v4.0.1",
+      "sourceRef": "v4.0.1",
+      "unresolvedReferences": [
+        "0Harmony",
+        "Assembly-CSharp",
+        "BepInEx",
+        "Newtonsoft.Json",
+        "System.Net.Http",
+        "Unity.VisualScripting.Core",
+        "UnityEngine.CoreModule",
+        "UnityEngine.IMGUIModule"
+      ]
+    },
+    {
+      "outputDirectory": "autoupdater_patcher",
+      "fileName": "autoupdater_patcher.dll",
+      "assemblyName": "autoupdater_patcher",
+      "assemblyVersion": "1.0.0.0",
+      "targetFramework": ".NETFramework,Version=v4.8",
+      "sha256": "6483d2f71cd5daeadc8ec11aeec98b1170454199e822f56b5389340b8aa94796",
+      "sourceUrl": "https://github.com/creaturefeaturelarry/casualties-together/releases/tag/v4.0.1",
+      "sourceRef": "v4.0.1",
+      "unresolvedReferences": [
+        "Mono.Cecil"
+      ]
+    }
+  ]
+}
