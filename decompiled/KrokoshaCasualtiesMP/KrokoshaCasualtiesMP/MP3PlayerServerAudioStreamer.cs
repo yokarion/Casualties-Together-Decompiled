@@ -138,9 +138,9 @@ public class MP3PlayerServerAudioStreamer : MP3PlayerAudioStreamPlayerBase
 				float[] data2 = new float[num2];
 				while (queued_resampled_samples.Count > num2)
 				{
-					for (int j = 0; j < data2.Length; j++)
+					for (int k = 0; k < data2.Length; k++)
 					{
-						data2[j] = queued_resampled_samples.Dequeue();
+						data2[k] = queued_resampled_samples.Dequeue();
 					}
 					if (Voicechat.mp3_listener_volume > 0f)
 					{

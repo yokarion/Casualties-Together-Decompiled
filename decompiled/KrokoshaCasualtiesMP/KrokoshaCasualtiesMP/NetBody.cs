@@ -123,7 +123,7 @@ public class NetBody : MonoBehaviour
 			//IL_0013: Unknown result type (might be due to invalid IL or missing references)
 			if (is_player)
 			{
-				return plr.plrcolor;
+				return plr.playerColor;
 			}
 			return _color;
 		}
@@ -205,7 +205,7 @@ public class NetBody : MonoBehaviour
 		}
 		_PRIV_NetIdToNetBody[netId] = this;
 		plr.body = body;
-		ApplyNameAndColor(playername, plr.plrcolor);
+		ApplyNameAndColor(playername, plr.playerColor);
 		unchipped = plr.unchipped;
 		NetPlayer.BodyToPlayerDict[body] = plr;
 	}
@@ -426,11 +426,11 @@ public class NetBody : MonoBehaviour
 		}
 		if (num2 < 1f)
 		{
-			for (int j = 0; j < message.Length; j++)
+			for (int k = 0; k < message.Length; k++)
 			{
-				if (Chat.CharCanBeReplacedWithBlank(stringBuilder[j]) && Random.value > num2)
+				if (Chat.CharCanBeReplacedWithBlank(stringBuilder[k]) && Random.value > num2)
 				{
-					stringBuilder[j] = '_';
+					stringBuilder[k] = '_';
 				}
 			}
 		}
@@ -761,7 +761,7 @@ public class NetBody : MonoBehaviour
 			netBody.plr = plr;
 			netBody.netId = plr.clientId;
 			netBody.last_sync_packet.pos = ((Component)plr.body).transform.position;
-			netBody.ApplyNameAndColor(plr.playername, plr.plrcolor);
+			netBody.ApplyNameAndColor(plr.playername, plr.playerColor);
 			if (KrokoshaScavMultiplayer.is_server)
 			{
 				if (plr.late_joined && KrokoshaScavMultiplayer.rules.LateJoinSpectate)
@@ -844,12 +844,31 @@ public class NetBody : MonoBehaviour
 
 	public static void DestroyNPC(NetBody npc)
 	{
-		Object.Destroy((Object)(object)((Component)((Component)npc).transform.parent).gameObject);
+		if ((Object)(object)npc != (Object)null)
+		{
+			if (npc.is_player)
+			{
+				NetPlayer.AllLivingPlayers.Remove(npc.player);
+				NetPlayer.AllDeadPlayers.Remove(npc.player);
+			}
+			if ((Object)(object)((Component)npc).transform.parent != (Object)null)
+			{
+				Object.Destroy((Object)(object)((Component)((Component)npc).transform.parent).gameObject);
+			}
+			Object.Destroy((Object)(object)((Component)npc).gameObject);
+		}
 	}
 
-	public static void DestroyNPC(Body npc)
+	public static void DestroyNPC(Body body)
 	{
-		Object.Destroy((Object)(object)((Component)((Component)npc).transform.parent).gameObject);
+		if ((Object)(object)body != (Object)null)
+		{
+			if ((Object)(object)((Component)body).transform.parent != (Object)null)
+			{
+				Object.Destroy((Object)(object)((Component)((Component)body).transform.parent).gameObject);
+			}
+			Object.Destroy((Object)(object)((Component)body).gameObject);
+		}
 	}
 
 	public bool IsBodyLocal()
@@ -1144,7 +1163,7 @@ public class NetBody : MonoBehaviour
 			{
 				return false;
 			}
-			if (is_player && KrokoshaScavMultiplayer.rules.Teams && component.plr.plrcolor == plr.plrcolor)
+			if (is_player && KrokoshaScavMultiplayer.rules.Teams && component.plr.playerColor == plr.playerColor)
 			{
 				return false;
 			}

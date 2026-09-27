@@ -137,11 +137,18 @@ public class UIBullshit : KrokoshaScavSingleton
 
 	private void Awake()
 	{
+		//IL_0023: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0028: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0035: Expected O, but got Unknown
 		if ((Object)(object)main != (Object)null)
 		{
 			throw new Exception("man wtf is this bro");
 		}
 		main = this;
+		Object.DontDestroyOnLoad((Object)new GameObject("NewNewMultiplayerUI")
+		{
+			hideFlags = (HideFlags)61
+		});
 	}
 
 	private void SecondUpdate()
@@ -247,9 +254,9 @@ public class UIBullshit : KrokoshaScavSingleton
 		Color[] pixels2 = val.GetPixels();
 		for (int i = 0; i < ((Texture)val).width; i++)
 		{
-			for (int j = 0; j < ((Texture)val).height; j++)
+			for (int k = 0; k < ((Texture)val).height; k++)
 			{
-				pixels2[i + j * ((Texture)val).width] = pixels[Mathf.FloorToInt((float)i * num) + Mathf.FloorToInt((float)j * num2) * ((Texture)t).width];
+				pixels2[i + k * ((Texture)val).width] = pixels[Mathf.FloorToInt((float)i * num) + Mathf.FloorToInt((float)k * num2) * ((Texture)t).width];
 			}
 		}
 		val.SetPixels(pixels2);
@@ -876,20 +883,20 @@ public class UIBullshit : KrokoshaScavSingleton
 		//IL_00bd: Expected O, but got Unknown
 		_GUI_SetButtonSkinTexture(GUI.skin.button);
 		GUI.skin.box.normal.background = tex_button_hover_nano;
-		GUI.skin.toggle.normal.background = GetChangedTex(KrokoshaCoopModAssets.checkbox.texture, 1f, 1f);
+		GUI.skin.toggle.normal.background = GetChangedTex(CoopModAssets.checkbox.texture, 1f, 1f);
 		if ((Object)(object)GUI.skin.toggle.normal.background != (Object)null)
 		{
 			GUI.skin.toggle.border = new RectOffset(((Texture)GUI.skin.toggle.normal.background).width, 1, ((Texture)GUI.skin.toggle.normal.background).height, 1);
 			GUI.skin.toggle.padding.left = ((Texture)GUI.skin.toggle.normal.background).width;
 			GUI.skin.toggle.padding.top = (int)((float)((Texture)GUI.skin.toggle.normal.background).height * 0.21f);
 		}
-		GUI.skin.toggle.focused.background = GetChangedTex(KrokoshaCoopModAssets.checkbox.texture, 0.9f, 1f);
+		GUI.skin.toggle.focused.background = GetChangedTex(CoopModAssets.checkbox.texture, 0.9f, 1f);
 		GUI.skin.toggle.hover.background = GUI.skin.toggle.focused.background;
-		GUI.skin.toggle.active.background = GetChangedTex(KrokoshaCoopModAssets.checkbox.texture, 0.8f, 1f);
-		GUI.skin.toggle.onNormal.background = GetChangedTex(KrokoshaCoopModAssets.checkbox_ticked.texture, 1f, 1f);
-		GUI.skin.toggle.onHover.background = GetChangedTex(KrokoshaCoopModAssets.checkbox_ticked.texture, 0.9f, 1f);
+		GUI.skin.toggle.active.background = GetChangedTex(CoopModAssets.checkbox.texture, 0.8f, 1f);
+		GUI.skin.toggle.onNormal.background = GetChangedTex(CoopModAssets.checkbox_ticked.texture, 1f, 1f);
+		GUI.skin.toggle.onHover.background = GetChangedTex(CoopModAssets.checkbox_ticked.texture, 0.9f, 1f);
 		GUI.skin.toggle.onFocused.background = GUI.skin.toggle.onHover.background;
-		GUI.skin.toggle.onActive.background = GetChangedTex(KrokoshaCoopModAssets.checkbox_ticked.texture, 0.8f, 1f);
+		GUI.skin.toggle.onActive.background = GetChangedTex(CoopModAssets.checkbox_ticked.texture, 0.8f, 1f);
 		DoSliderThings(GUI.skin.horizontalSlider, GUI.skin.horizontalSliderThumb);
 		DoSliderThings(GUI.skin.horizontalScrollbar, GUI.skin.horizontalScrollbarThumb);
 		DoSliderThings(GUI.skin.verticalSlider, GUI.skin.verticalSliderThumb);
@@ -909,11 +916,11 @@ public class UIBullshit : KrokoshaScavSingleton
 		GUI.skin.textArea.onNormal.background = GUI.skin.textField.onNormal.background;
 		GUI.skin.textArea.onNormal.textColor = Color.white;
 		GUI.skin.textArea.focused.textColor = Color.white;
-		if ((Object)(object)KrokoshaCoopModAssets.gamefont != (Object)null)
+		if ((Object)(object)CoopModAssets.gamefont != (Object)null)
 		{
 			if (USE_GAME_FONT)
 			{
-				GUI.skin.font = KrokoshaCoopModAssets.gamefont;
+				GUI.skin.font = CoopModAssets.gamefont;
 			}
 			else
 			{

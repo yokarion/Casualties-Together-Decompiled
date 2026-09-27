@@ -25,7 +25,7 @@ internal class KrokoshaMP_CharacterStatusIcon_AltTab : ICharacterStatusIcon
 	{
 		this.visual = visual;
 		this.spr = spr;
-		spr.sprite = KrokoshaCoopModAssets.alttab;
+		spr.sprite = CoopModAssets.alttab;
 	}
 
 	public bool DisappearCondition()

@@ -23,6 +23,7 @@
     <Reference Include="OpusSharp.Core" />
     <Reference Include="Steamworks.NET" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="Unity.Burst" />
     <Reference Include="Unity.RenderPipelines.Core.Runtime" />
     <Reference Include="Unity.RenderPipelines.Universal.Runtime" />

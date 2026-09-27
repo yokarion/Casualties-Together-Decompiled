@@ -92,9 +92,9 @@ public static class SaveSystem_LoadGame_MultiplayerPatch
 					{
 						log.warn("TEMP DEV: TODO: LEVEL THING FORGOR WHAT ITS FOR");
 					}
-					if (text != "4.0.1")
+					if (text != "4.1.2")
 					{
-						log.warn("LoadGame_MultiplayerPatch: Mismatching mod version! file:" + text + " current: 4.0.1");
+						log.warn("LoadGame_MultiplayerPatch: Mismatching mod version! file:" + text + " current: 4.1.2");
 					}
 					if (text2 != Application.version)
 					{

@@ -148,7 +148,7 @@ public static class KrokoshaMainmenuBackground
 				component2.skipLocale = true;
 				component2.tipName = Lang.Get("mainmenu_mp_button_tooltip", false);
 				Image component3 = MP_LINK_BUTTON.GetComponent<Image>();
-				component3.sprite = KrokoshaCoopModAssets.mpmod_icon;
+				component3.sprite = CoopModAssets.mpmod_icon;
 				((Graphic)component3).color = Color.green;
 				Button component4 = MP_LINK_BUTTON.GetComponent<Button>();
 				((UnityEventBase)component4.onClick).RemoveAllListeners();

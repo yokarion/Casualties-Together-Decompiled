@@ -33,8 +33,9 @@ public static class WorldGeneration_GenerateWorld_MultiplayerPatch
 		//IL_00a9: Expected O, but got Unknown
 		//IL_00b4: Unknown result type (might be due to invalid IL or missing references)
 		//IL_00be: Expected O, but got Unknown
-		//IL_010a: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0115: Expected O, but got Unknown
+		//IL_00c9: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0128: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0133: Expected O, but got Unknown
 		ComponentHolderProtocol.GetOrAddComponent<Krokosha_CaveTicks_Tracker>((Object)(GameObject)Resources.Load("CaveTicks"));
 		GameObject val = (GameObject)Resources.Load("Special/sandvinerope");
 		Krokosha_BuildingEntity_Rope_TrackerComponent orAddComponent = ComponentHolderProtocol.GetOrAddComponent<Krokosha_BuildingEntity_Rope_TrackerComponent>((Object)val);
@@ -54,6 +55,7 @@ public static class WorldGeneration_GenerateWorld_MultiplayerPatch
 		component.id = "Special/mushroomrope";
 		orAddComponent = ComponentHolderProtocol.GetOrAddComponent<Krokosha_BuildingEntity_Rope_TrackerComponent>((Object)(GameObject)Resources.Load("climbingropeextended"));
 		orAddComponent = ComponentHolderProtocol.GetOrAddComponent<Krokosha_BuildingEntity_Rope_TrackerComponent>((Object)(GameObject)Resources.Load("ladder"));
+		((GameObject)Resources.Load("Special/defibrack")).GetComponent<BuildingEntity>().id = "Special/defibrack";
 		string[] array = new string[3] { "Lifepod", "BioContainer", "structures/SteelBridge" };
 		foreach (string text in array)
 		{

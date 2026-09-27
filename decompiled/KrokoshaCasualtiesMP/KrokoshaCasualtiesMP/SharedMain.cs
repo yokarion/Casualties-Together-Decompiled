@@ -20,6 +20,8 @@ public class SharedMain : MonoBehaviour
 
 	private static bool[,] CHUNKS_VISIBLE_TO_PLAYERS = new bool[16, 16];
 
+	private static int VISIBLE_CHUNK_RANGE_HALF = 2;
+
 	internal static float timer_SendPerformanceReport = 0f;
 
 	public static float max_player_interaction_distance_sq => max_player_interaction_distance * max_player_interaction_distance;
@@ -156,26 +158,26 @@ public class SharedMain : MonoBehaviour
 		return CHUNKS_VISIBLE_TO_PLAYERS[((Vector2Int)(ref val)).x, ((Vector2Int)(ref val)).y];
 	}
 
-	private static void _PlayerVisibleChunksAroundPos(Vector2 mainCamTransformPos)
+	private static void _PlayerVisibleChunksAroundPos(Vector2 pos)
 	{
 		//IL_0052: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0069: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0080: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0094: Unknown result type (might be due to invalid IL or missing references)
+		//IL_006d: Unknown result type (might be due to invalid IL or missing references)
+		//IL_008a: Unknown result type (might be due to invalid IL or missing references)
+		//IL_00a2: Unknown result type (might be due to invalid IL or missing references)
 		float num = 1f / (float)WorldGeneration.CHUNKSIZE;
 		int num2 = (int)((float)WorldGeneration.world.chunkWidth * 0.5f);
 		int num3 = (int)((float)WorldGeneration.world.chunkHeight * 0.5f);
 		int num4 = CHUNKS_VISIBLE_TO_PLAYERS.GetLength(1) - 1;
 		int num5 = CHUNKS_VISIBLE_TO_PLAYERS.GetLength(0) - 1;
-		int num6 = Mathf.Clamp((int)(mainCamTransformPos.x * num) - 3 + num2, 0, num5);
-		int num7 = Mathf.Clamp((int)(mainCamTransformPos.x * num) + 4 + num2, 0, num5);
-		int num8 = Mathf.Clamp((int)(mainCamTransformPos.y * num) - 3 + num3, 0, num4);
-		int num9 = Mathf.Clamp((int)(mainCamTransformPos.y * num) + 4 + num3, 0, num4);
+		int num6 = Mathf.Clamp((int)(pos.x * num) - VISIBLE_CHUNK_RANGE_HALF + num2, 0, num5);
+		int num7 = Mathf.Clamp((int)(pos.x * num) + VISIBLE_CHUNK_RANGE_HALF + 1 + num2, 0, num5);
+		int num8 = Mathf.Clamp((int)(pos.y * num) - VISIBLE_CHUNK_RANGE_HALF + num3, 0, num4);
+		int num9 = Mathf.Clamp((int)(pos.y * num) + VISIBLE_CHUNK_RANGE_HALF + 1 + num3, 0, num4);
 		for (int i = num8; i <= num9; i++)
 		{
-			for (int j = num6; j <= num7; j++)
+			for (int k = num6; k <= num7; k++)
 			{
-				CHUNKS_VISIBLE_TO_PLAYERS[j, i] = true;
+				CHUNKS_VISIBLE_TO_PLAYERS[k, i] = true;
 			}
 		}
 	}
@@ -187,9 +189,9 @@ public class SharedMain : MonoBehaviour
 		//IL_008a: Unknown result type (might be due to invalid IL or missing references)
 		for (int i = 0; i < CHUNKS_VISIBLE_TO_PLAYERS.GetLength(1); i++)
 		{
-			for (int j = 0; j < CHUNKS_VISIBLE_TO_PLAYERS.GetLength(0); j++)
+			for (int k = 0; k < CHUNKS_VISIBLE_TO_PLAYERS.GetLength(0); k++)
 			{
-				CHUNKS_VISIBLE_TO_PLAYERS[j, i] = false;
+				CHUNKS_VISIBLE_TO_PLAYERS[k, i] = false;
 			}
 		}
 		if (!local_world_is_generated)

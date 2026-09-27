@@ -47,7 +47,7 @@ internal class KrokoshaCasualtiesMP_DISABLED_BUTTON_HANDLER : MonoBehaviour
 	{
 		try
 		{
-			mpmod_icon = KrokoshaCoopModAssets.LoadSprite("mp.png");
+			mpmod_icon = CoopModAssets.LoadSprite("mp.png");
 		}
 		catch (Exception ex)
 		{

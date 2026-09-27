@@ -2,7 +2,7 @@ using System.Text;
 using TMPro;
 using UnityEngine;
 
-namespace KrokoshaCasualtiesMP;
+namespace Together;
 
 public static class FontUtils
 {

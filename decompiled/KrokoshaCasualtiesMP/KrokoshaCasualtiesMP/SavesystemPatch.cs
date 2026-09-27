@@ -126,9 +126,9 @@ public static class SavesystemPatch
 		ushort[,] array2 = worldBlocks;
 		for (int i = 0; i < world.height; i++)
 		{
-			for (int j = 0; j < world.width; j++)
+			for (int k = 0; k < world.width; k++)
 			{
-				array[i * world.height + j] = (byte)array2[j, i];
+				array[i * world.height + k] = (byte)array2[k, i];
 			}
 		}
 		return Util.Compress(array);
@@ -142,9 +142,9 @@ public static class SavesystemPatch
 			ushort[,] array2 = worldBlocks;
 			for (int i = 0; i < world.height; i++)
 			{
-				for (int j = 0; j < world.width; j++)
+				for (int k = 0; k < world.width; k++)
 				{
-					array2[j, i] = array[i * world.height + j];
+					array2[k, i] = array[i * world.height + k];
 				}
 			}
 			world.UpdateWorld();
@@ -161,9 +161,9 @@ public static class SavesystemPatch
 		byte[,] array2 = fluid;
 		for (int i = 0; i < world.height; i++)
 		{
-			for (int j = 0; j < world.width; j++)
+			for (int k = 0; k < world.width; k++)
 			{
-				array[i * world.height + j] = array2[j, i];
+				array[i * world.height + k] = array2[k, i];
 			}
 		}
 		return Util.Compress(array);
@@ -177,9 +177,9 @@ public static class SavesystemPatch
 			byte[,] array2 = fluid;
 			for (int i = 0; i < world.height; i++)
 			{
-				for (int j = 0; j < world.width; j++)
+				for (int k = 0; k < world.width; k++)
 				{
-					array2[j, i] = array[i * world.height + j];
+					array2[k, i] = array[i * world.height + k];
 				}
 			}
 			world.UpdateWorld();

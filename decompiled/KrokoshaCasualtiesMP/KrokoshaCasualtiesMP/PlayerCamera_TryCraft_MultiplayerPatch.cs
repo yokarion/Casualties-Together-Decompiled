@@ -165,7 +165,7 @@ public static class PlayerCamera_TryCraft_MultiplayerPatch
 		Item val = null;
 		WaterContainerItem val2 = default(WaterContainerItem);
 		WaterContainerItem val3 = default(WaterContainerItem);
-		for (int j = 0; j < rres.amount; j++)
+		for (int k = 0; k < rres.amount; k++)
 		{
 			if (rres.isLiquid)
 			{

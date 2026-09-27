@@ -36,11 +36,11 @@ public static class DamagingCrate_OnCollisionEnter2D_MultiplayerPatch
 		{
 			Plugin.log.LogWarning((object)$"TEMP DEV: DamagingCrate OnCollisionEnter2D TRANSPILER LimbFromObject and stloc.1 {i}");
 		}
-		int j;
-		for (j = i; !((object)list[j]).ToString().Contains("prevFrameSpeed"); j++)
+		int k;
+		for (k = i; !((object)list[k]).ToString().Contains("prevFrameSpeed"); k++)
 		{
 		}
-		object operand = list[j].operand;
+		object operand = list[k].operand;
 		List<CodeInstruction> list2 = new List<CodeInstruction>();
 		list2.Add(new CodeInstruction(OpCodes.Ldarg_0, (object)null));
 		list2.Add(new CodeInstruction(OpCodes.Ldloc_1, (object)null));

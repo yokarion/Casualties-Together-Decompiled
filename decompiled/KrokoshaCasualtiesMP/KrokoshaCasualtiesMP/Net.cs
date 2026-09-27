@@ -43,7 +43,7 @@ public static class Net
 
 	public static bool running { get; private set; }
 
-	public static bool is_playing_with_steam { get; private set; }
+	public static bool IsRunningSteam { get; private set; }
 
 	public static bool is_client => type == NetType.Client;
 
@@ -96,11 +96,11 @@ public static class Net
 	{
 		if (TRANSPORT is TransportSteamworks transportSteamworks)
 		{
-			is_playing_with_steam = true;
+			IsRunningSteam = true;
 			tsteam = transportSteamworks;
 			return true;
 		}
-		is_playing_with_steam = false;
+		IsRunningSteam = false;
 		tsteam = null;
 		return false;
 	}
@@ -356,7 +356,7 @@ public static class Net
 		}
 		netPlayer.clientId = id;
 		netPlayer.playername = name;
-		netPlayer.plrcolor = color;
+		netPlayer.playerColor = color;
 		netPlayer.ApplyNameAndColor(name, color);
 		return netPlayer;
 	}
@@ -381,7 +381,7 @@ public static class Net
 			{
 				MP3Menu.dropdownList = null;
 			}
-			is_playing_with_steam = false;
+			IsRunningSteam = false;
 			type = NetType.Host;
 			ClientMain.LOCAL_PING = 0;
 			ClientMain.SERVER_FPS = 60;

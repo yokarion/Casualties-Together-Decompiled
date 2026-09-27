@@ -10,6 +10,7 @@ public struct NetBodySyncPacket : INetSerializeByMemcpy, IDeltaPacketBase
 {
 	public bool is_player = false;
 
+	[AlwaysSync]
 	public knetid plrid = default(knetid);
 
 	public bool standing = false;
@@ -31,7 +32,7 @@ public struct NetBodySyncPacket : INetSerializeByMemcpy, IDeltaPacketBase
 
 	public knetid piggyback = default(knetid);
 
-	public static int bitset_size = 10;
+	public static int bitset_size = 9;
 
 	public Vector2 moveDir
 	{
@@ -252,12 +253,7 @@ public struct NetBodySyncPacket : INetSerializeByMemcpy, IDeltaPacketBase
 		NetBodySyncPacket obj = (NetBodySyncPacket)(object)old;
 		bool flag = false;
 		pack_bools.Add(is_player);
-		flag = (ushort)obj.plrid != (ushort)plrid;
-		pack_bools.Add(flag);
-		if (flag)
-		{
-			writer.Put((ushort)plrid);
-		}
+		writer.Put((ushort)plrid);
 		pack_bools.Add(standing);
 		pack_bools.Add(crouching);
 		flag = obj.pos != pos;
@@ -297,31 +293,28 @@ public struct NetBodySyncPacket : INetSerializeByMemcpy, IDeltaPacketBase
 	public void Read(NetDataReader reader, BitArray bitset)
 	{
 		is_player = bitset[0];
-		if (bitset[1])
-		{
-			reader.Get(out plrid);
-		}
-		standing = bitset[2];
-		crouching = bitset[3];
-		if (bitset[4])
+		reader.Get(out plrid);
+		standing = bitset[1];
+		crouching = bitset[2];
+		if (bitset[3])
 		{
 			reader.Get(out pos);
 		}
-		if (bitset[5])
+		if (bitset[4])
 		{
 			reader.Get(out targetLookPos);
 		}
 		reader.Get(out compressedmoveDir);
-		if (bitset[6])
+		if (bitset[5])
 		{
 			reader.Get(out velocity);
 		}
-		if (bitset[7])
+		if (bitset[6])
 		{
 			reader.Get(ref compressednum4);
 		}
-		is_piggyback = bitset[8];
-		if (bitset[9])
+		is_piggyback = bitset[7];
+		if (bitset[8])
 		{
 			reader.Get(out piggyback);
 		}

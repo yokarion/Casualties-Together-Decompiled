@@ -5,7 +5,7 @@ using KrokoshaCasualtiesUtils;
 namespace KrokoshaCasualtiesMP;
 
 [HarmonyPatch(typeof(Observer), "RolledLastStand")]
-internal static class Observer_AddExp_MultiplayerPatch
+internal static class Observer_RolledLastStand_MultiplayerPatch
 {
 	private static bool Prefix(Observer __instance)
 	{

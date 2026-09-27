@@ -280,7 +280,7 @@ public class BugReporter : KrokoshaScavSingleton
 		//IL_0451: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0456: Unknown result type (might be due to invalid IL or missing references)
 		StringBuilder stringBuilder = new StringBuilder();
-		stringBuilder.AppendLine("# KrokMP Bug Report `GAME: " + Application.version + " MOD: 4.0.1`");
+		stringBuilder.AppendLine("# KrokMP Bug Report `GAME: " + Application.version + " MOD: 4.1.2`");
 		stringBuilder.AppendLine("```VERBOSE: " + KrokoshaScavMultiplayer.verbose);
 		try
 		{
@@ -390,7 +390,7 @@ public class BugReporter : KrokoshaScavSingleton
 				}
 			}
 			text = text4;
-			text = _RemoveLogLineTimestamp(text);
+			text2 = _RemoveLogLineTimestamp(text);
 			num = 1;
 		}
 		if (text != null)

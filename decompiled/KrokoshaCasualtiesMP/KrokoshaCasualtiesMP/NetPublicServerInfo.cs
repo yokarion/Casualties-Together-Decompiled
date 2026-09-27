@@ -111,28 +111,6 @@ public class NetPublicServerInfo : INetSerializable
 		return false;
 	}
 
-	public int GetJoinableProbability()
-	{
-		int num = 0;
-		if (friends_tooltip != null)
-		{
-			num += 100;
-		}
-		else if (version == "4.0.1")
-		{
-			num += 50;
-		}
-		if (IsJoinable())
-		{
-			num += 3;
-		}
-		if (!haspassword)
-		{
-			num += 3;
-		}
-		return num;
-	}
-
 	public void Deserialize(NetDataReader reader)
 	{
 		reader.Get(ref version);

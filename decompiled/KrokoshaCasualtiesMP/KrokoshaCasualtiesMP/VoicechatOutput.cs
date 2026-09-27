@@ -58,7 +58,7 @@ internal class VoicechatOutput : StreamedAudioOutput
 		{
 			realcurvol = cur_volume_output;
 		}
-		Color val = plr.plrcolor;
+		Color val = plr.playerColor;
 		return new Color(val.r, val.g, val.b, Mathf.Clamp01(realcurvol + 0.3f));
 	}
 

@@ -44,15 +44,15 @@ internal class KrokoshaMP_CharacterStatusIcon_Trading : ICharacterStatusIcon
 
 	public void Update()
 	{
-		//IL_0067: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0071: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0065: Unknown result type (might be due to invalid IL or missing references)
+		//IL_006f: Unknown result type (might be due to invalid IL or missing references)
 		counter += Time.unscaledDeltaTime;
-		if (counter > maxtime)
+		if (counter >= maxtime)
 		{
 			counter = 0f;
 		}
-		int num = Mathf.FloorToInt(counter / maxtime * (float)(KrokoshaCoopModAssets.trader_icon.Length - 1));
-		spr.sprite = KrokoshaCoopModAssets.trader_icon[num];
+		int num = Mathf.FloorToInt(counter / maxtime * (float)CoopModAssets.trader_icon.Length);
+		spr.sprite = CoopModAssets.trader_icon[num];
 		((Component)spr).transform.localScale = localScale * 1.4f;
 	}
 }

@@ -176,6 +176,16 @@ public static class Util_MiscSystemExtensions
 		return result;
 	}
 
+	public static byte[] GetUTF8Bytes(this string s)
+	{
+		return Encoding.UTF8.GetBytes(s);
+	}
+
+	public static string ToStringFromUTF8Bytes(this byte[] b)
+	{
+		return Encoding.UTF8.GetString(b);
+	}
+
 	public static int StableHash(this string s)
 	{
 		if (s == null)

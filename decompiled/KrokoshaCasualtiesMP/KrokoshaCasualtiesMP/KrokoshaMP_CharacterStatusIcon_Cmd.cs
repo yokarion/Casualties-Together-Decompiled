@@ -25,7 +25,7 @@ internal class KrokoshaMP_CharacterStatusIcon_Cmd : ICharacterStatusIcon
 	{
 		this.visual = visual;
 		this.spr = spr;
-		spr.sprite = KrokoshaCoopModAssets.cmdicon;
+		spr.sprite = CoopModAssets.cmdicon;
 	}
 
 	public bool DisappearCondition()

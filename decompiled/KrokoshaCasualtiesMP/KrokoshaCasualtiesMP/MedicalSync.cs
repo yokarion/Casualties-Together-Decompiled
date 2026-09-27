@@ -72,11 +72,11 @@ internal class MedicalSync : KrokoshaScavSingleton
 				{
 					for (int i = 0; i < woundview_ecg.width; i++)
 					{
-						for (int j = 0; j < woundview_ecg.height; j++)
+						for (int k = 0; k < woundview_ecg.height; k++)
 						{
-							Color32 val = woundview_ecg.pixelGrid[i, j];
+							Color32 val = woundview_ecg.pixelGrid[i, k];
 							val.a = 0;
-							woundview_ecg.pixelGrid[i, j] = val;
+							woundview_ecg.pixelGrid[i, k] = val;
 						}
 					}
 				}

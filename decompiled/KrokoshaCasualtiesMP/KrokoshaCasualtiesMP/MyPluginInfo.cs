@@ -6,5 +6,5 @@ public static class MyPluginInfo
 
 	public const string PLUGIN_NAME = "Krokosha_MP_CU";
 
-	public const string PLUGIN_VERSION = "4.0.1";
+	public const string PLUGIN_VERSION = "4.1.2";
 }

@@ -419,12 +419,12 @@ public static class Body_Attack_MultiplayerPatch
 		for (i = num2 + 1; !(list[i].opcode == OpCodes.Brtrue) && !(list[i].opcode == OpCodes.Brfalse); i++)
 		{
 		}
-		int j;
-		for (j = num2; !(list[j].opcode == OpCodes.Ldloca_S); j++)
+		int k;
+		for (k = num2; !(list[k].opcode == OpCodes.Ldloca_S); k++)
 		{
 		}
 		List<CodeInstruction> list2 = new List<CodeInstruction>();
-		CodeInstruction val = new CodeInstruction(OpCodes.Ldloc_S, list[j].operand);
+		CodeInstruction val = new CodeInstruction(OpCodes.Ldloc_S, list[k].operand);
 		CodeInstructionExtensions.MoveLabelsFrom(val, list[num2 + 1]);
 		list2.Add(val);
 		list2.Add(new CodeInstruction(OpCodes.Call, (object)AccessTools.Method(typeof(Body_Attack_MultiplayerPatch), "BodyAttack_DidHitSomething", (Type[])null, (Type[])null)));

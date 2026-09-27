@@ -4,8 +4,8 @@ Generated automatically by [dotnet-autodecompiler](https://github.com/Yokarion/d
 
 This is a reconstruction produced by a decompiler, not the author's original source. Local variable names and compiler-generated members will not match what was written.
 
-- Upstream release: `v4.0.1`
-- Source: https://github.com/creaturefeaturelarry/casualties-together/releases/tag/v4.0.1
+- Upstream release: `v4.1.2`
+- Source: https://github.com/creaturefeaturelarry/casualties-together/releases/tag/v4.1.2
 - Decompiler: ICSharpCode.Decompiler 10.1.1.8388
 - Language version: C# 10.0
 - Embedded resources: none
@@ -14,7 +14,7 @@ This is a reconstruction produced by a decompiler, not the author's original sou
 
 | Assembly | Version | Target framework | Source files | Folder |
 | --- | --- | --- | ---: | --- |
-| KrokoshaCasualtiesMP | 4.0.1.0 | .NET Framework 4.8 | 394 | [`KrokoshaCasualtiesMP/`](KrokoshaCasualtiesMP/) |
+| KrokoshaCasualtiesMP | 4.1.2.0 | .NET Framework 4.8 | 396 | [`KrokoshaCasualtiesMP/`](KrokoshaCasualtiesMP/) |
 | Multiupdater | 1.0.0.0 | .NET Framework 4.8 | 9 | [`Multiupdater/`](Multiupdater/) |
 | autoupdater_patcher | 1.0.0.0 | .NET Framework 4.8 | 2 | [`autoupdater_patcher/`](autoupdater_patcher/) |
 

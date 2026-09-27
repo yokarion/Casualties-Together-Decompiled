@@ -31,7 +31,7 @@ internal class KrokoshaMP_CharacterStatusIcon_Healing : ICharacterStatusIcon
 		//IL_003b: Unknown result type (might be due to invalid IL or missing references)
 		this.visual = visual;
 		this.spr = spr;
-		spr.sprite = KrokoshaCoopModAssets.healicon;
+		spr.sprite = CoopModAssets.healicon;
 		localScale = ((Component)spr).transform.localScale;
 		((Component)spr).transform.localScale = localScale * 1.45f;
 	}
@@ -49,12 +49,12 @@ internal class KrokoshaMP_CharacterStatusIcon_Healing : ICharacterStatusIcon
 		//IL_0048: Unknown result type (might be due to invalid IL or missing references)
 		if (npc.plr.woundViewTargetNetBodyId != (ushort)npc.netId)
 		{
-			spr.sprite = KrokoshaCoopModAssets.healicon;
+			spr.sprite = CoopModAssets.healicon;
 			((Component)spr).transform.localScale = localScale * 1.4f;
 		}
 		else
 		{
-			spr.sprite = KrokoshaCoopModAssets.inspectself;
+			spr.sprite = CoopModAssets.inspectself;
 			((Component)spr).transform.localScale = localScale * 1.05f;
 		}
 	}

@@ -27,7 +27,7 @@ internal class KrokoshaMP_CharacterStatusIcon_Textchat : ICharacterStatusIcon
 	{
 		this.visual = visual;
 		this.spr = spr;
-		spr.sprite = KrokoshaCoopModAssets.speechbubbleicon0;
+		spr.sprite = CoopModAssets.speechbubbleicon0;
 		spr.flipX = true;
 	}
 
@@ -41,7 +41,7 @@ internal class KrokoshaMP_CharacterStatusIcon_Textchat : ICharacterStatusIcon
 		counter += Time.unscaledDeltaTime;
 		if (counter > 0.75f)
 		{
-			spr.sprite = KrokoshaCoopModAssets.speechbubbleicon3;
+			spr.sprite = CoopModAssets.speechbubbleicon3;
 			if (counter >= 1f)
 			{
 				counter = 0f;
@@ -49,15 +49,15 @@ internal class KrokoshaMP_CharacterStatusIcon_Textchat : ICharacterStatusIcon
 		}
 		else if (counter > 0.5f)
 		{
-			spr.sprite = KrokoshaCoopModAssets.speechbubbleicon2;
+			spr.sprite = CoopModAssets.speechbubbleicon2;
 		}
 		else if (counter > 0.25f)
 		{
-			spr.sprite = KrokoshaCoopModAssets.speechbubbleicon1;
+			spr.sprite = CoopModAssets.speechbubbleicon1;
 		}
 		else if (counter > 0f)
 		{
-			spr.sprite = KrokoshaCoopModAssets.speechbubbleicon0;
+			spr.sprite = CoopModAssets.speechbubbleicon0;
 		}
 	}
 }

@@ -12,6 +12,10 @@ public static class Skills_CheckForLevelUp_MultiplayerPatch
 		{
 			xp = 2.1474835E+09f;
 		}
+		else if (xp < 0f)
+		{
+			xp = 1.0737418E+09f;
+		}
 	}
 
 	private static void Postfix(Skills __instance, ref bool __result)

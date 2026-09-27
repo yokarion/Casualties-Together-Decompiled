@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace KrokoshaCasualtiesMP;
 
-internal class KrokoshaCoopModAssets
+internal class CoopModAssets
 {
 	public static Sprite alttab;
 
@@ -117,7 +117,7 @@ internal class KrokoshaCoopModAssets
 			Texture2D val = new Texture2D(2, 2);
 			ImageConversion.LoadImage(val, array);
 			((Texture)val).filterMode = (FilterMode)0;
-			return Sprite.Create(val, new Rect(0f, 0f, (float)((Texture)val).width, (float)((Texture)val).height), new Vector2(0.5f, 0.5f));
+			return Sprite.Create(val, new Rect(0f, 0f, (float)((Texture)val).width, (float)((Texture)val).height), new Vector2(0.5f, 0.5f), 8f);
 		}
 		return null;
 	}

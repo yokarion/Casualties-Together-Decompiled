@@ -9,12 +9,12 @@
       "outputDirectory": "KrokoshaCasualtiesMP",
       "fileName": "KrokoshaCasualtiesMP.dll",
       "assemblyName": "KrokoshaCasualtiesMP",
-      "assemblyVersion": "4.0.1.0",
+      "assemblyVersion": "4.1.2.0",
       "targetFramework": ".NETFramework,Version=v4.8",
-      "sha256": "aac1bda55ed6de5d715e23adfbd07f8fad8f8a8315e02bad986d74aa5d1744e6",
-      "sourceUrl": "https://github.com/creaturefeaturelarry/casualties-together/releases/tag/v4.0.1",
-      "sourceRef": "v4.0.1",
-      "sourceFileCount": 394,
+      "sha256": "41a075901d97e38ae897b739065175aa400faa31ffe06eeb2c27beeee2faa694",
+      "sourceUrl": "https://github.com/creaturefeaturelarry/casualties-together/releases/tag/v4.1.2",
+      "sourceRef": "v4.1.2",
+      "sourceFileCount": 396,
       "references": [
         {
           "name": "0Harmony",
@@ -92,6 +92,12 @@
           "name": "System.Core",
           "version": "4.0.0.0",
           "resolved": true,
+          "framework": true
+        },
+        {
+          "name": "System.Net.Http",
+          "version": "4.2.0.0",
+          "resolved": false,
           "framework": true
         },
         {
@@ -235,8 +241,8 @@
       "assemblyVersion": "1.0.0.0",
       "targetFramework": ".NETFramework,Version=v4.8",
       "sha256": "9045c420c407ab4eef3a84295953898e66ef6e0d6a11b72e23850aa50101828c",
-      "sourceUrl": "https://github.com/creaturefeaturelarry/casualties-together/releases/tag/v4.0.1",
-      "sourceRef": "v4.0.1",
+      "sourceUrl": "https://github.com/creaturefeaturelarry/casualties-together/releases/tag/v4.1.2",
+      "sourceRef": "v4.1.2",
       "sourceFileCount": 9,
       "references": [
         {
@@ -320,8 +326,8 @@
       "assemblyVersion": "1.0.0.0",
       "targetFramework": ".NETFramework,Version=v4.8",
       "sha256": "6483d2f71cd5daeadc8ec11aeec98b1170454199e822f56b5389340b8aa94796",
-      "sourceUrl": "https://github.com/creaturefeaturelarry/casualties-together/releases/tag/v4.0.1",
-      "sourceRef": "v4.0.1",
+      "sourceUrl": "https://github.com/creaturefeaturelarry/casualties-together/releases/tag/v4.1.2",
+      "sourceRef": "v4.1.2",
       "sourceFileCount": 2,
       "references": [
         {

@@ -56,7 +56,7 @@ public class Chat : KrokoshaScavSingleton
 		{
 			//IL_002f: Unknown result type (might be due to invalid IL or missing references)
 			string text = "";
-			text = ((!((Object)(object)plr != (Object)null)) ? TagName(name, tag, rich: true) : TagName("<color=#" + ColorUtility.ToHtmlStringRGB((Color)plr.plrcolor) + ">" + name + "</color>", tag, rich: true));
+			text = ((!((Object)(object)plr != (Object)null)) ? TagName(name, tag, rich: true) : TagName("<color=#" + ColorUtility.ToHtmlStringRGB((Color)plr.playerColor) + ">" + name + "</color>", tag, rich: true));
 			result_nametag = "[" + text + "]: ";
 			result_nametag_sanitized = KrokoshaScavMultiplayer.SanitizeRichText(result_nametag);
 		}
@@ -258,10 +258,10 @@ public class Chat : KrokoshaScavSingleton
 			((Rect)(ref val))._002Ector(real_pos_X + num, this_y + 1f, (float)gUI_RealChatFontsize, (float)gUI_RealChatFontsize);
 			int num2 = (int)(8f * UIBullshit.uiScale);
 			int num3 = gUI_RealChatFontsize + num2;
-			foreach (Texture2D additional_profile_tag_icon in textinfo.plr.additional_profile_tag_icons)
+			foreach (Texture2D knownUserTagIcon in textinfo.plr.KnownUserTagIcons)
 			{
 				((Rect)(ref val)).x = real_pos_X + num;
-				GUI.DrawTexture(val, (Texture)(object)additional_profile_tag_icon);
+				GUI.DrawTexture(val, (Texture)(object)knownUserTagIcon);
 				num += (float)num3;
 				chathistory_area_width -= (float)num3;
 			}
@@ -534,9 +534,9 @@ public class Chat : KrokoshaScavSingleton
 					float num11 = item.namesize.x + 1f;
 					if ((Object)(object)item.plr != (Object)null)
 					{
-						foreach (Texture2D additional_profile_tag_icon in item.plr.additional_profile_tag_icons)
+						foreach (Texture2D knownUserTagIcon in item.plr.KnownUserTagIcons)
 						{
-							_ = additional_profile_tag_icon;
+							_ = knownUserTagIcon;
 							num11 += (float)(_GUI_RealChatFontsize + (int)(8f * UIBullshit.uiScale));
 						}
 						if ((Object)(object)item.plr.profilepic_any_smalltolarge != (Object)null)

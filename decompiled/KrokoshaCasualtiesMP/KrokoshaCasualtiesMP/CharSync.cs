@@ -100,9 +100,10 @@ internal class CharSync : CoolSyncSubSystemForObjects
 
 	protected override void Client_ReadData2(NetDataReader reader, ushort data2_len, Client_Object obj)
 	{
+		//IL_00c8: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0084: Unknown result type (might be due to invalid IL or missing references)
-		//IL_00e2: Unknown result type (might be due to invalid IL or missing references)
-		//IL_013c: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0111: Unknown result type (might be due to invalid IL or missing references)
+		//IL_016b: Unknown result type (might be due to invalid IL or missing references)
 		if (!Util.IsWorldInstantiated())
 		{
 			return;
@@ -137,12 +138,17 @@ internal class CharSync : CoolSyncSubSystemForObjects
 		else
 		{
 			netBody = (NetBody)obj.real_obj;
+			if ((Object)(object)netBody.body == (Object)null)
+			{
+				NetBody.DestroyNPC(netBody);
+				netBody = NetBody._Internal_CreateNetBody(obj.netId, last_sync_packet.pos);
+			}
 			if (last_sync_packet.is_player)
 			{
 				if (NetPlayer.TryGetPlayerFromClientId(last_sync_packet.plrid, out var plr2) && (Object)(object)plr2 != (Object)(object)netBody.plr)
 				{
 					netBody.plr = plr2;
-					netBody.ApplyNameAndColor(plr2.playername, plr2.plrcolor);
+					netBody.ApplyNameAndColor(plr2.playername, plr2.playerColor);
 					netBody.netId = obj.netId;
 				}
 			}

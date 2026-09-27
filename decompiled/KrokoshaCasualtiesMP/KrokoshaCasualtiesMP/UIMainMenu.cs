@@ -217,10 +217,10 @@ public static class UIMainMenu
 
 	private static string AHAHUJHAKFSDFJFJKFKJAFKJAK = "E";
 
-	private static (Texture2D, string)[] gaaaaaaaaaaaaa = new(Texture2D, string)[23]
+	private static (Texture2D, string)[] gaaaaaaaaaaaaa = new(Texture2D, string)[48]
 	{
-		(null, "Krokosha666 - OG MP Mod Developer, owner"),
 		(null, "Creature - MP Mod Developer"),
+		(null, "JyanSei - optimization assistance"),
 		(null, "dannad - Auto-updater module, Installer tool, C:T ds Staff"),
 		(null, "Gary the cat - playtester, Bug report module, past servers, C:T ds Staff"),
 		(null, "Todd - external mod \"ChangeSkin\", C:T ds Staff"),
@@ -240,7 +240,32 @@ public static class UIMainMenu
 		(null, "Shiro - playtester"),
 		(null, "Charu - playtester"),
 		(null, "kipish - playtester"),
+		(null, "Zero Ares IV - Supporter"),
+		(null, "EthanTheProtogen - Supporter"),
+		(null, "RoyMartini - Supporter"),
+		(null, "Jazun - Supporter"),
+		(null, "Alexx__ - Supporter"),
+		(null, "vega - Supporter"),
+		(null, "Zmechol1337 - Supporter"),
+		(null, "plasterjello - Supporter"),
+		(null, "Doctor Callico - Supporter"),
+		(null, "vivikat - Supporter"),
+		(null, "Ariyah - Supporter"),
+		(null, "therealbudget - Supporter"),
+		(null, "_stuck_ - Supporter"),
+		(null, "ShaoAZ - Supporter"),
+		(null, "JameisonAus - Supporter"),
+		(null, "Kidi - Supporter"),
+		(null, "BluBerryToaster - Supporter"),
+		(null, "Katomou - Supporter"),
+		(null, "Nemean_Lion732 - Supporter"),
+		(null, "Locko2265 - Supporter"),
+		(null, "Trenchburner - Supporter"),
+		(null, "TheBoathead - Supporter"),
+		(null, "Diesel - Supporter"),
+		(null, "Mitirich - Supporter"),
 		(null, "Orsoniks - Developer of Casualties: Unknown"),
+		(null, "Krokosha666 - OG MP Mod Developer, left"),
 		(null, "...and the rest of bug reporters, suggestions and regular players")
 	};
 
@@ -387,9 +412,9 @@ public static class UIMainMenu
 		string text = $"{plr.clientId}: {plr.playername}";
 		GUIContent val = new GUIContent(text);
 		Vector2 val2 = GUI.skin.label.CalcSize(val);
-		foreach (Texture2D additional_profile_tag_icon in plr.additional_profile_tag_icons)
+		foreach (Texture2D knownUserTagIcon in plr.KnownUserTagIcons)
 		{
-			GUILayout.Label((Texture)(object)additional_profile_tag_icon, (GUILayoutOption[])(object)new GUILayoutOption[2]
+			GUILayout.Label((Texture)(object)knownUserTagIcon, (GUILayoutOption[])(object)new GUILayoutOption[2]
 			{
 				GUILayout.Width(val2.y),
 				GUILayout.Height(val2.y)
@@ -406,17 +431,17 @@ public static class UIMainMenu
 			});
 			if ((Object)(object)plr.body != (Object)null && !plr.body.alive)
 			{
-				GUI.DrawTexture(GUILayoutUtility.GetLastRect().ShrinkBorder(-1f * GetMenuUIScale()), (Texture)(object)KrokoshaCoopModAssets.cross.texture, (ScaleMode)0, true, 1f, Color.red, 0f, 0f);
+				GUI.DrawTexture(GUILayoutUtility.GetLastRect().ShrinkBorder(-1f * GetMenuUIScale()), (Texture)(object)CoopModAssets.cross.texture, (ScaleMode)0, true, 1f, Color.red, 0f, 0f);
 			}
 		}
-		if (Voicechat.VCRULE_enabled && (Object)(object)plr.vc_output != (Object)null && (Object)(object)KrokoshaCoopModAssets.voicechaticon != (Object)null)
+		if (Voicechat.VCRULE_enabled && (Object)(object)plr.vc_output != (Object)null && (Object)(object)CoopModAssets.voicechaticon != (Object)null)
 		{
 			float realcurvol;
 			Color color = plr.vc_output.CalculateVoiceChatIconColor(out realcurvol);
 			if (realcurvol > 0f || (plr.is_local && Voicechat.IS_RECORDING))
 			{
 				GUI.color = color;
-				GUILayout.Label((Texture)(object)KrokoshaCoopModAssets.voicechaticon.texture, (GUILayoutOption[])(object)new GUILayoutOption[2]
+				GUILayout.Label((Texture)(object)CoopModAssets.voicechaticon.texture, (GUILayoutOption[])(object)new GUILayoutOption[2]
 				{
 					GUILayout.Width(val2.y),
 					GUILayout.Height(val2.y)
@@ -429,7 +454,7 @@ public static class UIMainMenu
 			}
 			num2 += val2.y;
 		}
-		GUI.skin.label.normal.textColor = plr.plrcolor;
+		GUI.skin.label.normal.textColor = plr.playerColor;
 		string text2 = "ping: " + plr.ping_as_ms;
 		Vector2 val3 = GUI.skin.label.CalcSize(new GUIContent(" " + text2));
 		GUILayout.Label(text, (GUILayoutOption[])(object)new GUILayoutOption[1] { GUILayout.MaxWidth(num * 0.97f - (num2 + val3.x)) });
@@ -483,7 +508,7 @@ public static class UIMainMenu
 		GUI.skin.label.wordWrap = false;
 		GUI.skin.label.margin = new RectOffset(0, 0, 0, 0);
 		GUI.skin.label.fontSize = (int)((float)fontSize * 1.3f);
-		GUILayout.Label(Lang.Get("netpanel_title", false) + " v4.0.1", (GUILayoutOption[])(object)new GUILayoutOption[1] { GUILayout.Height((float)GUI.skin.label.fontSize * 1.75f) });
+		GUILayout.Label(Lang.Get("netpanel_title", false) + " v4.1.2", (GUILayoutOption[])(object)new GUILayoutOption[1] { GUILayout.Height((float)GUI.skin.label.fontSize * 1.75f) });
 		GUI.skin.label.fontSize = fontSize;
 		GUI.skin.label.alignment = alignment2;
 		_GUI__PanelInfo();
@@ -976,9 +1001,9 @@ public static class UIMainMenu
 				{
 					foreach (KeyValuePair<knetid, NetPlayer> item in NetPlayer.ClientIdToPlayerDict)
 					{
-						if (!list.Contains(item.Value.plrcolor))
+						if (!list.Contains(item.Value.playerColor))
 						{
-							list.Add(item.Value.plrcolor);
+							list.Add(item.Value.playerColor);
 						}
 					}
 				}
@@ -1022,7 +1047,7 @@ public static class UIMainMenu
 		else
 		{
 			GUILayout.Space(val.y);
-			GUILayout.Label(((Object)(object)NetPlayer.LOCAL_PLAYER != (Object)null) ? NetPlayer.LOCAL_PLAYER.plrcolor.ToHex() : INPUT_COLORHEX, (GUILayoutOption[])(object)new GUILayoutOption[1] { GUILayout.Width(val.x) });
+			GUILayout.Label(((Object)(object)NetPlayer.LOCAL_PLAYER != (Object)null) ? NetPlayer.LOCAL_PLAYER.playerColor.ToHex() : INPUT_COLORHEX, (GUILayoutOption[])(object)new GUILayoutOption[1] { GUILayout.Width(val.x) });
 		}
 		GUI.color = Color.white;
 	}
@@ -1264,7 +1289,7 @@ public static class UIMainMenu
 					KrokoshaScavMultiplayer.DoMultiplayerStatusMessageLog("Disconnected by the user.");
 					Util.PlayUISound((UISoundType)2);
 				}
-				if (Net.is_playing_with_steam && KSteam.IS_IN_LOBBY && ((!KSteam.CURRENT_LOBBY.locked && !Net.cur_server_info.midjoin_lock_active) || Net.is_server))
+				if (Net.IsRunningSteam && KSteam.IS_IN_LOBBY && ((!KSteam.CURRENT_LOBBY.locked && !Net.cur_server_info.midjoin_lock_active) || Net.is_server))
 				{
 					GUILayout.FlexibleSpace();
 					if (GUILayout.Button(Lang.Get("mmct_steam_invitefriends", false), (GUILayoutOption[])(object)new GUILayoutOption[1] { GUILayout.Height(num2) }))
@@ -1806,15 +1831,15 @@ public static class UIMainMenu
 		GUILayout.BeginHorizontal(Array.Empty<GUILayoutOption>());
 		if (plr.is_host)
 		{
-			GUILayout.Label((Texture)(object)KrokoshaCoopModAssets.icon_crown.texture, (GUILayoutOption[])(object)new GUILayoutOption[2]
+			GUILayout.Label((Texture)(object)CoopModAssets.icon_crown.texture, (GUILayoutOption[])(object)new GUILayoutOption[2]
 			{
 				GUILayout.Width(val.y),
 				GUILayout.Height(val.y)
 			});
 		}
-		foreach (Texture2D additional_profile_tag_icon in plr.additional_profile_tag_icons)
+		foreach (Texture2D knownUserTagIcon in plr.KnownUserTagIcons)
 		{
-			GUILayout.Label((Texture)(object)additional_profile_tag_icon, (GUILayoutOption[])(object)new GUILayoutOption[2]
+			GUILayout.Label((Texture)(object)knownUserTagIcon, (GUILayoutOption[])(object)new GUILayoutOption[2]
 			{
 				GUILayout.Width(val.y),
 				GUILayout.Height(val.y)
@@ -1829,7 +1854,7 @@ public static class UIMainMenu
 				GUILayout.Height(val.y)
 			});
 		}
-		GUI.color = plr.plrcolor;
+		GUI.color = plr.playerColor;
 		GUILayout.Label(plr.playername, (GUILayoutOption[])(object)new GUILayoutOption[1] { GUILayout.Width(Mathf.Min(val.x, ((Rect)(ref r)).width * 0.5f)) });
 		GUI.color = Color.white;
 		GUILayout.FlexibleSpace();
@@ -1866,7 +1891,7 @@ public static class UIMainMenu
 		GUILayout.BeginHorizontal(Array.Empty<GUILayoutOption>());
 		if (____GUI___ConnectionSecondPanel_ContentRender_RenderDetailedPlayerList_gaben && GUILayout.Button(Lang.Get("mmct_plr_steamprofile", false), Array.Empty<GUILayoutOption>()))
 		{
-			SteamFriends.ActivateGameOverlayToUser("steamid", (CSteamID)plr.steam_id);
+			SteamFriends.ActivateGameOverlayToUser("steamid", (CSteamID)plr.SteamId);
 		}
 		GUILayout.Space(5f * GetMenuUIScale());
 		if (Con.CanExecuteAdminCommands())
@@ -1874,7 +1899,7 @@ public static class UIMainMenu
 			if ((Object)(object)_COLOR_EDITING == (Object)(object)plr)
 			{
 				Vector2 val2 = GUI.skin.label.CalcSize(new GUIContent("#FFFFFF"));
-				Color24 color = plr.plrcolor;
+				Color24 color = plr.playerColor;
 				if (Color24.TryParseHex(_COLOR_EDITING_STR, out var color2))
 				{
 					color = color2;
@@ -1888,7 +1913,7 @@ public static class UIMainMenu
 				GUI.color = Color.white;
 				if (GUILayout.Button(Lang.Get("mm_apply", false), Array.Empty<GUILayoutOption>()))
 				{
-					if (plr.plrcolor != color)
+					if (plr.playerColor != color)
 					{
 						Con.ExecuteCommandAdminNoLog($"setplrcolor id:{plr.clientId} {color.ToHex()}");
 					}
@@ -1897,10 +1922,10 @@ public static class UIMainMenu
 			}
 			else
 			{
-				GUI.color = plr.plrcolor;
+				GUI.color = plr.playerColor;
 				if (GUILayout.Button(Lang.Get("mmct_plr_setcolor", false), Array.Empty<GUILayoutOption>()))
 				{
-					_COLOR_EDITING_STR = plr.plrcolor.ToHex(with_hashtag: false);
+					_COLOR_EDITING_STR = plr.playerColor.ToHex(with_hashtag: false);
 					_COLOR_EDITING = plr;
 				}
 				GUI.color = Color.white;
@@ -1912,7 +1937,7 @@ public static class UIMainMenu
 		if (!plr.is_local && Con.CanExecuteAdminCommands())
 		{
 			GUILayout.Label(val3, Array.Empty<GUILayoutOption>());
-			if (GUILayout.Button((Texture)(object)KrokoshaCoopModAssets.voicechaticon.texture, (GUILayoutOption[])(object)new GUILayoutOption[2]
+			if (GUILayout.Button((Texture)(object)CoopModAssets.voicechaticon.texture, (GUILayoutOption[])(object)new GUILayoutOption[2]
 			{
 				GUILayout.Width(val4.y),
 				GUILayout.Height(val4.y)
@@ -1925,9 +1950,9 @@ public static class UIMainMenu
 			}
 			if (plr.server_mute_vc)
 			{
-				GUI.DrawTexture(GUILayoutUtility.GetLastRect(), (Texture)(object)KrokoshaCoopModAssets.cross.texture, (ScaleMode)2, true, 1f, Color.red, 0f, 0f);
+				GUI.DrawTexture(GUILayoutUtility.GetLastRect(), (Texture)(object)CoopModAssets.cross.texture, (ScaleMode)2, true, 1f, Color.red, 0f, 0f);
 			}
-			if (GUILayout.Button((Texture)(object)KrokoshaCoopModAssets.speechbubbleicon3.texture, (GUILayoutOption[])(object)new GUILayoutOption[2]
+			if (GUILayout.Button((Texture)(object)CoopModAssets.speechbubbleicon3.texture, (GUILayoutOption[])(object)new GUILayoutOption[2]
 			{
 				GUILayout.Width(val4.y),
 				GUILayout.Height(val4.y)
@@ -1940,7 +1965,7 @@ public static class UIMainMenu
 			}
 			if (plr.server_mute_tc)
 			{
-				GUI.DrawTexture(GUILayoutUtility.GetLastRect(), (Texture)(object)KrokoshaCoopModAssets.cross.texture, (ScaleMode)2, true, 1f, Color.red, 0f, 0f);
+				GUI.DrawTexture(GUILayoutUtility.GetLastRect(), (Texture)(object)CoopModAssets.cross.texture, (ScaleMode)2, true, 1f, Color.red, 0f, 0f);
 			}
 			GUI.enabled = enabled;
 		}
@@ -1948,23 +1973,23 @@ public static class UIMainMenu
 		{
 			GUILayout.FlexibleSpace();
 			GUILayout.Label(val3, Array.Empty<GUILayoutOption>());
-			GUILayout.Label((Texture)(object)KrokoshaCoopModAssets.voicechaticon.texture, (GUILayoutOption[])(object)new GUILayoutOption[2]
+			GUILayout.Label((Texture)(object)CoopModAssets.voicechaticon.texture, (GUILayoutOption[])(object)new GUILayoutOption[2]
 			{
 				GUILayout.Width(val4.y),
 				GUILayout.Height(val4.y)
 			});
 			if (plr.server_mute_vc)
 			{
-				GUI.DrawTexture(GUILayoutUtility.GetLastRect(), (Texture)(object)KrokoshaCoopModAssets.cross.texture, (ScaleMode)2, true, 1f, Color.red, 0f, 0f);
+				GUI.DrawTexture(GUILayoutUtility.GetLastRect(), (Texture)(object)CoopModAssets.cross.texture, (ScaleMode)2, true, 1f, Color.red, 0f, 0f);
 			}
-			GUILayout.Label((Texture)(object)KrokoshaCoopModAssets.speechbubbleicon3.texture, (GUILayoutOption[])(object)new GUILayoutOption[2]
+			GUILayout.Label((Texture)(object)CoopModAssets.speechbubbleicon3.texture, (GUILayoutOption[])(object)new GUILayoutOption[2]
 			{
 				GUILayout.Width(val4.y),
 				GUILayout.Height(val4.y)
 			});
 			if (plr.server_mute_tc)
 			{
-				GUI.DrawTexture(GUILayoutUtility.GetLastRect(), (Texture)(object)KrokoshaCoopModAssets.cross.texture, (ScaleMode)2, true, 1f, Color.red, 0f, 0f);
+				GUI.DrawTexture(GUILayoutUtility.GetLastRect(), (Texture)(object)CoopModAssets.cross.texture, (ScaleMode)2, true, 1f, Color.red, 0f, 0f);
 			}
 			GUILayout.FlexibleSpace();
 		}
@@ -2618,14 +2643,13 @@ public static class UIMainMenu
 
 	private static void _GUI__ABOUTMENU_FULL_CREDITS(Rect r)
 	{
-		//IL_004e: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0058: Expected O, but got Unknown
-		//IL_0053: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0058: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0075: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0083: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0094: Unknown result type (might be due to invalid IL or missing references)
-		gaaaaaaaaaaaaa[0].Item1 = KrokoshaCoopModAssets.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.texture;
+		//IL_0034: Unknown result type (might be due to invalid IL or missing references)
+		//IL_003e: Expected O, but got Unknown
+		//IL_0039: Unknown result type (might be due to invalid IL or missing references)
+		//IL_003e: Unknown result type (might be due to invalid IL or missing references)
+		//IL_005b: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0069: Unknown result type (might be due to invalid IL or missing references)
+		//IL_007a: Unknown result type (might be due to invalid IL or missing references)
 		(Texture2D, string)[] array = gaaaaaaaaaaaaa;
 		for (int i = 0; i < array.Length; i++)
 		{

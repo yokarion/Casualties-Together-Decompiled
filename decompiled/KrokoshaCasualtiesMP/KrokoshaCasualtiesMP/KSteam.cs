@@ -253,9 +253,9 @@ public class KSteam : MonoBehaviour
 		}
 		List<CSteamID> list = new List<CSteamID>();
 		int numLobbyMembers = SteamMatchmaking.GetNumLobbyMembers(steamIDLobby);
-		for (int j = 0; j < numLobbyMembers; j++)
+		for (int k = 0; k < numLobbyMembers; k++)
 		{
-			CSteamID lobbyMemberByIndex = SteamMatchmaking.GetLobbyMemberByIndex(steamIDLobby, j);
+			CSteamID lobbyMemberByIndex = SteamMatchmaking.GetLobbyMemberByIndex(steamIDLobby, k);
 			list.Add(lobbyMemberByIndex);
 		}
 		List<CSteamID> list2 = list;
@@ -367,7 +367,7 @@ public class KSteam : MonoBehaviour
 			{
 				foreach (NetPlayer value in NetPlayer.ClientIdToPlayerDict.Values)
 				{
-					SteamFriends.SetPlayedWith((CSteamID)value.steam_id);
+					SteamFriends.SetPlayedWith((CSteamID)value.SteamId);
 				}
 			}
 		};
@@ -375,7 +375,7 @@ public class KSteam : MonoBehaviour
 		{
 			//IL_002a: Unknown result type (might be due to invalid IL or missing references)
 			SteamTimeline.AddInstantaneousTimelineEvent(WorldGeneration.world.biomeTitles[WorldGeneration.world.biomeDepth], "", "steam_bookmark", 400u, 0f, (ETimelineEventClipPriority)1);
-			if (Net.is_playing_with_steam && Net.is_server)
+			if (Net.IsRunningSteam && Net.is_server)
 			{
 				Server_UpdateLobbyData();
 			}
@@ -420,7 +420,7 @@ public class KSteam : MonoBehaviour
 
 	private void Update10s()
 	{
-		if (Net.is_playing_with_steam && Net.is_server)
+		if (Net.IsRunningSteam && Net.is_server)
 		{
 			Server_UpdateLobbyData();
 		}
@@ -653,10 +653,10 @@ public class KSteam : MonoBehaviour
 			{
 				int num4 = (int)(num2 - 1 - i) * num3;
 				int num5 = i * (int)num;
-				for (int j = 0; j < num; j++)
+				for (int k = 0; k < num; k++)
 				{
-					int num6 = num4 + j * 4;
-					array2[num5 + j] = new Color32(array[num6], array[num6 + 1], array[num6 + 2], array[num6 + 3]);
+					int num6 = num4 + k * 4;
+					array2[num5 + k] = new Color32(array[num6], array[num6 + 1], array[num6 + 2], array[num6 + 3]);
 				}
 			}
 			value = new Texture2D((int)num, (int)num2, (TextureFormat)4, false, true);
@@ -672,7 +672,7 @@ public class KSteam : MonoBehaviour
 	{
 		//IL_0019: Unknown result type (might be due to invalid IL or missing references)
 		//IL_001e: Unknown result type (might be due to invalid IL or missing references)
-		CSteamID steamid = (CSteamID)plr.steam_id;
+		CSteamID steamid = (CSteamID)plr.SteamId;
 		if (steamid.m_SteamID == 0L)
 		{
 			return;
@@ -771,7 +771,7 @@ public class KSteam : MonoBehaviour
 		SteamServerInfoInLobbyExtraData value = new SteamServerInfoInLobbyExtraData(Net.MY_SERVER_INFO);
 		NetDataWriter val = new NetDataWriter();
 		MyLiteNetLibExtensions.PutUnmanaged(val, value);
-		val.PutArray(NetPlayer.ClientIdToPlayerDict.Values.Select((NetPlayer x) => x.steam_id).ToArray());
+		val.PutArray(NetPlayer.ClientIdToPlayerDict.Values.Select((NetPlayer x) => x.SteamId).ToArray());
 		val.Put(KrokoshaScavMultiplayer.SERVER_TOGGLE_ENFORCE_MODLIST);
 		val.PutArray(KrokoshaScavMultiplayer.GetModListGUIDs());
 		MyLiteNetLibExtensions.CompressWriter(val, 0);
@@ -781,45 +781,49 @@ public class KSteam : MonoBehaviour
 
 	public static NetPublicServerInfo Client_LobbyBrowser_ReadLobbyIntoServerInfos(Lobby slobby)
 	{
-		//IL_00fa: Unknown result type (might be due to invalid IL or missing references)
-		//IL_01f9: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0200: Expected O, but got Unknown
-		//IL_01d7: Unknown result type (might be due to invalid IL or missing references)
-		//IL_01dd: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0238: Unknown result type (might be due to invalid IL or missing references)
-		//IL_024f: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0254: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0261: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0115: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0214: Unknown result type (might be due to invalid IL or missing references)
+		//IL_021b: Expected O, but got Unknown
+		//IL_01f2: Unknown result type (might be due to invalid IL or missing references)
+		//IL_01f8: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0253: Unknown result type (might be due to invalid IL or missing references)
+		//IL_026a: Unknown result type (might be due to invalid IL or missing references)
+		//IL_026f: Unknown result type (might be due to invalid IL or missing references)
+		//IL_027c: Unknown result type (might be due to invalid IL or missing references)
 		try
 		{
-			string version = slobby.metadata["CASUALTIESUNKNOWN_KROKOSHA_MULTIPLAYER_COOP_MOD_VERSION"];
-			string text = slobby.metadata["CASUALTIESUNKNOWN_KROKOSHA_MULTIPLAYER_COOP_MOD_LOBBYNAME"];
-			string gamemode = slobby.metadata["CASUALTIESUNKNOWN_KROKOSHA_MULTIPLAYER_COOP_MOD_GAMEMODE"];
+			string text = slobby.metadata["CASUALTIESUNKNOWN_KROKOSHA_MULTIPLAYER_COOP_MOD_VERSION"];
+			string text2 = slobby.metadata["CASUALTIESUNKNOWN_KROKOSHA_MULTIPLAYER_COOP_MOD_LOBBYNAME"];
+			string text3 = slobby.metadata["CASUALTIESUNKNOWN_KROKOSHA_MULTIPLAYER_COOP_MOD_GAMEMODE"];
 			string s = slobby.metadata["CASUALTIESUNKNOWN_KROKOSHA_MULTIPLAYER_COOP_MOD_CURRENTLAYER"];
 			string s2 = slobby.metadata["CASUALTIESUNKNOWN_KROKOSHA_MULTIPLAYER_COOP_MOD_DEPTH"];
 			string s3 = slobby.metadata["CASUALTIESUNKNOWN_KROKOSHA_MULTIPLAYER_COOP_MOD_LIVINGCOUNT"];
 			string s4 = slobby.metadata["CASUALTIESUNKNOWN_KROKOSHA_MULTIPLAYER_COOP_MOD_PLRCOUNT"];
 			string s5 = slobby.metadata["CASUALTIESUNKNOWN_KROKOSHA_MULTIPLAYER_COOP_MOD_AVGMOOD"];
 			string s6 = slobby.metadata["CASUALTIESUNKNOWN_KROKOSHA_MULTIPLAYER_COOP_MOD_EXTRADATA"];
-			string text2 = slobby.metadata["CASUALTIESUNKNOWN_KROKOSHA_MULTIPLAYER_COOP_MOD_HASPASSWORD"];
-			string text3 = slobby.metadata["CASUALTIESUNKNOWN_KROKOSHA_MULTIPLAYER_COOP_MOD_ISDEDICATED"];
-			string text4 = slobby.metadata["CASUALTIESUNKNOWN_KROKOSHA_MULTIPLAYER_COOP_MOD_LOCKED"];
-			if (text.Length > 32)
+			string text4 = slobby.metadata["CASUALTIESUNKNOWN_KROKOSHA_MULTIPLAYER_COOP_MOD_HASPASSWORD"];
+			string text5 = slobby.metadata["CASUALTIESUNKNOWN_KROKOSHA_MULTIPLAYER_COOP_MOD_ISDEDICATED"];
+			string text6 = slobby.metadata["CASUALTIESUNKNOWN_KROKOSHA_MULTIPLAYER_COOP_MOD_LOCKED"];
+			if (text2.Length > 32)
 			{
 				return null;
 			}
-			if (KrokoshaScavMultiplayer.SanitizeTextInputAllowSpaces(text) != text)
+			if (text.Length > 20 || text3.Length > 8)
 			{
-				text = $"Expedition {slobby.lobby_steamID}";
+				return null;
+			}
+			if (KrokoshaScavMultiplayer.SanitizeTextInputAllowSpaces(text2) != text2)
+			{
+				text2 = $"Expedition {slobby.lobby_steamID}";
 			}
 			NetPublicServerInfo netPublicServerInfo = new NetPublicServerInfo();
 			netPublicServerInfo.steam_lobby_info = slobby;
-			netPublicServerInfo.name = text;
-			netPublicServerInfo.version = version;
-			netPublicServerInfo.haspassword = text2 != "0";
-			netPublicServerInfo.dedicated = text3 != "0";
-			netPublicServerInfo.midjoin_lock_active = text4 != "0";
-			netPublicServerInfo.gamemode = gamemode;
+			netPublicServerInfo.name = text2;
+			netPublicServerInfo.version = text;
+			netPublicServerInfo.haspassword = text4 != "0";
+			netPublicServerInfo.dedicated = text5 != "0";
+			netPublicServerInfo.midjoin_lock_active = text6 != "0";
+			netPublicServerInfo.gamemode = text3;
 			netPublicServerInfo.cur_layer = int.Parse(s);
 			netPublicServerInfo.avg_happiness = int.Parse(s5);
 			netPublicServerInfo.cur_depth = int.Parse(s2);
@@ -1442,8 +1446,8 @@ public class KSteam : MonoBehaviour
 		if (Net.is_host && (Object)(object)NetPlayer.LOCAL_PLAYER == (Object)null)
 		{
 			NetPlayer.LOCAL_PLAYER = Net.CreatePlayer((ushort)0, GetLocalUsername(), UIMainMenu.LAST_VALID_INPUT_COLOR);
-			NetPlayer.LOCAL_PLAYER.steam_id = GetLocalUserSteamID().m_SteamID;
-			tsteam.SteamIDToNetPlayerDict[NetPlayer.LOCAL_PLAYER.steam_id] = NetPlayer.LOCAL_PLAYER;
+			NetPlayer.LOCAL_PLAYER.SteamId = GetLocalUserSteamID().m_SteamID;
+			tsteam.SteamIDToNetPlayerDict[NetPlayer.LOCAL_PLAYER.SteamId] = NetPlayer.LOCAL_PLAYER;
 		}
 		SteamMatchmaking.SetLobbyData(lobbyId, "CASUALTIESUNKNOWN_KROKOSHA_MULTIPLAYER_COOP_MOD_VERSION", KrokoshaScavMultiplayer.FULL_VERSION_TAG);
 		SteamMatchmaking.SetLobbyData(lobbyId, "bucket", num.ToString());
@@ -1579,7 +1583,7 @@ public class KSteam : MonoBehaviour
 			GetSteamUsername(val.m_SteamID, force_reload_name: true);
 			if (tsteam.SteamIDToNetPlayerDict.TryGetValue(pCallback.m_ulSteamID, out var value) && !value.nameIsCustom)
 			{
-				value.ApplyNameAndColor(((object)(*(CSteamID*)(&val))/*cast due to constrained. prefix*/).ToString(), value.plrcolor);
+				value.ApplyNameAndColor(((object)(*(CSteamID*)(&val))/*cast due to constrained. prefix*/).ToString(), value.playerColor);
 			}
 		}
 		((Enum)nChangeFlags).HasFlag((Enum)(object)(EPersonaChange)64);
@@ -2109,7 +2113,7 @@ public class KSteam : MonoBehaviour
 			Plugin.Logger.LogInfo((object)KrokoshaCasualtiesMP.log.do_timestamp(what));
 			if ((Object)(object)Con.con != (Object)null)
 			{
-				Con.con.LogToConsole("<color=#00ffffff>KrokMP:  " + what + "</color>");
+				Con.con.LogToConsole("<color=#00ffffff>MP:  " + what + "</color>");
 			}
 		}
 		catch (Exception ex)

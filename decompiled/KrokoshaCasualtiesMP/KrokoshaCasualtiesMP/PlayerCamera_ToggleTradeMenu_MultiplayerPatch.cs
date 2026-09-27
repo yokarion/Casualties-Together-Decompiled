@@ -87,7 +87,7 @@ internal static class PlayerCamera_ToggleTradeMenu_MultiplayerPatch
 				component.offsetMax += val;
 				component.offsetMin += val;
 				((Transform)component).SetSiblingIndex(traderMoveButon.transform.GetSiblingIndex());
-				((Component)RECRUITButton.transform.GetChild(0)).GetComponent<Image>().sprite = KrokoshaCoopModAssets.recruit;
+				((Component)RECRUITButton.transform.GetChild(0)).GetComponent<Image>().sprite = CoopModAssets.recruit;
 				Button component2 = RECRUITButton.GetComponent<Button>();
 				((UnityEventBase)component2.onClick).RemoveAllListeners();
 				((UnityEventBase)component2.onClick).SetPersistentListenerState(0, (UnityEventCallState)0);

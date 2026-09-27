@@ -6,9 +6,9 @@ namespace KrokoshaCasualtiesMP;
 
 internal class log
 {
-	public const string name = "KrokMP";
+	public const string name = "MP";
 
-	public const string prefix1 = "KrokMP: ";
+	public const string prefix1 = "MP: ";
 
 	public static bool verbose => KrokoshaScavMultiplayer.verbose;
 
@@ -40,7 +40,7 @@ internal class log
 		}
 		if ((verbose || ignoreverbose) && Object.op_Implicit((Object)(object)con))
 		{
-			con.LogToConsole("KrokMP: " + s);
+			con.LogToConsole("MP: " + s);
 		}
 	}
 
@@ -55,7 +55,7 @@ internal class log
 		Plugin.log.LogInfo((object)do_timestamp(s));
 		if (console && Object.op_Implicit((Object)(object)con))
 		{
-			con.LogToConsole("KrokMP: " + s);
+			con.LogToConsole("MP: " + s);
 		}
 	}
 
@@ -70,7 +70,7 @@ internal class log
 		Plugin.log.LogWarning((object)do_timestamp(s));
 		if (console && Object.op_Implicit((Object)(object)con))
 		{
-			con.LogToConsole("<color=yellow>KrokMP WARN: " + s + "</color>");
+			con.LogToConsole("<color=yellow>MP WARN: " + s + "</color>");
 		}
 	}
 
@@ -97,7 +97,7 @@ internal class log
 		Plugin.log.LogError((object)do_timestamp(s));
 		if (console && Object.op_Implicit((Object)(object)con))
 		{
-			con.LogToConsole("<color=red>KrokMP ERROR: " + s + "</color>");
+			con.LogToConsole("<color=red>MP ERROR: " + s + "</color>");
 		}
 	}
 
@@ -108,7 +108,7 @@ internal class log
 		Plugin.log.LogWarning((object)do_timestamp(s));
 		if (console && Object.op_Implicit((Object)(object)con) && KrokoshaScavMultiplayer.verbose)
 		{
-			con.LogToConsole("<color=orange>KrokMP: " + s + "</color>");
+			con.LogToConsole("<color=orange>MP: " + s + "</color>");
 		}
 	}
 
@@ -119,7 +119,7 @@ internal class log
 		Plugin.log.LogWarning((object)do_timestamp(s));
 		if (Object.op_Implicit((Object)(object)con) && KrokoshaScavMultiplayer.verbose)
 		{
-			con.LogToConsole("<color=yellow>KrokMP: " + s + "</color>");
+			con.LogToConsole("<color=yellow>MP: " + s + "</color>");
 		}
 	}
 

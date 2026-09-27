@@ -114,7 +114,7 @@ public class CharStatusVisuals : MonoBehaviour
 			SpriteRenderer val2 = val.AddComponent<SpriteRenderer>();
 			((Renderer)val2).sortingOrder = 6000;
 			val2.color = color_st;
-			val.transform.localScale = Vector3.one * 9f;
+			val.transform.localScale = Vector3.one * 0.9f;
 			characterStatusIcon.Create(this, val2);
 			IconInstance iconInstance = new IconInstance
 			{
@@ -146,16 +146,48 @@ public class CharStatusVisuals : MonoBehaviour
 
 	public void MakeNametagFancy()
 	{
-		//IL_0039: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0043: Expected O, but got Unknown
-		TextMeshPro component = nametag.GetComponent<TextMeshPro>();
-		if (!((Object)(object)((TMP_Text)component).fontMaterial != (Object)null) || !((Object)((TMP_Text)component).fontMaterial).name.StartsWith("FANCY"))
+		MakeNametagFancy((TMP_Text)(object)nametag.GetComponent<TextMeshPro>(), plr);
+	}
+
+	public static void MakeNametagFancy(TMP_Text tmp, NetPlayer plr)
+	{
+		//IL_002d: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0037: Expected O, but got Unknown
+		if (!((Object)(object)tmp.fontMaterial != (Object)null) || !((Object)tmp.fontMaterial).name.StartsWith("FANCY"))
 		{
-			((TMP_Text)component).fontMaterial = new Material(((TMP_Text)component).fontMaterial);
-			((Object)((TMP_Text)component).fontMaterial).name = "FANCYTEXT";
-			((TMP_Text)component).fontMaterial.shader = KrokoshaCoopModAssets.coolshader;
-			((TMP_Text)component).fontMaterial.SetFloat("_OutlineWidth", ((TMP_Text)component).outlineWidth);
+			tmp.fontMaterial = new Material(tmp.fontMaterial);
+			((Object)tmp.fontMaterial).name = "FANCYTEXT";
+			tmp.fontMaterial.shader = CoopModAssets.coolshader;
+			tmp.fontMaterial.SetFloat("_OutlineWidth", tmp.outlineWidth);
+			if ((Object)(object)plr != (Object)null)
+			{
+				FancyNametagUpdateColor(tmp, plr.playerColor);
+			}
 		}
+	}
+
+	public static bool FancyNametagUpdateColor(TMP_Text tmp, Color24 color, float scale = 0.9f)
+	{
+		//IL_001b: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0025: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0032: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0037: Unknown result type (might be due to invalid IL or missing references)
+		//IL_003d: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0047: Unknown result type (might be due to invalid IL or missing references)
+		//IL_004c: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0058: Unknown result type (might be due to invalid IL or missing references)
+		//IL_006a: Unknown result type (might be due to invalid IL or missing references)
+		if (((Object)tmp.fontMaterial).name.StartsWith("FANCY"))
+		{
+			((Graphic)tmp).color = Color.white * 1.2f;
+			Color val = Color.Lerp(Util_MiscSystemExtensions.ColorBW(color), (Color)color, 0.3f);
+			tmp.fontMaterial.SetColor("_ColorA", val);
+			tmp.fontMaterial.SetColor("_ColorB", (Color)color);
+			tmp.fontMaterial.SetFloat("_LocalGradientScale", scale);
+			tmp.fontMaterial.SetFloat("_GradientSpeed", 6f);
+			return true;
+		}
+		return false;
 	}
 
 	protected void LateUpdate()

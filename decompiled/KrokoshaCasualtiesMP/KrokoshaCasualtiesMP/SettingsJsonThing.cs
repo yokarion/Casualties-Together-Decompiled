@@ -2,14 +2,17 @@ namespace KrokoshaCasualtiesMP;
 
 public class SettingsJsonThing : KrokoshaScavSingleton
 {
-	public static SettingsJsonThing Instance;
+	private static JsonConfigThingy thing;
 
-	private JsonConfigThingy thing = new JsonConfigThingy("mp_settings.json");
-
-	public static JsonConfigThingy json => Instance.thing;
-
-	public SettingsJsonThing()
+	public static JsonConfigThingy json
 	{
-		Instance = this;
+		get
+		{
+			if (thing == null)
+			{
+				thing = new JsonConfigThingy("mp_settings.json");
+			}
+			return thing;
+		}
 	}
 }

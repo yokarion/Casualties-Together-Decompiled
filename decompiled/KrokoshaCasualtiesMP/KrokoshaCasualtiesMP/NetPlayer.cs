@@ -8,6 +8,7 @@ using LiteNetLib;
 using LiteNetLib.Utils;
 using Steamworks;
 using TMPro;
+using Together;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -19,7 +20,7 @@ public class NetPlayer : MonoBehaviour
 
 	public Server_PlayerState server_plrstate;
 
-	public ulong steam_id;
+	public ulong SteamId;
 
 	public Texture2D profilepic_largeicon;
 
@@ -27,7 +28,7 @@ public class NetPlayer : MonoBehaviour
 
 	public Texture2D profilepic_smallicon;
 
-	public List<Texture2D> additional_profile_tag_icons = new List<Texture2D>();
+	public List<Texture2D> KnownUserTagIcons = new List<Texture2D>();
 
 	public Vector2 cursorpos = Vector2.zero;
 
@@ -90,7 +91,7 @@ public class NetPlayer : MonoBehaviour
 	[DoSync]
 	public bool is_trading;
 
-	[DoSync]
+	[AlwaysSync]
 	public ushort woundViewTargetNetBodyId;
 
 	[DoSync]
@@ -123,7 +124,7 @@ public class NetPlayer : MonoBehaviour
 
 	private static TMP_FontAsset s_retroGamingFontAsset = null;
 
-	public Color24 plrcolor = Color.black;
+	public Color24 playerColor = Color.black;
 
 	public static Color[] DEFAULT_TEAMS = (Color[])(object)new Color[4]
 	{
@@ -167,7 +168,7 @@ public class NetPlayer : MonoBehaviour
 
 	public byte is_pointingfingeratTYPE;
 
-	public double is_pointingfingeratTIME;
+	public double is_pointingfingeratTIME = -9990.0;
 
 	public Vector2 is_pointingfingeratTARGET = Vector2.zero;
 
@@ -524,9 +525,9 @@ public class NetPlayer : MonoBehaviour
 		{
 			return "PLR(NULL)";
 		}
-		if (steam_id != 0L && Net.is_playing_with_steam)
+		if (SteamId != 0L && Net.IsRunningSteam)
 		{
-			return $"PLR(ID:{clientId}, name:{playername}, SteamID: {steam_id})";
+			return $"PLR(ID:{clientId}, name:{playername}, SteamID: {SteamId})";
 		}
 		return $"PLR(ID:{clientId}, name:{playername})";
 	}
@@ -601,9 +602,9 @@ public class NetPlayer : MonoBehaviour
 		//IL_01ff: Unknown result type (might be due to invalid IL or missing references)
 		if (Net.TryGetSteamTransport(out var _))
 		{
-			if (!nameIsCustom && steam_id.ToString() == name)
+			if (!nameIsCustom && SteamId.ToString() == name)
 			{
-				name = KSteam.GetSteamUsername(steam_id);
+				name = KSteam.GetSteamUsername(SteamId);
 			}
 		}
 		else
@@ -620,9 +621,9 @@ public class NetPlayer : MonoBehaviour
 			name = FontUtils.ReplaceMissingCharacters(s_retroGamingFontAsset, name);
 		}
 		bool flag = nameIsCustom && playername != name;
-		bool flag2 = plrcolor != color;
+		bool flag2 = playerColor != color;
 		playername = name;
-		plrcolor = color;
+		playerColor = color;
 		((Object)((Component)this).gameObject).name = "PlayerObject_" + name;
 		if (KrokoshaScavMultiplayer.is_server && (flag || flag2))
 		{
@@ -669,7 +670,7 @@ public class NetPlayer : MonoBehaviour
 
 	public bool IsInSameTeamAs(NetPlayer plr)
 	{
-		return plrcolor == plr.plrcolor;
+		return playerColor == plr.playerColor;
 	}
 
 	private void Awake()
@@ -702,7 +703,7 @@ public class NetPlayer : MonoBehaviour
 			}
 			Color24 result = NAMETAG_DEFAULT_COLORS[SERVER_NAMETAG_COLOR_PICKER_COUNTER];
 			SERVER_NAMETAG_COLOR_PICKER_COUNTER++;
-			if (!ClientIdToPlayerDict.Values.Any((NetPlayer x) => x.plrcolor == result))
+			if (!ClientIdToPlayerDict.Values.Any((NetPlayer x) => x.playerColor == result))
 			{
 				return result;
 			}
@@ -714,7 +715,7 @@ public class NetPlayer : MonoBehaviour
 			{
 				result2[Random.Range(0, 3)] = (byte)Random.Range(200, 255);
 			}
-			if (!ClientIdToPlayerDict.Values.Any((NetPlayer x) => x.plrcolor == result2))
+			if (!ClientIdToPlayerDict.Values.Any((NetPlayer x) => x.playerColor == result2))
 			{
 				return result2;
 			}
@@ -733,21 +734,22 @@ public class NetPlayer : MonoBehaviour
 		//IL_00a1: Unknown result type (might be due to invalid IL or missing references)
 		//IL_00c0: Unknown result type (might be due to invalid IL or missing references)
 		//IL_00ca: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0298: Unknown result type (might be due to invalid IL or missing references)
-		//IL_029f: Expected O, but got Unknown
+		//IL_00d4: Unknown result type (might be due to invalid IL or missing references)
+		//IL_02a2: Unknown result type (might be due to invalid IL or missing references)
+		//IL_02a9: Expected O, but got Unknown
 		locationPingCircle = new GameObject("fingerpointercircle");
 		SpriteRenderer obj = locationPingCircle.AddComponent<SpriteRenderer>();
-		obj.sprite = KrokoshaCoopModAssets.circlething;
+		obj.sprite = CoopModAssets.circlething;
 		obj.color = new Color(0f, 0f, 0f, 0f);
 		((Renderer)obj).sortingOrder = 6000;
 		Object.DontDestroyOnLoad((Object)(object)locationPingCircle);
 		locationPingCircle.SetActive(false);
 		locationPingArrow = new GameObject("fingerpointerarrow");
 		SpriteRenderer obj2 = locationPingArrow.AddComponent<SpriteRenderer>();
-		obj2.sprite = KrokoshaCoopModAssets.arrowicon;
+		obj2.sprite = CoopModAssets.arrowicon;
 		obj2.color = new Color(0f, 0f, 0f, 0f);
 		((Renderer)obj2).sortingOrder = 6000;
-		locationPingArrow.transform.localScale = Vector3.one * 8f;
+		locationPingArrow.transform.localScale = Vector3.one * 8f * 0.08f;
 		Object.DontDestroyOnLoad((Object)(object)locationPingArrow);
 		locationPingArrow.SetActive(false);
 		bool flag = Net.TRANSPORT != null && Net.TRANSPORT is TransportSteamworks;
@@ -770,9 +772,9 @@ public class NetPlayer : MonoBehaviour
 					log.error(ex.ToString());
 				}
 			}
-			if (!CheckIfPlrColorIsValid(plrcolor))
+			if (!CheckIfPlrColorIsValid(playerColor))
 			{
-				plrcolor = PickNewPlayerColor();
+				playerColor = PickNewPlayerColor();
 			}
 			((Object)this).name = "PlayerObject_" + playername;
 			string message = playername + " just joined the game!";
@@ -787,7 +789,7 @@ public class NetPlayer : MonoBehaviour
 				string persistentId = GetPersistentId();
 				if (ServerMain.server_lastplayerstates.TryGetValue(persistentId, out var value))
 				{
-					plrcolor = value.plrcolor;
+					playerColor = value.plrcolor;
 				}
 			}
 		}
@@ -825,7 +827,7 @@ public class NetPlayer : MonoBehaviour
 				item.Value.Server__ResponsePlayerName(clientId);
 			}
 		}
-		ApplyNameAndColor(playername, plrcolor);
+		ApplyNameAndColor(playername, playerColor);
 		NetPlayer.OnPlayerJoined?.Invoke(this);
 		((MonoBehaviour)this).InvokeRepeating("SlowUpdate", 1f, 1f);
 		((MonoBehaviour)this).InvokeRepeating("SlowButFastUpdate", 1f, 0.1f);
@@ -850,9 +852,9 @@ public class NetPlayer : MonoBehaviour
 
 	public string GetPersistentId()
 	{
-		if (Net.is_playing_with_steam)
+		if (Net.IsRunningSteam)
 		{
-			return "STEAM_" + steam_id;
+			return "STEAM_" + SteamId;
 		}
 		return "NAME_" + playername_as_hex;
 	}
@@ -933,9 +935,9 @@ public class NetPlayer : MonoBehaviour
 			{
 				writer.Put(playername);
 			}
-			writer.Put(plrcolor);
+			writer.Put(playerColor);
 			writer.Put((ushort)clientId);
-			writer.Put(steam_id);
+			writer.Put(SteamId);
 			Net.Server_SendToClients((DeliveryMethod)2, in writer, clientId);
 		}
 		if (list.Count != 0)
@@ -948,9 +950,9 @@ public class NetPlayer : MonoBehaviour
 			{
 				writer.Put(playername);
 			}
-			writer.Put(plrcolor);
+			writer.Put(playerColor);
 			writer.Put((ushort)clientId);
-			writer.Put(steam_id);
+			writer.Put(SteamId);
 			DeliveryMethod delivery = (DeliveryMethod)2;
 			IEnumerable<knetid> clientIds = list;
 			Net.Server_SendToClients(in delivery, in writer, in clientIds);
@@ -1013,9 +1015,9 @@ public class NetPlayer : MonoBehaviour
 		{
 			LOCAL_PLAYER = plr;
 		}
-		plr.steam_id = num;
+		plr.SteamId = num;
 		plr.ApplyNameAndColor(name, result);
-		KrokoshaScavMultiplayer.DoMultiplayerStatusMessageLog($"Received others player name {plr} color: {plr.plrcolor}  its_me: {flag}");
+		KrokoshaScavMultiplayer.DoMultiplayerStatusMessageLog($"Received others player name {plr} color: {plr.playerColor}  its_me: {flag}");
 	}
 
 	public bool HasGunEquipped(out GunScript gun)
@@ -1091,7 +1093,7 @@ public class NetPlayer : MonoBehaviour
 
 	public void Server_Kick(string message = "Kicked.")
 	{
-		if (Net.TryGetSteamTransport(out var _) && KnownPersons.PRIVILEGED_STEAM_USERS.Contains(steam_id))
+		if (Net.TryGetSteamTransport(out var _) && KnownPersons.IsSteamUserPrivileged(SteamId))
 		{
 			return;
 		}
@@ -1231,13 +1233,13 @@ public class NetPlayer : MonoBehaviour
 		switch (type)
 		{
 		case 0:
-			component.sprite = KrokoshaCoopModAssets.circlething;
+			component.sprite = CoopModAssets.circlething;
 			break;
 		case 1:
-			component.sprite = KrokoshaCoopModAssets.alert2;
+			component.sprite = CoopModAssets.alert2;
 			break;
 		default:
-			component.sprite = KrokoshaCoopModAssets.circlething;
+			component.sprite = CoopModAssets.circlething;
 			break;
 		}
 	}
@@ -1266,33 +1268,34 @@ public class NetPlayer : MonoBehaviour
 		//IL_015b: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0165: Unknown result type (might be due to invalid IL or missing references)
 		//IL_016f: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0181: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0179: Unknown result type (might be due to invalid IL or missing references)
+		//IL_018b: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0100: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0102: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0115: Unknown result type (might be due to invalid IL or missing references)
 		//IL_011a: Unknown result type (might be due to invalid IL or missing references)
 		//IL_011f: Unknown result type (might be due to invalid IL or missing references)
-		//IL_01b7: Unknown result type (might be due to invalid IL or missing references)
-		//IL_01bc: Unknown result type (might be due to invalid IL or missing references)
-		//IL_020f: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0214: Unknown result type (might be due to invalid IL or missing references)
+		//IL_01c1: Unknown result type (might be due to invalid IL or missing references)
+		//IL_01c6: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0219: Unknown result type (might be due to invalid IL or missing references)
-		//IL_021f: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0224: Unknown result type (might be due to invalid IL or missing references)
-		//IL_023c: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0241: Unknown result type (might be due to invalid IL or missing references)
+		//IL_021e: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0223: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0229: Unknown result type (might be due to invalid IL or missing references)
+		//IL_022e: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0246: Unknown result type (might be due to invalid IL or missing references)
-		//IL_024d: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0252: Unknown result type (might be due to invalid IL or missing references)
+		//IL_024b: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0250: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0257: Unknown result type (might be due to invalid IL or missing references)
-		//IL_026a: Unknown result type (might be due to invalid IL or missing references)
+		//IL_025c: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0261: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0274: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0279: Unknown result type (might be due to invalid IL or missing references)
+		//IL_027e: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0283: Unknown result type (might be due to invalid IL or missing references)
-		//IL_02a2: Unknown result type (might be due to invalid IL or missing references)
-		//IL_02a7: Unknown result type (might be due to invalid IL or missing references)
-		//IL_02b4: Unknown result type (might be due to invalid IL or missing references)
-		//IL_02ca: Unknown result type (might be due to invalid IL or missing references)
+		//IL_028d: Unknown result type (might be due to invalid IL or missing references)
+		//IL_02ac: Unknown result type (might be due to invalid IL or missing references)
+		//IL_02b1: Unknown result type (might be due to invalid IL or missing references)
+		//IL_02be: Unknown result type (might be due to invalid IL or missing references)
+		//IL_02d4: Unknown result type (might be due to invalid IL or missing references)
 		if (is_pointingfingerat && (!Util.IsInWorld() || Time.timeAsDouble - is_pointingfingeratTIME > 3.0))
 		{
 			is_pointingfingerat = false;
@@ -1320,8 +1323,8 @@ public class NetPlayer : MonoBehaviour
 				val += Vector2.up * (4f + num3 * 0.7f);
 			}
 			locationPingCircle.transform.position = KM.v3v2z(val, -2.601f);
-			locationPingCircle.transform.localScale = Vector3.one * (1f + num3 * 0.3f) * 32f * 0.5f;
-			component.color = plrcolor.ToColorWithAlpha(num2);
+			locationPingCircle.transform.localScale = Vector3.one * (1f + num3 * 0.3f) * 32f * 0.5f * 0.08f;
+			component.color = playerColor.ToColorWithAlpha(num2);
 		}
 		bool flag2 = (Object)(object)body != (Object)null && flag && IsConscious() && locationPingCircle.activeSelf && !KM.dist2dsqrcheck(in is_pointingfingeratTARGET, pos, 8f);
 		if (locationPingArrow.activeSelf != flag2)
@@ -1359,7 +1362,7 @@ public class NetPlayer : MonoBehaviour
 
 	public void OnDestroy()
 	{
-		//IL_00f1: Unknown result type (might be due to invalid IL or missing references)
+		//IL_00f2: Unknown result type (might be due to invalid IL or missing references)
 		try
 		{
 			if (Util.IsInWorld() && (Object)(object)body != (Object)null && KrokoshaScavMultiplayer.rules.DisconnectShouldSaveAnything)
@@ -1392,7 +1395,7 @@ public class NetPlayer : MonoBehaviour
 			{
 				NetDataWriter writer = Net.CreateWriter(10170);
 				writer.Put((ushort)clientId);
-				writer.Put(steam_id);
+				writer.Put(SteamId);
 				Net.Server_SendToClients((DeliveryMethod)2, in writer, (IEnumerable<knetid>)ServerMain.AllClientIdsExceptHost);
 				string msg = playername + " disconnected.";
 				KrokoshaScavMultiplayer.DoMultiplayerStatusMessageLog(msg);

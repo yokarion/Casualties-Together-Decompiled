@@ -11,6 +11,8 @@ public struct CharacterLimbHealthState : INetSerializeByMemcpy
 
 	private byte shrapnel = 0;
 
+	private byte compressednumfurBloodAmount = 0;
+
 	private byte compressednum6 = 0;
 
 	private byte compressednum7 = 0;
@@ -89,6 +91,18 @@ public struct CharacterLimbHealthState : INetSerializeByMemcpy
 		}
 	}
 
+	public float furBloodAmount
+	{
+		get
+		{
+			return (float)(int)compressednumfurBloodAmount / 25.5f;
+		}
+		set
+		{
+			compressednumfurBloodAmount = (byte)(Mathf.Clamp(value, 0f, 10f) * 25.5f);
+		}
+	}
+
 	public float muscleHealth
 	{
 		get
@@ -156,6 +170,7 @@ public struct CharacterLimbHealthState : INetSerializeByMemcpy
 		infected = limb.infected;
 		muscleHealth = limb.muscleHealth;
 		skinHealth = limb.skinHealth;
+		furBloodAmount = limb.furBloodAmount;
 		if (!limb.broken)
 		{
 			boneHealTimer = 0f;
@@ -274,6 +289,7 @@ public struct CharacterLimbHealthState : INetSerializeByMemcpy
 		{
 			limb.MendBone();
 		}
+		limb.furBloodAmount = furBloodAmount;
 		limb.dismembered = dismembered;
 		limb.shrapnel = shrapnel;
 		limb.infected = infected;

@@ -187,9 +187,9 @@ public class WorldChunkSync : KrokoshaScavSingleton
 			using MemoryStream memoryStream2 = new MemoryStream();
 			for (int i = 0; i < 32; i++)
 			{
-				for (int j = 0; j < 32; j++)
+				for (int k = 0; k < 32; k++)
 				{
-					memoryStream2.WriteByte((byte)array[j + num, i + num2]);
+					memoryStream2.WriteByte((byte)array[k + num, i + num2]);
 				}
 			}
 			byte[] array2 = memoryStream2.ToArray();
@@ -214,9 +214,9 @@ public class WorldChunkSync : KrokoshaScavSingleton
 			using MemoryStream memoryStream2 = new MemoryStream();
 			for (int i = 0; i < 32; i++)
 			{
-				for (int j = 0; j < 32; j++)
+				for (int k = 0; k < 32; k++)
 				{
-					memoryStream2.WriteByte(array[j + num, i + num2]);
+					memoryStream2.WriteByte(array[k + num, i + num2]);
 				}
 			}
 			byte[] array2 = memoryStream2.ToArray();
@@ -290,9 +290,9 @@ public class WorldChunkSync : KrokoshaScavSingleton
 			((Vector2Int)(ref val2))._002Ector(((Vector2Int)(ref current2)).x / 32, ((Vector2Int)(ref current2)).y / 32);
 			for (int i = 0; i < 3; i++)
 			{
-				for (int j = 0; j < 3; j++)
+				for (int k = 0; k < 3; k++)
 				{
-					Vector2Int val3 = val2 + new Vector2Int(j, i);
+					Vector2Int val3 = val2 + new Vector2Int(k, i);
 					((Vector2Int)(ref val3)).Clamp(new Vector2Int(0, 0), new Vector2Int(31, 31));
 					hashSet.Add((Vector2UInt8)val3);
 				}
@@ -313,9 +313,9 @@ public class WorldChunkSync : KrokoshaScavSingleton
 		ushort num2 = 0;
 		for (int i = ymin; i < ymax; i++)
 		{
-			for (int j = xmin; j < xmax; j++)
+			for (int k = xmin; k < xmax; k++)
 			{
-				ushort num3 = arr[j, i];
+				ushort num3 = arr[k, i];
 				if (num3 != 0)
 				{
 					num2++;
@@ -382,9 +382,9 @@ public class WorldChunkSync : KrokoshaScavSingleton
 			writer.Put((byte)((Vector2Int)(ref val)).y);
 			for (int i = 0; i < 8; i++)
 			{
-				for (int j = 0; j < 8; j++)
+				for (int k = 0; k < 8; k++)
 				{
-					int num = (((Vector2Int)(ref val)).x + j) * 32;
+					int num = (((Vector2Int)(ref val)).x + k) * 32;
 					int num2 = (((Vector2Int)(ref val)).y + i) * 32;
 					uint num3 = HashRegion(worldBlocks, num, num + 32, num2, num2 + 32);
 					writer.Put(num3);
@@ -407,11 +407,11 @@ public class WorldChunkSync : KrokoshaScavSingleton
 		Vector2UInt8 vector2UInt = WorldPosToSyncchunkCoordinateSafe(plr.pos - new Vector2(16f, 0f));
 		for (int i = Mathf.Max(0, vector2UInt.y - 2); i < Mathf.Min(vector2UInt.y + 1, 32); i++)
 		{
-			for (int j = vector2UInt.x; j < Mathf.Min(vector2UInt.x + 2, 32); j++)
+			for (int k = vector2UInt.x; k < Mathf.Min(vector2UInt.x + 2, 32); k++)
 			{
-				if (!plr.server_plrstate.known_chunks[j, i])
+				if (!plr.server_plrstate.known_chunks[k, i])
 				{
-					Vector2UInt8 syncchunk_coordinate = new Vector2UInt8(j, i);
+					Vector2UInt8 syncchunk_coordinate = new Vector2UInt8(k, i);
 					Server_Sendchunk(syncchunk_coordinate, plr);
 					Server_SendFluidChunk(syncchunk_coordinate, plr);
 				}
@@ -442,9 +442,9 @@ public class WorldChunkSync : KrokoshaScavSingleton
 		byte[,] array = new byte[CHUNKSIZE, CHUNKSIZE];
 		for (int i = 0; i < CHUNKSIZE; i++)
 		{
-			for (int j = 0; j < CHUNKSIZE; j++)
+			for (int k = 0; k < CHUNKSIZE; k++)
 			{
-				array[i, j] = (byte)worldBlocks[i + ((Vector2Int)(ref val)).x, j + ((Vector2Int)(ref val)).y];
+				array[i, k] = (byte)worldBlocks[i + ((Vector2Int)(ref val)).x, k + ((Vector2Int)(ref val)).y];
 			}
 		}
 		return array;
@@ -455,9 +455,9 @@ public class WorldChunkSync : KrokoshaScavSingleton
 		byte[,] array = new byte[64, 64];
 		for (int i = 0; i < 64; i++)
 		{
-			for (int j = 0; j < 64; j++)
+			for (int k = 0; k < 64; k++)
 			{
-				array[i, j] = fluid[i + ((Vector2Int)(ref lefttopcorner)).x, j + ((Vector2Int)(ref lefttopcorner)).y];
+				array[i, k] = fluid[i + ((Vector2Int)(ref lefttopcorner)).x, k + ((Vector2Int)(ref lefttopcorner)).y];
 			}
 		}
 		return array;
@@ -484,10 +484,10 @@ public class WorldChunkSync : KrokoshaScavSingleton
 		int num = 0;
 		for (int i = 0; i < 32; i++)
 		{
-			for (int j = 0; j < 32; j++)
+			for (int k = 0; k < 32; k++)
 			{
 				byte b3 = array2[num++];
-				array[j + ((Vector2Int)(ref val)).x, i + ((Vector2Int)(ref val)).y] = b3;
+				array[k + ((Vector2Int)(ref val)).x, i + ((Vector2Int)(ref val)).y] = b3;
 			}
 		}
 	}
@@ -520,10 +520,10 @@ public class WorldChunkSync : KrokoshaScavSingleton
 		int num = 0;
 		for (int i = 0; i < 32; i++)
 		{
-			for (int j = 0; j < 32; j++)
+			for (int k = 0; k < 32; k++)
 			{
 				byte b3 = array2[num++];
-				array[j + ((Vector2Int)(ref val)).x, i + ((Vector2Int)(ref val)).y] = b3;
+				array[k + ((Vector2Int)(ref val)).x, i + ((Vector2Int)(ref val)).y] = b3;
 			}
 		}
 		WorldGeneration.world.UpdateChunkClosest(val);
@@ -567,10 +567,10 @@ public class WorldChunkSync : KrokoshaScavSingleton
 		Vector2 a = default(Vector2);
 		for (int i = 0; i < 8; i++)
 		{
-			for (int j = 0; j < 8; j++)
+			for (int k = 0; k < 8; k++)
 			{
 				reader.Get(ref num);
-				int num2 = ((Vector2Int)(ref val)).x + j;
+				int num2 = ((Vector2Int)(ref val)).x + k;
 				int num3 = ((Vector2Int)(ref val)).y + i;
 				int num4 = num2 * 32;
 				int num5 = num3 * 32;
@@ -583,7 +583,7 @@ public class WorldChunkSync : KrokoshaScavSingleton
 				{
 					((Vector2)(ref a))._002Ector((float)num4, (float)num5);
 					float dist = KM.dist2dsqr(in a, Vector2Int.op_Implicit(val2));
-					Server_QueueChunkToSync(chunkPos: new Vector2UInt8(((Vector2Int)(ref val)).x + j, ((Vector2Int)(ref val)).y + i), plrId: plr.clientId, dist: dist);
+					Server_QueueChunkToSync(chunkPos: new Vector2UInt8(((Vector2Int)(ref val)).x + k, ((Vector2Int)(ref val)).y + i), plrId: plr.clientId, dist: dist);
 					if (DebugHelp._DEV_VISUALISE_NET_EVENTS)
 					{
 						DebugHelp.OnNetEvent(WorldGeneration.world.BlockToWorldPos(new Vector2Int(num4, num5)), $"S: {plr} doesn't know about this chunk  {b},{b2}");

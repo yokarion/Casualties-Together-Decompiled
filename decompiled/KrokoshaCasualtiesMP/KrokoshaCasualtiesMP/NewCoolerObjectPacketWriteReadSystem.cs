@@ -241,9 +241,10 @@ internal class NewCoolerObjectPacketWriteReadSystem : CoolSyncSubSystemForObject
 		}
 	}
 
-	public override void Server_DeleteObject(knetid netId)
+	public override bool Server_DeleteObject(knetid netId)
 	{
 		SimplyUnregisterObject(netId);
+		return true;
 	}
 
 	public bool TryGetSyncinfo(knetid obj_netId, out SyncInfo si)

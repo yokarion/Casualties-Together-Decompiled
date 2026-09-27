@@ -367,20 +367,20 @@ public static class Util
 		ushort[,] array = worldBlocks;
 		for (int i = startX; i <= endX; i++)
 		{
-			for (int j = startY; j <= endY; j++)
+			for (int k = startY; k <= endY; k++)
 			{
-				array[i, j] = block_id;
+				array[i, k] = block_id;
 			}
 		}
 		if (world.generatingWorld)
 		{
 			return;
 		}
-		for (int k = startX / WorldGeneration.CHUNKSIZE; k <= endX / WorldGeneration.CHUNKSIZE; k++)
+		for (int l = startX / WorldGeneration.CHUNKSIZE; l <= endX / WorldGeneration.CHUNKSIZE; l++)
 		{
-			for (int l = startY / WorldGeneration.CHUNKSIZE; l <= endY / WorldGeneration.CHUNKSIZE; l++)
+			for (int m = startY / WorldGeneration.CHUNKSIZE; m <= endY / WorldGeneration.CHUNKSIZE; m++)
 			{
-				WorldGeneration.world.UpdateChunk(new Vector2Int(k, l));
+				WorldGeneration.world.UpdateChunk(new Vector2Int(l, m));
 			}
 		}
 	}
@@ -891,9 +891,9 @@ public static class Util
 			eulerAngles.z = ((Quaternion)(ref localRotation)).eulerAngles.z - savedHingeJointState.referenceAngle;
 			((Component)savedHingeJointState.connectedBody).transform.localRotation = Quaternion.Euler(eulerAngles);
 		}
-		for (int j = 0; j < body.limbs.Length; j++)
+		for (int k = 0; k < body.limbs.Length; k++)
 		{
-			Limb obj = body.limbs[j];
+			Limb obj = body.limbs[k];
 			((Component)obj).gameObject.SetActive(false);
 			obj.dismembered = false;
 		}

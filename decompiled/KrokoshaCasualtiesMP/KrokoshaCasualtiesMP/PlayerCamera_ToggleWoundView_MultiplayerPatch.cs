@@ -64,7 +64,7 @@ public static class PlayerCamera_ToggleWoundView_MultiplayerPatch
 					component2.tipName = Lang.Get("ww_cpr", false);
 					component2.tipDesc = Lang.Get("ww_cprdesc", false);
 					((Transform)component).SetSiblingIndex(val.GetSiblingIndex());
-					CPRButton.GetComponent<Image>().sprite = KrokoshaCoopModAssets.cpr_button_icon;
+					CPRButton.GetComponent<Image>().sprite = CoopModAssets.cpr_button_icon;
 					Button component3 = CPRButton.GetComponent<Button>();
 					((UnityEventBase)component3.onClick).RemoveAllListeners();
 					((UnityEventBase)component3.onClick).SetPersistentListenerState(0, (UnityEventCallState)0);

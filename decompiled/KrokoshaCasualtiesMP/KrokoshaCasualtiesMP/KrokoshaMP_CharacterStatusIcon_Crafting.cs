@@ -25,7 +25,7 @@ internal class KrokoshaMP_CharacterStatusIcon_Crafting : ICharacterStatusIcon
 	{
 		this.visual = visual;
 		this.spr = spr;
-		spr.sprite = KrokoshaCoopModAssets.crafting;
+		spr.sprite = CoopModAssets.crafting;
 	}
 
 	public bool DisappearCondition()

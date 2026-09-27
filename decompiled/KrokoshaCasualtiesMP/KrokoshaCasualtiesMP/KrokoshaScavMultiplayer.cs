@@ -411,7 +411,7 @@ public class KrokoshaScavMultiplayer : MonoBehaviour
 		}
 		float num = 20f;
 		Utility.IsNullOrWhiteSpace(Application.version);
-		GUI.Label(new Rect(20f, num, 1000f, 20f), "CO-OP MOD v4.0.1    \"RELEASE BUILD\" ");
+		GUI.Label(new Rect(20f, num, 1000f, 20f), "CO-OP MOD v4.1.2    \"RELEASE BUILD\" ");
 		num += 20f;
 		if (is_dedicated_server)
 		{
@@ -1159,7 +1159,7 @@ public class KrokoshaScavMultiplayer : MonoBehaviour
 		//IL_03ab: Unknown result type (might be due to invalid IL or missing references)
 		//IL_03b0: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0032: Unknown result type (might be due to invalid IL or missing references)
-		FULL_VERSION_TAG = Application.version + "_MPv4.0.1";
+		FULL_VERSION_TAG = Application.version + "_MPv4.1.2";
 		try
 		{
 			foreach (KeyValuePair<string, KeyCode> item in CoopKeybinds.as_dict)
@@ -1344,7 +1344,7 @@ public class KrokoshaScavMultiplayer : MonoBehaviour
 		bool flag = ((Scene)(ref a)).name == "SampleScene";
 		if (network_system_is_running)
 		{
-			if (!Net.is_playing_with_steam)
+			if (!Net.IsRunningSteam)
 			{
 				Plugin.log.LogInfo((object)("Local player username: " + INPUT_USERNAME));
 			}

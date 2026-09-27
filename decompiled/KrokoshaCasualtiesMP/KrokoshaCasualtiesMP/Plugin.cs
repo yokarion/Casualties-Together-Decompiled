@@ -18,7 +18,7 @@ using UnityEngine.SceneManagement;
 namespace KrokoshaCasualtiesMP;
 
 [BepInProcess("CasualtiesUnknown.exe")]
-[BepInPlugin("KrokoshaCasualtiesMP", "Krokosha_MP_CU", "4.0.1")]
+[BepInPlugin("KrokoshaCasualtiesMP", "Krokosha_MP_CU", "4.1.2")]
 public class Plugin : BaseUnityPlugin
 {
 	internal class LoadErrorNotifier : MonoBehaviour
@@ -36,7 +36,7 @@ public class Plugin : BaseUnityPlugin
 			//IL_0023: Unknown result type (might be due to invalid IL or missing references)
 			if (!Object.op_Implicit((Object)(object)Object.FindObjectOfType<Body>()))
 			{
-				GUI.Label(new Rect(20f, 20f, (float)Screen.width, (float)Screen.height), "Krokosha666 CO-OP MOD v4.0.1 failed to load!!!!!! \n\n" + errorstr);
+				GUI.Label(new Rect(20f, 20f, (float)Screen.width, (float)Screen.height), "Krokosha666 CO-OP MOD v4.1.2 failed to load!!!!!! \n\n" + errorstr);
 			}
 		}
 	}
@@ -57,7 +57,7 @@ public class Plugin : BaseUnityPlugin
 
 	public const string TARGET_GAME_VERSION = "7.0.1";
 
-	public const string MOD_VERSION = "4.0.1";
+	public const string MOD_VERSION = "4.1.2";
 
 	public static List<string> commands_to_run = new List<string>();
 
@@ -255,7 +255,7 @@ public class Plugin : BaseUnityPlugin
 		}
 		catch (Exception ex)
 		{
-			KrokoshaCasualtiesMP.log.error(string.Format("Plugin {0} {1} failed to load! Make sure you have correct version!\n\n{2}\n", "KrokoshaCasualtiesMP", "4.0.1", ex));
+			KrokoshaCasualtiesMP.log.error(string.Format("Plugin {0} {1} failed to load! Make sure you have correct version!\n\n{2}\n", "KrokoshaCasualtiesMP", "4.1.2", ex));
 			LoadErrorNotifier.errorstr = LoadErrorNotifier.errorstr + "\n" + ex.ToString();
 			if (Paths.ExecutablePath.Any((char c) => c > '\u007f'))
 			{
@@ -266,7 +266,7 @@ public class Plugin : BaseUnityPlugin
 			return;
 		}
 		Application.runInBackground = true;
-		log.LogInfo((object)"Plugin KrokoshaCasualtiesMP version 4.0.1 is loaded!");
+		log.LogInfo((object)"Plugin KrokoshaCasualtiesMP version 4.1.2 is loaded!");
 		log.LogInfo((object)("Game version: \"" + Application.version + "\""));
 		KSteam.CheckSteam();
 		UIMainMenu._USE_STEAM_MENU = KSteam.Loaded;
@@ -276,11 +276,11 @@ public class Plugin : BaseUnityPlugin
 		}
 		try
 		{
-			KrokoshaCoopModAssets.LoadAssets();
+			CoopModAssets.LoadAssets();
 		}
 		catch (Exception ex2)
 		{
-			KrokoshaCasualtiesMP.log.error(string.Format("{0} {1} failed to load ASSETS!!!\n\n{2}\n", "KrokoshaCasualtiesMP", "4.0.1", ex2));
+			KrokoshaCasualtiesMP.log.error(string.Format("{0} {1} failed to load ASSETS!!!\n\n{2}\n", "KrokoshaCasualtiesMP", "4.1.2", ex2));
 			LoadErrorNotifier.errorstr = LoadErrorNotifier.errorstr + "\n" + ex2.ToString();
 			ComponentHolderProtocol.AddComponent<LoadErrorNotifier>((Object)(object)this);
 			return;
@@ -294,7 +294,7 @@ public class Plugin : BaseUnityPlugin
 		}
 		catch (Exception ex3)
 		{
-			KrokoshaCasualtiesMP.log.error(string.Format("{0} {1} failed to load!\n\n{2}\n", "KrokoshaCasualtiesMP", "4.0.1", ex3));
+			KrokoshaCasualtiesMP.log.error(string.Format("{0} {1} failed to load!\n\n{2}\n", "KrokoshaCasualtiesMP", "4.1.2", ex3));
 			LoadErrorNotifier.errorstr = LoadErrorNotifier.errorstr + "\n" + ex3.ToString();
 			ComponentHolderProtocol.AddComponent<LoadErrorNotifier>((Object)(object)this);
 			Object.Destroy((Object)(object)krokoshaScavMultiplayer);
@@ -351,12 +351,16 @@ public class Plugin : BaseUnityPlugin
 	{
 		startworld = 0;
 		string[] commandLineArgs = Environment.GetCommandLineArgs();
+		for (int i = 0; i < commandLineArgs.Length; i++)
+		{
+			commandLineArgs[i] = commandLineArgs[i].Replace("--ksmulti-", "--mp-");
+		}
 		dump_game_ids = false;
 		Func<string, string, bool> func = (string arg, string thing) => arg == "--" + thing || arg == "-" + thing || arg == thing;
 		for (int num = 0; num < commandLineArgs.Length; num++)
 		{
 			string text = commandLineArgs[num];
-			if (text == "--ksmulti-disable" || func(text, "nomp") || func(text, "no-mp") || func(text, "nomultiplayer") || func(text, "no-multiplayer"))
+			if (text == "--mp-disable" || func(text, "nomp") || func(text, "no-mp") || func(text, "nomultiplayer") || func(text, "no-multiplayer"))
 			{
 				FORCE_DISABLE_MP_MOD = true;
 				string msg = "CMD: Force-Disable multiplayer";
@@ -374,33 +378,33 @@ public class Plugin : BaseUnityPlugin
 					return;
 				}
 			}
-			if (text == "--ksmulti-starthost")
+			if (text == "--mp-starthost")
 			{
 				start_network = true;
 				cmd_start__is_client = false;
 			}
-			if (text == "--ksmulti-startclient")
+			if (text == "--mp-startclient")
 			{
 				start_network = true;
 				cmd_start__is_client = true;
 			}
-			if (text == "--ksmulti-startserver")
+			if (text == "--mp-startserver")
 			{
 				start_network = true;
 				cmd_start__is_client = false;
 				cmd_start__is_dedicated_server = true;
 				KrokoshaScavMultiplayer.rules.AutoContinue = true;
 			}
-			if (text == "--ksmulti-sethost")
+			if (text == "--mp-sethost")
 			{
 				cmd_start__is_client = false;
 				cmd_start__is_dedicated_server = false;
 			}
-			if (text == "--ksmulti-setclient")
+			if (text == "--mp-setclient")
 			{
 				cmd_start__is_client = true;
 			}
-			if (text == "--ksmulti-setserver")
+			if (text == "--mp-setserver")
 			{
 				cmd_start__is_client = false;
 				cmd_start__is_dedicated_server = true;
@@ -410,28 +414,28 @@ public class Plugin : BaseUnityPlugin
 			{
 				dump_game_ids = true;
 			}
-			if (text == "--ksmulti-startnetwork")
+			if (text == "--mp-startnetwork")
 			{
 				start_network = true;
 			}
-			if (text == "--ksmulti-immidiate-start")
+			if (text == "--mp-immidiate-start")
 			{
 				do_immidiate_start = true;
 			}
-			if (text == "--ksmulti-setstarttutorial")
+			if (text == "--mp-setstarttutorial")
 			{
 				startworld = 1;
 			}
-			if (text == "--ksmulti-setstartdebug")
+			if (text == "--mp-setstartdebug")
 			{
 				startworld = 2;
 			}
-			if (text == "--ksmulti-verbose")
+			if (text == "--mp-verbose")
 			{
 				DebugMenuSettings.is_verbose = true;
 				DebugMenuSettings._DEV_VISUALISE_NET_EVENTS = true;
 			}
-			if (text == "--ksmulti-ip-port")
+			if (text == "--mp-ip-port")
 			{
 				num++;
 				if (num == commandLineArgs.Length)
@@ -440,7 +444,7 @@ public class Plugin : BaseUnityPlugin
 				}
 				text = (KrokoshaScavMultiplayer.INPUT_IPPORT = commandLineArgs[num]);
 			}
-			if (text == "--ksmulti-setname")
+			if (text == "--mp-setname")
 			{
 				num++;
 				if (num == commandLineArgs.Length)
@@ -452,7 +456,7 @@ public class Plugin : BaseUnityPlugin
 				plrname_override = true;
 				log.LogInfo((object)("CMD: set name to: " + KrokoshaScavMultiplayer.INPUT_USERNAME));
 			}
-			if (text == "--ksmulti-setpass")
+			if (text == "--mp-setpass")
 			{
 				num++;
 				if (num == commandLineArgs.Length)
@@ -464,7 +468,7 @@ public class Plugin : BaseUnityPlugin
 				KrokoshaScavMultiplayer.INPUT_PASSWORD = text;
 				log.LogInfo((object)("CMD: set password to: " + KrokoshaScavMultiplayer.INPUT_PASSWORD));
 			}
-			if (text == "--ksmulti-setrule")
+			if (text == "--mp-setrule")
 			{
 				num++;
 				if (num == commandLineArgs.Length)
@@ -502,7 +506,7 @@ public class Plugin : BaseUnityPlugin
 				log.LogInfo((object)$"CMD: set rule: {current_rule_to_set} = {field.GetValue(KrokoshaScavMultiplayer.rules)}");
 				continue;
 			}
-			if (text == "--ksmulti-test")
+			if (text == "--mp-test")
 			{
 				num++;
 				if (num == commandLineArgs.Length)
@@ -511,7 +515,7 @@ public class Plugin : BaseUnityPlugin
 				}
 				text = (test_scenario = commandLineArgs[num]);
 			}
-			if (text == "--ksmulti-runcommand" || text == "--ksm-con")
+			if (text == "--mp-runcommand" || text == "--ksm-con")
 			{
 				num++;
 				if (num == commandLineArgs.Length)
@@ -522,7 +526,7 @@ public class Plugin : BaseUnityPlugin
 				юзер_прошаренный = true;
 				commands_to_run.Add(text);
 			}
-			if (text == "--ksmulti-servername")
+			if (text == "--mp-servername")
 			{
 				num++;
 				if (num == commandLineArgs.Length)
@@ -533,7 +537,7 @@ public class Plugin : BaseUnityPlugin
 				юзер_прошаренный = true;
 				Net.MY_SERVER_INFO.name = text;
 			}
-			if (text == "--ksmulti-hoststeam")
+			if (text == "--mp-hoststeam")
 			{
 				cmd_start__steam_lobby = true;
 				start_network = true;
@@ -546,7 +550,7 @@ public class Plugin : BaseUnityPlugin
 				text = (cmd_start__steam_lobby_type = commandLineArgs[num]);
 				log.LogInfo((object)("CMD: Will start steam lobby of type:" + text));
 			}
-			if (text == "--ksmulti-nosteam" || func(text, "nosteam") || func(text, "no-steam"))
+			if (text == "--mp-nosteam" || func(text, "nosteam") || func(text, "no-steam"))
 			{
 				FORCE_NO_STEAM = true;
 			}

@@ -26,6 +26,8 @@ public struct ItemOrBuildingCoolDeltaCompressablePacket : IDeltaPacketBase
 
 	public bool rb_dynamic;
 
+	public bool itemLock;
+
 	public Vector2 pos;
 
 	public float rotation;
@@ -80,7 +82,7 @@ public struct ItemOrBuildingCoolDeltaCompressablePacket : IDeltaPacketBase
 
 	private static float combatrelaxdist = 6f;
 
-	public static int bitset_size = 26;
+	public static int bitset_size = 27;
 
 	public float angvel
 	{
@@ -139,13 +141,13 @@ public struct ItemOrBuildingCoolDeltaCompressablePacket : IDeltaPacketBase
 		//IL_0071: Unknown result type (might be due to invalid IL or missing references)
 		//IL_008e: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0094: Invalid comparison between Unknown and I4
-		//IL_036f: Unknown result type (might be due to invalid IL or missing references)
-		//IL_03a6: Unknown result type (might be due to invalid IL or missing references)
-		//IL_03d6: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0282: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0288: Invalid comparison between Unknown and I4
-		//IL_0295: Unknown result type (might be due to invalid IL or missing references)
-		//IL_029b: Invalid comparison between Unknown and I4
+		//IL_037d: Unknown result type (might be due to invalid IL or missing references)
+		//IL_03b4: Unknown result type (might be due to invalid IL or missing references)
+		//IL_03e4: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0290: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0296: Invalid comparison between Unknown and I4
+		//IL_02a3: Unknown result type (might be due to invalid IL or missing references)
+		//IL_02a9: Invalid comparison between Unknown and I4
 		GameObject go = si.go;
 		Rigidbody2D val = default(Rigidbody2D);
 		bool num = go.TryGetComponent<Rigidbody2D>(ref val);
@@ -161,14 +163,16 @@ public struct ItemOrBuildingCoolDeltaCompressablePacket : IDeltaPacketBase
 			vel = val.velocity;
 			angvel = val.angularVelocity;
 			rb_dynamic = (int)val.bodyType == 0;
+			ItemLock val3 = default(ItemLock);
+			itemLock = ((Component)val).TryGetComponent<ItemLock>(ref val3);
 		}
-		Item val3 = default(Item);
-		BuildingEntity val10 = default(BuildingEntity);
-		if (go.TryGetComponent<Item>(ref val3))
+		Item val4 = default(Item);
+		BuildingEntity val11 = default(BuildingEntity);
+		if (go.TryGetComponent<Item>(ref val4))
 		{
-			condition = val3.condition;
-			wetTime = Time.time - val3.wetTime;
-			ItemSync.ItemsContainerInfo itemsContainerInfo = ItemSync.ItemGetContainerInfo(val3);
+			condition = val4.condition;
+			wetTime = Time.time - val4.wetTime;
+			ItemSync.ItemsContainerInfo itemsContainerInfo = ItemSync.ItemGetContainerInfo(val4);
 			container_netId = itemsContainerInfo.knetid;
 			if (itemsContainerInfo.is_wearing)
 			{
@@ -186,10 +190,10 @@ public struct ItemOrBuildingCoolDeltaCompressablePacket : IDeltaPacketBase
 			{
 				container_data1 = 0;
 			}
-			FreshItemDrop val4 = default(FreshItemDrop);
-			if (((Component)val3).TryGetComponent<FreshItemDrop>(ref val4))
+			FreshItemDrop val5 = default(FreshItemDrop);
+			if (((Component)val4).TryGetComponent<FreshItemDrop>(ref val5))
 			{
-				if (val4.timeLeft > 5f)
+				if (val5.timeLeft > 5f)
 				{
 					freshitemdrop = true;
 				}
@@ -198,34 +202,34 @@ public struct ItemOrBuildingCoolDeltaCompressablePacket : IDeltaPacketBase
 			{
 				freshitemdrop = false;
 			}
-			BoughtItem val5 = default(BoughtItem);
-			if (((Component)val3).TryGetComponent<BoughtItem>(ref val5))
+			BoughtItem val6 = default(BoughtItem);
+			if (((Component)val4).TryGetComponent<BoughtItem>(ref val6))
 			{
-				boughtitemtime = val5.time;
+				boughtitemtime = val6.time;
 			}
 			else
 			{
 				compressedboughtitemtime = 0;
 			}
-			CustomItemBehaviour val6 = default(CustomItemBehaviour);
-			PlushScript val7 = default(PlushScript);
-			if (((Component)val3).TryGetComponent<CustomItemBehaviour>(ref val6) && ItemSync.CustomItemBehaviourStateCanBeJustByte(val3))
+			CustomItemBehaviour val7 = default(CustomItemBehaviour);
+			PlushScript val8 = default(PlushScript);
+			if (((Component)val4).TryGetComponent<CustomItemBehaviour>(ref val7) && ItemSync.CustomItemBehaviourStateCanBeJustByte(val4))
 			{
-				specialdata1 = (byte)val6.state;
-				if (val6.data != null && val6.data.Length != 0 && val6.data[0] is float num2)
+				specialdata1 = (byte)val7.state;
+				if (val7.data != null && val7.data.Length != 0 && val7.data[0] is float num2)
 				{
 					specialdata2 = num2;
 				}
 			}
-			else if (((Component)val3).TryGetComponent<PlushScript>(ref val7) && val7.index >= 0)
+			else if (((Component)val4).TryGetComponent<PlushScript>(ref val8) && val8.index >= 0)
 			{
-				specialdata1 = (byte)val7.index;
+				specialdata1 = (byte)val8.index;
 			}
-			if ((Object)(object)val3.battery != (Object)null && val3.battery.hasBattery)
+			if ((Object)(object)val4.battery != (Object)null && val4.battery.hasBattery)
 			{
-				if (!Enum.TryParse<CurrentBattery>(val3.battery.batteryType, out var result))
+				if (!Enum.TryParse<CurrentBattery>(val4.battery.batteryType, out var result))
 				{
-					Plugin.log.LogError((object)("Unknown battery type: " + val3.battery.batteryType + " "));
+					Plugin.log.LogError((object)("Unknown battery type: " + val4.battery.batteryType + " "));
 				}
 				current_battery = (byte)result;
 			}
@@ -233,59 +237,59 @@ public struct ItemOrBuildingCoolDeltaCompressablePacket : IDeltaPacketBase
 			{
 				current_battery = 0;
 			}
-			GunScript val8 = default(GunScript);
-			AmmoScript val9 = default(AmmoScript);
-			if (((Component)val3).TryGetComponent<GunScript>(ref val8))
+			GunScript val9 = default(GunScript);
+			AmmoScript val10 = default(AmmoScript);
+			if (((Component)val4).TryGetComponent<GunScript>(ref val9))
 			{
-				gun_racked = val8.racked;
-				gun_safe = val8.safe;
-				gun_hasMag = val8.hasMag;
-				gun_roundInChamber = (int)val8.roundInChamber != 2;
-				gun_roundInChamber_is_casing = (int)val8.roundInChamber == 1;
-				ammo = (byte)val8.roundsInMag;
+				gun_racked = val9.racked;
+				gun_safe = val9.safe;
+				gun_hasMag = val9.hasMag;
+				gun_roundInChamber = (int)val9.roundInChamber != 2;
+				gun_roundInChamber_is_casing = (int)val9.roundInChamber == 1;
+				ammo = (byte)val9.roundsInMag;
 			}
-			else if (((Component)val3).TryGetComponent<AmmoScript>(ref val9))
+			else if (((Component)val4).TryGetComponent<AmmoScript>(ref val10))
 			{
-				ammo = (byte)val9.rounds;
+				ammo = (byte)val10.rounds;
 			}
 		}
-		else if (go.TryGetComponent<BuildingEntity>(ref val10))
+		else if (go.TryGetComponent<BuildingEntity>(ref val11))
 		{
-			condition = val10.health;
-			Krokosha_BuildingEntity_TrackerComponent_for_backgroundified orAddComponent = ComponentHolderProtocol.GetOrAddComponent<Krokosha_BuildingEntity_TrackerComponent_for_backgroundified>((Object)(object)val10);
+			condition = val11.health;
+			Krokosha_BuildingEntity_TrackerComponent_for_backgroundified orAddComponent = ComponentHolderProtocol.GetOrAddComponent<Krokosha_BuildingEntity_TrackerComponent_for_backgroundified>((Object)(object)val11);
 			building_backgroundified = orAddComponent.is_backgroundified;
-			CorpseScript val11 = default(CorpseScript);
+			CorpseScript val12 = default(CorpseScript);
 			SpikeStabberScript spike = default(SpikeStabberScript);
 			DrillPod_Update_MultiplayerPatch.Krokosha_DrillPod_OverrideComponent krokosha_DrillPod_OverrideComponent = default(DrillPod_Update_MultiplayerPatch.Krokosha_DrillPod_OverrideComponent);
-			SpiderHandler val12 = default(SpiderHandler);
-			GrabberPlant val13 = default(GrabberPlant);
-			TraderScript val14 = default(TraderScript);
-			if (((Component)val10).TryGetComponent<CorpseScript>(ref val11))
+			SpiderHandler val13 = default(SpiderHandler);
+			GrabberPlant val14 = default(GrabberPlant);
+			TraderScript val15 = default(TraderScript);
+			if (((Component)val11).TryGetComponent<CorpseScript>(ref val12))
 			{
-				specialdata1 = (byte)Array.IndexOf(val11.startSprites, ((Component)val11).GetComponent<SpriteRenderer>().sprite);
+				specialdata1 = (byte)Array.IndexOf(val12.startSprites, ((Component)val12).GetComponent<SpriteRenderer>().sprite);
 			}
-			else if (((Component)val10).TryGetComponent<SpikeStabberScript>(ref spike))
+			else if (((Component)val11).TryGetComponent<SpikeStabberScript>(ref spike))
 			{
 				specialdata1 = (spike.GetSpikeActivated() ? ((byte)1) : ((byte)0));
 			}
-			else if (((Component)val10).TryGetComponent<DrillPod_Update_MultiplayerPatch.Krokosha_DrillPod_OverrideComponent>(ref krokosha_DrillPod_OverrideComponent))
+			else if (((Component)val11).TryGetComponent<DrillPod_Update_MultiplayerPatch.Krokosha_DrillPod_OverrideComponent>(ref krokosha_DrillPod_OverrideComponent))
 			{
 				specialdata1 = (krokosha_DrillPod_OverrideComponent.working ? ((byte)1) : ((byte)0));
 			}
-			else if (go.TryGetComponent<SpiderHandler>(ref val12))
+			else if (go.TryGetComponent<SpiderHandler>(ref val13))
 			{
-				spider_target = val12.target;
-				spider_biteCooldown = val12.biteCooldown;
-				spider_stunTime = val12.stunTime;
+				spider_target = val13.target;
+				spider_biteCooldown = val13.biteCooldown;
+				spider_stunTime = val13.stunTime;
 			}
-			else if (go.TryGetComponent<GrabberPlant>(ref val13))
+			else if (go.TryGetComponent<GrabberPlant>(ref val14))
 			{
-				grabberplant_tipPos = val13.tipPos;
-				grabberplant_randOffset = Time.unscaledTime + val13.randOffset;
+				grabberplant_tipPos = val14.tipPos;
+				grabberplant_randOffset = Time.unscaledTime + val14.randOffset;
 			}
-			else if (go.TryGetComponent<TraderScript>(ref val14))
+			else if (go.TryGetComponent<TraderScript>(ref val15))
 			{
-				trader_desiredpos = val14.desiredPos;
+				trader_desiredpos = val15.desiredPos;
 			}
 		}
 	}
@@ -406,16 +410,16 @@ public struct ItemOrBuildingCoolDeltaCompressablePacket : IDeltaPacketBase
 		//IL_0033: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0037: Unknown result type (might be due to invalid IL or missing references)
 		//IL_004c: Unknown result type (might be due to invalid IL or missing references)
-		//IL_051e: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0150: Unknown result type (might be due to invalid IL or missing references)
-		//IL_054e: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0553: Unknown result type (might be due to invalid IL or missing references)
-		//IL_048b: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0490: Unknown result type (might be due to invalid IL or missing references)
-		//IL_049e: Unknown result type (might be due to invalid IL or missing references)
-		//IL_03b3: Unknown result type (might be due to invalid IL or missing references)
-		//IL_01f3: Unknown result type (might be due to invalid IL or missing references)
-		//IL_01f8: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0535: Unknown result type (might be due to invalid IL or missing references)
+		//IL_015f: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0565: Unknown result type (might be due to invalid IL or missing references)
+		//IL_056a: Unknown result type (might be due to invalid IL or missing references)
+		//IL_04a2: Unknown result type (might be due to invalid IL or missing references)
+		//IL_04a7: Unknown result type (might be due to invalid IL or missing references)
+		//IL_04b5: Unknown result type (might be due to invalid IL or missing references)
+		//IL_03ca: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0202: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0207: Unknown result type (might be due to invalid IL or missing references)
 		GameObject go = si.go;
 		if (container_data1 == 0)
 		{
@@ -432,6 +436,10 @@ public struct ItemOrBuildingCoolDeltaCompressablePacket : IDeltaPacketBase
 				{
 					val.velocity = vel;
 					val.angularVelocity = angvel;
+					if (itemLock)
+					{
+						ComponentHolderProtocol.GetOrAddComponent<ItemLock>((Object)(object)val);
+					}
 				}
 			}
 		}
@@ -532,6 +540,7 @@ public struct ItemOrBuildingCoolDeltaCompressablePacket : IDeltaPacketBase
 			else if (((Component)val3).TryGetComponent<PlushScript>(ref val5) && val5.index != specialdata1)
 			{
 				val5.index = specialdata1;
+				j.Prefix(val5);
 				((Component)val5).GetComponent<SpriteRenderer>().sprite = val5.possibleSprites[specialdata1];
 				val5.selectedSound = val5.possibleSounds[specialdata1];
 			}
@@ -656,17 +665,18 @@ public struct ItemOrBuildingCoolDeltaCompressablePacket : IDeltaPacketBase
 
 	public void Write(NetDataWriter writer, List<bool> pack_bools, IDeltaPacketBase old)
 	{
-		//IL_0032: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0038: Unknown result type (might be due to invalid IL or missing references)
-		//IL_004f: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0082: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0088: Unknown result type (might be due to invalid IL or missing references)
-		//IL_009f: Unknown result type (might be due to invalid IL or missing references)
+		//IL_003e: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0044: Unknown result type (might be due to invalid IL or missing references)
+		//IL_005b: Unknown result type (might be due to invalid IL or missing references)
+		//IL_008e: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0094: Unknown result type (might be due to invalid IL or missing references)
+		//IL_00ab: Unknown result type (might be due to invalid IL or missing references)
 		ItemOrBuildingCoolDeltaCompressablePacket obj = (ItemOrBuildingCoolDeltaCompressablePacket)(object)old;
 		bool flag = false;
 		writer.Put(container_data1);
 		writer.Put((ushort)container_netId);
 		pack_bools.Add(rb_dynamic);
+		pack_bools.Add(itemLock);
 		flag = obj.pos != pos;
 		pack_bools.Add(flag);
 		if (flag)
@@ -789,82 +799,83 @@ public struct ItemOrBuildingCoolDeltaCompressablePacket : IDeltaPacketBase
 		reader.Get(ref container_data1);
 		reader.Get(out container_netId);
 		rb_dynamic = bitset[0];
-		if (bitset[1])
+		itemLock = bitset[1];
+		if (bitset[2])
 		{
 			reader.Get(out pos);
 		}
-		if (bitset[2])
+		if (bitset[3])
 		{
 			reader.Get(ref rotation);
 		}
-		if (bitset[3])
+		if (bitset[4])
 		{
 			reader.Get(out scale);
 		}
-		if (bitset[4])
+		if (bitset[5])
 		{
 			reader.Get(out vel);
 		}
-		if (bitset[5])
+		if (bitset[6])
 		{
 			reader.Get(ref angvel_quantized);
 		}
-		if (bitset[6])
+		if (bitset[7])
 		{
 			reader.Get(ref condition);
 		}
-		if (bitset[7])
+		if (bitset[8])
 		{
 			reader.Get(ref compressedboughtitemtime);
 		}
-		if (bitset[8])
+		if (bitset[9])
 		{
 			reader.Get(ref compressedwetTime);
 		}
-		freshitemdrop = bitset[9];
-		if (bitset[10])
+		freshitemdrop = bitset[10];
+		if (bitset[11])
 		{
 			reader.Get(ref current_battery);
 		}
-		if (bitset[11])
+		if (bitset[12])
 		{
 			reader.Get(ref specialdata1);
 		}
-		if (bitset[12])
+		if (bitset[13])
 		{
 			reader.Get(ref specialdata2);
 		}
-		if (bitset[13])
+		if (bitset[14])
 		{
 			reader.Get(ref ammo);
 		}
-		if (bitset[14])
+		if (bitset[15])
 		{
 			reader.Get(out spider_target);
 		}
-		if (bitset[15])
+		if (bitset[16])
 		{
 			reader.Get(ref spider_biteCooldown);
 		}
-		if (bitset[16])
+		if (bitset[17])
 		{
 			reader.Get(ref spider_stunTime);
 		}
-		if (bitset[17])
+		if (bitset[18])
 		{
 			reader.Get(out trader_desiredpos);
 		}
-		gun_racked = bitset[18];
-		gun_safe = bitset[19];
-		gun_hasMag = bitset[20];
-		gun_roundInChamber = bitset[21];
-		gun_roundInChamber_is_casing = bitset[22];
-		building_backgroundified = bitset[23];
-		if (bitset[24])
+		gun_racked = bitset[19];
+		gun_safe = bitset[20];
+		gun_hasMag = bitset[21];
+		gun_roundInChamber = bitset[22];
+		gun_roundInChamber_is_casing = bitset[23];
+		building_backgroundified = bitset[24];
+		if (bitset[25])
 		{
 			reader.Get(out grabberplant_tipPos);
 		}
-		if (bitset[25])
+		if (bitset[26])
 		{
 			reader.Get(ref grabberplant_randOffset);
 		}

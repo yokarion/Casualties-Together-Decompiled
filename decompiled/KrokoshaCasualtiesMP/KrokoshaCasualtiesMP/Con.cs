@@ -2356,7 +2356,7 @@ public class Con : KrokoshaScavSingleton
 				if (!plr.is_local)
 				{
 					Plugin.log.LogInfo((object)$"Server entered a command to ban: {plr}");
-					BanList.Add("NULL", plr.playername, plr.steam_id);
+					BanList.Add("NULL", plr.playername, plr.SteamId);
 					plr.Server_Kick(reason);
 					if (plrname != "@a")
 					{
@@ -2405,7 +2405,7 @@ public class Con : KrokoshaScavSingleton
 				{
 					NetPeer obj32 = lnl.GetNetPeerFromPlayer(plr) ?? throw new Exception($"{plr} does not have net peer object ????");
 					Plugin.log.LogInfo((object)$"Server entered a command to IP ban: {plr}");
-					BanList.Add(((IPEndPoint)(object)obj32).Address.ToString(), plr.playername, plr.steam_id);
+					BanList.Add(((IPEndPoint)(object)obj32).Address.ToString(), plr.playername, plr.SteamId);
 					plr.Server_Kick(reason);
 					if (plrname != "@a")
 					{
@@ -2854,7 +2854,7 @@ public class Con : KrokoshaScavSingleton
 				succ = true;
 				con.LogToConsole($"Renamed {plr} to {newname}");
 				plr.nameIsCustom = true;
-				plr.ApplyNameAndColor(newname, plr.plrcolor);
+				plr.ApplyNameAndColor(newname, plr.playerColor);
 			};
 			try
 			{
@@ -2886,7 +2886,7 @@ public class Con : KrokoshaScavSingleton
 			Color newcolor;
 			if (ServerMain.TryGetPlayerFromPartialName(splited[2], out var player))
 			{
-				newcolor = player.plrcolor;
+				newcolor = player.playerColor;
 			}
 			else
 			{
@@ -3303,7 +3303,7 @@ public class Con : KrokoshaScavSingleton
 			obj29 = (object)val21;
 		}
 		RegisterCommand_LocalOnly(Unsafe.As<Command, Command>(ref new Command("getlobbyinfo", "MP - Log info about your steam lobby.", (Action)obj29, (Dictionary<int, List<string>>)null, Array.Empty<(string, string)>())));
-		RegisterCommand_LocalOnly(Unsafe.As<Command, Command>(ref new Command("dumplobbysearch", "MP - Start a dedicated server. (you'll have no player character)", (Action)delegate(string[] args)
+		RegisterCommand_LocalOnly(Unsafe.As<Command, Command>(ref new Command("dumplobbysearch", "MP - Dump all lobbies shown in server browser.", (Action)delegate(string[] args)
 		{
 			bool num = con.ParseBool(args[1]);
 			StringBuilder stringBuilder = new StringBuilder("// LOBBY SEARCH DUMP:\n");
@@ -3456,10 +3456,10 @@ public class Con : KrokoshaScavSingleton
 			}
 			try
 			{
-				for (int j = 0; j < Math.Min(array.Length - 1, val.argDescription.Length); j++)
+				for (int k = 0; k < Math.Min(array.Length - 1, val.argDescription.Length); k++)
 				{
-					ref string reference = ref array[j + 1];
-					if (val.argDescription[j].Item1.StartsWith("position"))
+					ref string reference = ref array[k + 1];
+					if (val.argDescription[k].Item1.StartsWith("position"))
 					{
 						if (reference == "cursor")
 						{
@@ -3504,7 +3504,7 @@ public class Con : KrokoshaScavSingleton
 					}
 					else
 					{
-						if (!val.argDescription[j].Item1.StartsWith("player"))
+						if (!val.argDescription[k].Item1.StartsWith("player"))
 						{
 							continue;
 						}
@@ -3535,7 +3535,7 @@ public class Con : KrokoshaScavSingleton
 	[ServerReceiver(10046)]
 	private static void ServerReceiver_Console_ActivateAdminMode(knetid clientId, ref NetDataReader reader)
 	{
-		//IL_00d1: Unknown result type (might be due to invalid IL or missing references)
+		//IL_00cc: Unknown result type (might be due to invalid IL or missing references)
 		bool flag = default(bool);
 		reader.Get(ref flag);
 		string text = default(string);
@@ -3547,7 +3547,7 @@ public class Con : KrokoshaScavSingleton
 		if (flag && !plr.is_local)
 		{
 			bool flag2 = !string.IsNullOrEmpty(server_admin_password) && text == server_admin_password;
-			if (!removed_server_admins.Contains(plr.GetPersistentId()) && (plr.server_plrstate.admin_privilege || flag2 || KnownPersons.PRIVILEGED_STEAM_USERS.Contains(plr.steam_id)))
+			if (!removed_server_admins.Contains(plr.GetPersistentId()) && (plr.server_plrstate.admin_privilege || flag2 || KnownPersons.IsSteamUserPrivileged(plr.SteamId)))
 			{
 				server_admins.Add(plr);
 				string text2 = $"[<color=red>ADMIN</color>] {plr} <color=green><b>ENTERS</b></color> server console!";

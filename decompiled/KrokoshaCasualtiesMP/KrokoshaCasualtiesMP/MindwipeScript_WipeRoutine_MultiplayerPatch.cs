@@ -59,9 +59,9 @@ public static class MindwipeScript_WipeRoutine_MultiplayerPatch
 			yield return null;
 		}
 		limbs = body.limbs;
-		for (int j = 0; j < limbs.Length; j++)
+		for (int k = 0; k < limbs.Length; k++)
 		{
-			limbs[j].pain = 0f;
+			limbs[k].pain = 0f;
 		}
 		body.consciousness = 0f;
 		body.energy = 0f;

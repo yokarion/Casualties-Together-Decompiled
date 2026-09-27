@@ -148,7 +148,7 @@ public class CoolSyncSubSystemForObjects : BaseCoolSyncSubSystem
 
 	public int MAX_PACKET_SIZE = 512;
 
-	private ushort im_calling_out_from_scatland_im_calling_out_from_scatmans_world_if_you_wanna_break_free_you_better_listen_to_me_youve_got_to_learn_how_to_see_in_your_fantasy_im_calling_out_from_scatland_im_calling_out_from_scatmans_world_if_you_wanna_break_free_you_better_listen_to_me_youve_got_to_learn_how_to_see_in_your_fantasy__everybodys_talkin_something_very_shockin_just_to_keep_on_blockin_what_theyre_feeling_inside_but_listen_to_me_brother_you_just_keep_on_walkin_cause_you_and_me_and_sister_aint_got_nothing_to_hide_scatman_fat_man_black_and_white_and_brown_man_tell_me_bout_the_color_of_your_soul_if_part_of_your_solution_isnt_ending_the_pollution_then_i_dont_want_to_hear_your_stories_told_i_want_to_welcome_you_to_scatmans_world__babobehbopbopahdopbabababa_babedibabobehbabopbedopbababapi_babedibabobehpopbopbedopbabobeh_bopbopbedopbabobehpopbopbedopbababababehdi = 1;
+	private ushort _serverIdCounter = 1;
 
 	public float fastsync_interval = 0.04f;
 
@@ -392,10 +392,17 @@ public class CoolSyncSubSystemForObjects : BaseCoolSyncSubSystem
 				byte[] array = new byte[b2];
 				reader.GetBytes(array, (int)b2);
 				value.bitset = new BitArray(array);
-				reader.SetPosition(position);
-				Client_ReadData1(reader, b3, value);
-				reader.SetPosition(position + b3);
-				Client_ReadData2(reader, num, value);
+				try
+				{
+					reader.SetPosition(position);
+					Client_ReadData1(reader, b3, value);
+					reader.SetPosition(position + b3);
+					Client_ReadData2(reader, num, value);
+				}
+				catch (Exception ex)
+				{
+					log.error("Client_Receive: " + value.ToString() + " : " + ex.ToString());
+				}
 				reader.SetPosition(position + b3 + num + b2);
 			}
 			else if (client_objects.TryGetValue(result, out value2))
@@ -419,18 +426,18 @@ public class CoolSyncSubSystemForObjects : BaseCoolSyncSubSystem
 	{
 		while (true)
 		{
-			if (im_calling_out_from_scatland_im_calling_out_from_scatmans_world_if_you_wanna_break_free_you_better_listen_to_me_youve_got_to_learn_how_to_see_in_your_fantasy_im_calling_out_from_scatland_im_calling_out_from_scatmans_world_if_you_wanna_break_free_you_better_listen_to_me_youve_got_to_learn_how_to_see_in_your_fantasy__everybodys_talkin_something_very_shockin_just_to_keep_on_blockin_what_theyre_feeling_inside_but_listen_to_me_brother_you_just_keep_on_walkin_cause_you_and_me_and_sister_aint_got_nothing_to_hide_scatman_fat_man_black_and_white_and_brown_man_tell_me_bout_the_color_of_your_soul_if_part_of_your_solution_isnt_ending_the_pollution_then_i_dont_want_to_hear_your_stories_told_i_want_to_welcome_you_to_scatmans_world__babobehbopbopahdopbabababa_babedibabobehbabopbedopbababapi_babedibabobehpopbopbedopbabobeh_bopbopbedopbabobehpopbopbedopbababababehdi == 0)
+			if (_serverIdCounter == 0)
 			{
-				im_calling_out_from_scatland_im_calling_out_from_scatmans_world_if_you_wanna_break_free_you_better_listen_to_me_youve_got_to_learn_how_to_see_in_your_fantasy_im_calling_out_from_scatland_im_calling_out_from_scatmans_world_if_you_wanna_break_free_you_better_listen_to_me_youve_got_to_learn_how_to_see_in_your_fantasy__everybodys_talkin_something_very_shockin_just_to_keep_on_blockin_what_theyre_feeling_inside_but_listen_to_me_brother_you_just_keep_on_walkin_cause_you_and_me_and_sister_aint_got_nothing_to_hide_scatman_fat_man_black_and_white_and_brown_man_tell_me_bout_the_color_of_your_soul_if_part_of_your_solution_isnt_ending_the_pollution_then_i_dont_want_to_hear_your_stories_told_i_want_to_welcome_you_to_scatmans_world__babobehbopbopahdopbabababa_babedibabobehbabopbedopbababapi_babedibabobehpopbopbedopbabobeh_bopbopbedopbabobehpopbopbedopbababababehdi++;
+				_serverIdCounter++;
 				continue;
 			}
-			if (!server_objects.ContainsKey(im_calling_out_from_scatland_im_calling_out_from_scatmans_world_if_you_wanna_break_free_you_better_listen_to_me_youve_got_to_learn_how_to_see_in_your_fantasy_im_calling_out_from_scatland_im_calling_out_from_scatmans_world_if_you_wanna_break_free_you_better_listen_to_me_youve_got_to_learn_how_to_see_in_your_fantasy__everybodys_talkin_something_very_shockin_just_to_keep_on_blockin_what_theyre_feeling_inside_but_listen_to_me_brother_you_just_keep_on_walkin_cause_you_and_me_and_sister_aint_got_nothing_to_hide_scatman_fat_man_black_and_white_and_brown_man_tell_me_bout_the_color_of_your_soul_if_part_of_your_solution_isnt_ending_the_pollution_then_i_dont_want_to_hear_your_stories_told_i_want_to_welcome_you_to_scatmans_world__babobehbopbopahdopbabababa_babedibabobehbabopbedopbababapi_babedibabobehpopbopbedopbabobeh_bopbopbedopbabobehpopbopbedopbababababehdi))
+			if (!server_objects.ContainsKey(_serverIdCounter))
 			{
 				break;
 			}
-			im_calling_out_from_scatland_im_calling_out_from_scatmans_world_if_you_wanna_break_free_you_better_listen_to_me_youve_got_to_learn_how_to_see_in_your_fantasy_im_calling_out_from_scatland_im_calling_out_from_scatmans_world_if_you_wanna_break_free_you_better_listen_to_me_youve_got_to_learn_how_to_see_in_your_fantasy__everybodys_talkin_something_very_shockin_just_to_keep_on_blockin_what_theyre_feeling_inside_but_listen_to_me_brother_you_just_keep_on_walkin_cause_you_and_me_and_sister_aint_got_nothing_to_hide_scatman_fat_man_black_and_white_and_brown_man_tell_me_bout_the_color_of_your_soul_if_part_of_your_solution_isnt_ending_the_pollution_then_i_dont_want_to_hear_your_stories_told_i_want_to_welcome_you_to_scatmans_world__babobehbopbopahdopbabababa_babedibabobehbabopbedopbababapi_babedibabobehpopbopbedopbabobeh_bopbopbedopbabobehpopbopbedopbababababehdi++;
+			_serverIdCounter++;
 		}
-		return im_calling_out_from_scatland_im_calling_out_from_scatmans_world_if_you_wanna_break_free_you_better_listen_to_me_youve_got_to_learn_how_to_see_in_your_fantasy_im_calling_out_from_scatland_im_calling_out_from_scatmans_world_if_you_wanna_break_free_you_better_listen_to_me_youve_got_to_learn_how_to_see_in_your_fantasy__everybodys_talkin_something_very_shockin_just_to_keep_on_blockin_what_theyre_feeling_inside_but_listen_to_me_brother_you_just_keep_on_walkin_cause_you_and_me_and_sister_aint_got_nothing_to_hide_scatman_fat_man_black_and_white_and_brown_man_tell_me_bout_the_color_of_your_soul_if_part_of_your_solution_isnt_ending_the_pollution_then_i_dont_want_to_hear_your_stories_told_i_want_to_welcome_you_to_scatmans_world__babobehbopbopahdopbabababa_babedibabobehbabopbedopbababapi_babedibabobehpopbopbedopbabobeh_bopbopbedopbabobehpopbopbedopbababababehdi++;
+		return _serverIdCounter++;
 	}
 
 	public virtual knetid Server_NewObject(object obj)
@@ -453,6 +460,10 @@ public class CoolSyncSubSystemForObjects : BaseCoolSyncSubSystem
 		Server_Object server_Object = new Server_Object();
 		server_Object.netId = targetid;
 		server_Object.real_obj = obj;
+		if (Server_DeleteObject(targetid))
+		{
+			Server_Internal_DeallocateObject(targetid);
+		}
 		server_objects[targetid] = server_Object;
 		return server_Object;
 	}
@@ -466,13 +477,15 @@ public class CoolSyncSubSystemForObjects : BaseCoolSyncSubSystem
 		server_has_queued_forcesync = false;
 	}
 
-	public virtual void Server_DeleteObject(knetid netId)
+	public virtual bool Server_DeleteObject(knetid netId)
 	{
 		if (server_objects.TryGetValue(netId, out var value))
 		{
 			Server_QueueForceSyncForAll(netId);
 			value.real_obj = null;
+			return true;
 		}
+		return false;
 	}
 
 	protected virtual void Server_Internal_DeallocateObject(knetid objId)
@@ -490,7 +503,6 @@ public class CoolSyncSubSystemForObjects : BaseCoolSyncSubSystem
 		if (fastsync_timer > fastsync_interval)
 		{
 			fastsync_timer = 0f;
-			Server_RunFastSync();
 		}
 	}
 
@@ -519,7 +531,7 @@ public class CoolSyncSubSystemForObjects : BaseCoolSyncSubSystem
 			{
 				client_checkerconter = 0;
 			}
-			for (int j = 0; j < Math.Min(40, list.Count); j++)
+			for (int k = 0; k < Math.Min(40, list.Count); k++)
 			{
 				Client_Object client_Object = list[client_checkerconter];
 				if ((Time.realtimeSinceStartupAsDouble - client_Object.last_receive_time) * (double)Mathf.Clamp01(ClientMain.ServerPerformanceScale * 2f) > 40.0)
@@ -574,7 +586,7 @@ public class CoolSyncSubSystemForObjects : BaseCoolSyncSubSystem
 				log.warn($"{ToString()} -> TOO MUCH SNAPSHOTS!!! {plrstate.ToString()} OLDEST SNAPSHOT: {arg}");
 			}
 		}
-		if (plrstate.objstates.Any((KeyValuePair<knetid, Server_PerPlrState.Server_PerPlrObjectState> x) => x.Value.last_known_snapshot_id == deltaid))
+		if (plrstate.objstates.Any((KeyValuePair<knetid, Server_PerPlrState.Server_PerPlrObjectState> x) => x.Value.last_known_snapshot_id == deltaid) && plrstate.snapshots.Count < 4000)
 		{
 			return false;
 		}

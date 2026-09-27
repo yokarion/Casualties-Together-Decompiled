@@ -132,8 +132,8 @@ internal static class TraderScript_TryPurchase_MultiplayerPatch
 	[ServerReceiver(10163)]
 	private static void Server_Trader_TryPurchase(knetid clientId, ref NetDataReader reader)
 	{
-		//IL_017b: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0180: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0189: Unknown result type (might be due to invalid IL or missing references)
+		//IL_018e: Unknown result type (might be due to invalid IL or missing references)
 		//IL_00cf: Unknown result type (might be due to invalid IL or missing references)
 		//IL_00d4: Unknown result type (might be due to invalid IL or missing references)
 		reader.Get(out knetid result);
@@ -160,7 +160,11 @@ internal static class TraderScript_TryPurchase_MultiplayerPatch
 			orAddComponent.focused_body = body;
 			if (!plr.is_local)
 			{
-				NetObjectRegistry.TryGetSyncInfoOrRegister((Component)(object)TryPurchase_rewritten(trader, trader.items[b], body), out var _);
+				Item val = TryPurchase_rewritten(trader, trader.items[b], body);
+				if ((Object)(object)val != (Object)null)
+				{
+					NetObjectRegistry.TryGetSyncInfoOrRegister((Component)(object)val, out var _);
+				}
 			}
 			orAddComponent.Server_SendTraderInventory(ServerMain.GetListOfClientIdsExceptThisAndHost(clientId));
 		}

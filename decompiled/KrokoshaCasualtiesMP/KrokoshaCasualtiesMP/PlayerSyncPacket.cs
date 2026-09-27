@@ -44,7 +44,7 @@ public struct PlayerSyncPacket : IDeltaAutoSync<NetPlayer>, IDeltaPacketBase
 
 	public bool server_mute_tc;
 
-	public static int bitset_size = 16;
+	public static int bitset_size = 15;
 
 	public void SetDefault()
 	{
@@ -160,12 +160,7 @@ public struct PlayerSyncPacket : IDeltaAutoSync<NetPlayer>, IDeltaPacketBase
 		pack_bools.Add(is_chatting);
 		pack_bools.Add(is_crafting);
 		pack_bools.Add(is_trading);
-		flag = obj.woundViewTargetNetBodyId != woundViewTargetNetBodyId;
-		pack_bools.Add(flag);
-		if (flag)
-		{
-			writer.Put(woundViewTargetNetBodyId);
-		}
+		writer.Put(woundViewTargetNetBodyId);
 		pack_bools.Add(server_mute_vc);
 		pack_bools.Add(server_mute_tc);
 	}
@@ -205,11 +200,8 @@ public struct PlayerSyncPacket : IDeltaAutoSync<NetPlayer>, IDeltaPacketBase
 		is_chatting = bitset[10];
 		is_crafting = bitset[11];
 		is_trading = bitset[12];
-		if (bitset[13])
-		{
-			reader.Get(ref woundViewTargetNetBodyId);
-		}
-		server_mute_vc = bitset[14];
-		server_mute_tc = bitset[15];
+		reader.Get(ref woundViewTargetNetBodyId);
+		server_mute_vc = bitset[13];
+		server_mute_tc = bitset[14];
 	}
 }

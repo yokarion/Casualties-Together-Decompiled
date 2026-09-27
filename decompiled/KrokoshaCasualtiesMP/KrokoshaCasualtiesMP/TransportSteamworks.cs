@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using KrokoshaCasualtiesUtils;
@@ -83,6 +82,8 @@ public class TransportSteamworks : NetTransportBase
 	public TransportSteamworks()
 	{
 		hostLobbyBucket = (byte)Random.Range(0, 20);
+		GCHandle gCHandle = GCHandle.Alloc(1048576, GCHandleType.Pinned);
+		SteamNetworkingUtils.SetConfigValue((ESteamNetworkingConfigValue)9, (ESteamNetworkingConfigScope)1, IntPtr.Zero, (ESteamNetworkingConfigDataType)1, gCHandle.AddrOfPinnedObject());
 	}
 
 	private unsafe void OnConnectionStatusChanged(SteamNetConnectionStatusChangedCallback_t pCallback)
@@ -551,26 +552,22 @@ public class TransportSteamworks : NetTransportBase
 		SteamIDToClientIDDict.Clear();
 		foreach (KeyValuePair<knetid, NetPlayer> item in NetPlayer.ClientIdToPlayerDict)
 		{
-			SteamIDToNetPlayerDict[item.Value.steam_id] = item.Value;
-			SteamIDToClientIDDict[item.Value.steam_id] = item.Value.clientId;
-			item.Value.is_host = item.Value.steam_id == KSteam.CURRENT_LOBBY.ownerID.m_SteamID;
+			SteamIDToNetPlayerDict[item.Value.SteamId] = item.Value;
+			SteamIDToClientIDDict[item.Value.SteamId] = item.Value.clientId;
+			item.Value.is_host = item.Value.SteamId == KSteam.CURRENT_LOBBY.ownerID.m_SteamID;
 		}
 	}
 
 	private void _Update_PollMessages()
 	{
-		//IL_006e: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0073: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0075: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0085: Unknown result type (might be due to invalid IL or missing references)
-		//IL_008f: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0057: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0046: Unknown result type (might be due to invalid IL or missing references)
-		int num = 255;
-		if (Net.is_client)
-		{
-			num = 65535;
-		}
+		//IL_0061: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0066: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0068: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0076: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0080: Unknown result type (might be due to invalid IL or missing references)
+		//IL_004a: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0039: Unknown result type (might be due to invalid IL or missing references)
+		int num = 65535;
 		IntPtr[] array = new IntPtr[num];
 		foreach (SteamConnectionData item in new List<SteamConnectionData>(connectionMapping.Values))
 		{
@@ -578,8 +575,8 @@ public class TransportSteamworks : NetTransportBase
 			for (int i = 0; i < num2; i++)
 			{
 				SteamNetworkingMessage_t val = Marshal.PtrToStructure<SteamNetworkingMessage_t>(array[i]);
-				byte[] array2 = new byte[val.m_cbSize - 1];
-				Marshal.Copy(val.m_pData, array2, 0, val.m_cbSize - 1);
+				byte[] array2 = new byte[val.m_cbSize];
+				Marshal.Copy(val.m_pData, array2, 0, val.m_cbSize);
 				SteamNetworkingMessage_t.Release(array[i]);
 				try
 				{
@@ -597,10 +594,10 @@ public class TransportSteamworks : NetTransportBase
 	{
 		//IL_001f: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0025: Expected O, but got Unknown
-		//IL_01b6: Unknown result type (might be due to invalid IL or missing references)
-		//IL_01c0: Unknown result type (might be due to invalid IL or missing references)
+		//IL_01b1: Unknown result type (might be due to invalid IL or missing references)
+		//IL_01bb: Unknown result type (might be due to invalid IL or missing references)
 		//IL_003b: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0110: Unknown result type (might be due to invalid IL or missing references)
+		//IL_010b: Unknown result type (might be due to invalid IL or missing references)
 		ulong steamID = connection.id.m_SteamID;
 		NetDataReader reader = new NetDataReader(data);
 		if (i_am_owner_of_this_lobby)
@@ -612,7 +609,7 @@ public class TransportSteamworks : NetTransportBase
 			if (!SteamIDToClientIDDict.TryGetByFirst(steamID, out var value2))
 			{
 				bool privileged_user = false;
-				if (KnownPersons.PRIVILEGED_STEAM_USERS.Contains(steamID))
+				if (KnownPersons.IsSteamUserPrivileged(steamID))
 				{
 					privileged_user = true;
 				}
@@ -638,7 +635,7 @@ public class TransportSteamworks : NetTransportBase
 				{
 					aplayername = KSteam.GetSteamUsername(steamID);
 					NetPlayer netPlayer = Net.CreatePlayer(Net.GetNextPlayerId(), aplayername, aplayercolor);
-					netPlayer.steam_id = steamID;
+					netPlayer.SteamId = steamID;
 					SteamIDToClientIDDict[steamID] = netPlayer.clientId;
 					SteamIDToNetPlayerDict[steamID] = netPlayer;
 					log.l($"{GetType().Name}: Accepted connection for: {netPlayer}  color:{aplayercolor}");
@@ -874,21 +871,20 @@ public class TransportSteamworks : NetTransportBase
 
 	public void SendThroughSteamSocket(in HSteamNetConnection connection, ArraySegment<byte> data, int sendFlag)
 	{
+		//IL_0057: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0063: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0068: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0074: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0079: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0042: Unknown result type (might be due to invalid IL or missing references)
+		//IL_004e: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0053: Unknown result type (might be due to invalid IL or missing references)
-		//IL_005f: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0064: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0081: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0083: Invalid comparison between Unknown and I4
-		//IL_0085: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0087: Invalid comparison between Unknown and I4
-		//IL_00a6: Unknown result type (might be due to invalid IL or missing references)
-		//IL_00ad: Unknown result type (might be due to invalid IL or missing references)
-		byte[] array = new byte[data.Count + 1];
+		//IL_0070: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0072: Invalid comparison between Unknown and I4
+		//IL_0074: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0076: Invalid comparison between Unknown and I4
+		//IL_0095: Unknown result type (might be due to invalid IL or missing references)
+		//IL_009c: Unknown result type (might be due to invalid IL or missing references)
+		byte[] array = new byte[data.Count];
 		Array.Copy(data.Array, data.Offset, array, 0, data.Count);
-		array[data.Count] = Convert.ToByte(sendFlag);
 		GCHandle gCHandle = GCHandle.Alloc(array, GCHandleType.Pinned);
 		IntPtr intPtr = gCHandle.AddrOfPinnedObject();
 		long num = default(long);
@@ -936,7 +932,7 @@ public class TransportSteamworks : NetTransportBase
 	{
 		if (SteamIDToClientIDDict.TryGetBySecond(clientid, out var key))
 		{
-			SendThroughSteamSocket(key, new ArraySegment<byte>(writer.Data), steam_sendFlags);
+			SendThroughSteamSocket(key, new ArraySegment<byte>(writer.Data, 0, writer.Length), steam_sendFlags);
 		}
 		else if (log.verbose)
 		{

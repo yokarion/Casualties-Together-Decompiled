@@ -564,9 +564,9 @@ public class StreamedAudioOutput : MonoBehaviour
 				if (num2 > 10)
 				{
 					float[] array = new float[num2];
-					for (int j = 0; j < num2; j++)
+					for (int k = 0; k < num2; k++)
 					{
-						array[j] = data[data.Length - 1] * Mathf.Clamp01(1f - (float)(j / 24) * 3f);
+						array[k] = data[data.Length - 1] * Mathf.Clamp01(1f - (float)(k / 24) * 3f);
 					}
 					clip.SetData(array, vc_endpos);
 				}
@@ -575,9 +575,9 @@ public class StreamedAudioOutput : MonoBehaviour
 		}
 		else
 		{
-			for (int k = 0; k < data.Length; k++)
+			for (int l = 0; l < data.Length; l++)
 			{
-				vc_buffer.Enqueue(KM.clamp11(data[k]) * finalVolume);
+				vc_buffer.Enqueue(KM.clamp11(data[l]) * finalVolume);
 			}
 		}
 		if (KM.dist2dsqrcheck(Vector2.op_Implicit(((Component)audioSource).transform.position), Vector2.op_Implicit(((Component)Camera.main).transform.position), max_hear_distance * 0.5f))

@@ -87,7 +87,7 @@ public static class SaveSystem_SaveGame_MultiplayerPatch
 					string contents = JsonConvert.SerializeObject((object)new Dictionary<string, object>
 					{
 						["hello"] = "Multiplayer Mod created by Krokosha666",
-						["MPVERSION"] = "4.0.1",
+						["MPVERSION"] = "4.1.2",
 						["GAMEVERSION"] = Application.version,
 						["SAVEID"] = WoundView.view.cInfo[2],
 						["LEVEL"] = flag,

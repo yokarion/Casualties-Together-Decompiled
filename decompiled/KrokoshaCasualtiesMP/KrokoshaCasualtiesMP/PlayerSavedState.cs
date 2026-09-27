@@ -45,7 +45,7 @@ public struct PlayerSavedState
 		if (((Component)body).TryGetComponent<NetBody>(ref netBody) && netBody.is_player)
 		{
 			hascrafterbeforerecipes = new List<int>(netBody.plr.tosave_hascrafterbeforerecipes);
-			plrcolor = netBody.plr.plrcolor;
+			plrcolor = netBody.plr.playerColor;
 		}
 		if (!KrokoshaScavMultiplayer.rules.SavePlayerInventory)
 		{
@@ -97,7 +97,7 @@ public struct PlayerSavedState
 				{
 					netBody2.plr.tosave_hascrafterbeforerecipes = hascrafterbeforerecipes;
 				}
-				netBody2.plr.plrcolor = plrcolor;
+				netBody2.plr.playerColor = plrcolor;
 			}
 		}
 		if (KrokoshaScavMultiplayer.rules.SavePlayerInventory && (Object)(object)invholder != (Object)null && inventory != null)

@@ -59,49 +59,49 @@ public static class UIServerBrowser
 
 	private static void _GUI_RenderServerBrowser(Rect r)
 	{
-		//IL_0d73: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0d6e: Unknown result type (might be due to invalid IL or missing references)
 		//IL_016b: Unknown result type (might be due to invalid IL or missing references)
 		//IL_00f4: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0161: Expected I4, but got Unknown
 		//IL_0161: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0710: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0717: Expected O, but got Unknown
-		//IL_07ef: Unknown result type (might be due to invalid IL or missing references)
-		//IL_07f6: Expected O, but got Unknown
+		//IL_070b: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0712: Expected O, but got Unknown
+		//IL_07ea: Unknown result type (might be due to invalid IL or missing references)
+		//IL_07f1: Expected O, but got Unknown
+		//IL_07fd: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0802: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0807: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0850: Unknown result type (might be due to invalid IL or missing references)
-		//IL_085f: Unknown result type (might be due to invalid IL or missing references)
+		//IL_084b: Unknown result type (might be due to invalid IL or missing references)
+		//IL_085a: Unknown result type (might be due to invalid IL or missing references)
+		//IL_086c: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0871: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0876: Unknown result type (might be due to invalid IL or missing references)
-		//IL_087b: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0742: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0749: Expected O, but got Unknown
+		//IL_073d: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0744: Expected O, but got Unknown
 		//IL_043d: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0447: Unknown result type (might be due to invalid IL or missing references)
 		//IL_044c: Unknown result type (might be due to invalid IL or missing references)
 		//IL_047b: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0480: Unknown result type (might be due to invalid IL or missing references)
-		//IL_04a7: Unknown result type (might be due to invalid IL or missing references)
-		//IL_08b6: Unknown result type (might be due to invalid IL or missing references)
-		//IL_08c5: Unknown result type (might be due to invalid IL or missing references)
+		//IL_04a2: Unknown result type (might be due to invalid IL or missing references)
+		//IL_08b1: Unknown result type (might be due to invalid IL or missing references)
+		//IL_08c0: Unknown result type (might be due to invalid IL or missing references)
+		//IL_08d2: Unknown result type (might be due to invalid IL or missing references)
 		//IL_08d7: Unknown result type (might be due to invalid IL or missing references)
 		//IL_08dc: Unknown result type (might be due to invalid IL or missing references)
-		//IL_08e1: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0777: Unknown result type (might be due to invalid IL or missing references)
-		//IL_077e: Expected O, but got Unknown
-		//IL_07a6: Unknown result type (might be due to invalid IL or missing references)
-		//IL_07ad: Expected O, but got Unknown
-		//IL_07d4: Unknown result type (might be due to invalid IL or missing references)
-		//IL_07db: Expected O, but got Unknown
-		//IL_07c4: Unknown result type (might be due to invalid IL or missing references)
-		//IL_07cb: Expected O, but got Unknown
-		//IL_0acd: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0772: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0779: Expected O, but got Unknown
+		//IL_07a1: Unknown result type (might be due to invalid IL or missing references)
+		//IL_07a8: Expected O, but got Unknown
+		//IL_07cf: Unknown result type (might be due to invalid IL or missing references)
+		//IL_07d6: Expected O, but got Unknown
+		//IL_07bf: Unknown result type (might be due to invalid IL or missing references)
+		//IL_07c6: Expected O, but got Unknown
+		//IL_0ac8: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0b8e: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0b93: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0b98: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0bc4: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0bb0: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0bb6: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0bbf: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0bab: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0bb1: Unknown result type (might be due to invalid IL or missing references)
 		GUI.skin.label.alignment = (TextAnchor)1;
 		UIBullshit._GUI_BiggerLabel(Lang.Get("mmtb_serverbrowser", false), 1.4f);
 		GUI.skin.label.alignment = (TextAnchor)0;
@@ -194,7 +194,7 @@ public static class UIServerBrowser
 		TextAnchor alignment = GUI.skin.label.alignment;
 		GUI.skin.label.wordWrap = false;
 		GUILayout.Space(10f * UIMainMenu.GetMenuUIScale());
-		bool flag = KnownPersons.PRIVILEGED_STEAM_USERS.Contains(KSteam.GetLocalUserSteamID().m_SteamID);
+		bool flag = KnownPersons.IsSteamUserPrivileged(KSteam.GetLocalUserSteamID().m_SteamID);
 		GUI.skin.label.alignment = (TextAnchor)4;
 		if (CurServerList.Count == 0)
 		{
@@ -280,7 +280,7 @@ public static class UIServerBrowser
 							GUILayout.Space(10f * UIMainMenu.GetMenuUIScale());
 							if (curFilteredServer.friends_tooltip != null)
 							{
-								GUILayout.Label((Texture)(object)KrokoshaCoopModAssets.happy.texture, (GUILayoutOption[])(object)new GUILayoutOption[2]
+								GUILayout.Label((Texture)(object)CoopModAssets.happy.texture, (GUILayoutOption[])(object)new GUILayoutOption[2]
 								{
 									GUILayout.Width(val3.y),
 									GUILayout.Height(val3.y)
@@ -292,7 +292,7 @@ public static class UIServerBrowser
 							}
 							if (curFilteredServer.haspassword)
 							{
-								GUILayout.Label((Texture)(object)KrokoshaCoopModAssets.@lock.texture, (GUILayoutOption[])(object)new GUILayoutOption[2]
+								GUILayout.Label((Texture)(object)CoopModAssets.@lock.texture, (GUILayoutOption[])(object)new GUILayoutOption[2]
 								{
 									GUILayout.Width(val3.y),
 									GUILayout.Height(val3.y)
@@ -486,7 +486,34 @@ public static class UIServerBrowser
 
 	public static void SortServerListByJoinability()
 	{
-		CurFilteredServerList.Sort((NetPublicServerInfo a, NetPublicServerInfo b) => b.GetJoinableProbability().CompareTo(a.GetJoinableProbability()));
+		CurFilteredServerList.Sort(delegate(NetPublicServerInfo a, NetPublicServerInfo b)
+		{
+			bool flag = a.friends_tooltip != null;
+			bool value = b.friends_tooltip != null;
+			int num = flag.CompareTo(value);
+			if (num != 0)
+			{
+				return num;
+			}
+			bool flag2 = a.version != "4.1.2";
+			bool value2 = b.version != "4.1.2";
+			int num2 = flag2.CompareTo(value2);
+			if (num2 != 0)
+			{
+				return num2;
+			}
+			bool flag3 = !a.IsJoinable();
+			bool value3 = !b.IsJoinable();
+			int num3 = flag3.CompareTo(value3);
+			if (num3 != 0)
+			{
+				return num3;
+			}
+			bool flag4 = !a.haspassword;
+			bool value4 = !b.haspassword;
+			int num4 = flag4.CompareTo(value4);
+			return (num4 != 0) ? num4 : 0;
+		});
 	}
 
 	public static void ClearLists()

@@ -634,9 +634,9 @@ internal class ItemSync : BaseObjectSynchronizerStaticSerializerFunctions
 		{
 			log.error("DoClientInventoryUpdate: " + ex.ToString());
 		}
-		for (int j = 0; j < array.Length; j++)
+		for (int k = 0; k < array.Length; k++)
 		{
-			Client_last_inventory_state[j] = array[j];
+			Client_last_inventory_state[k] = array[k];
 		}
 	}
 
@@ -751,22 +751,22 @@ internal class ItemSync : BaseObjectSynchronizerStaticSerializerFunctions
 		}
 		else
 		{
-			for (int j = 0; j < body.slots.Length; j++)
+			for (int k = 0; k < body.slots.Length; k++)
 			{
-				knetid syncid = array[j];
-				_ = bitset2[j];
-				Item val = body.GetItem(j);
+				knetid syncid = array[k];
+				_ = bitset2[k];
+				Item val = body.GetItem(k);
 				SyncInfo si = null;
 				if ((Object)(object)val != (Object)null && !NetObjectRegistry.TryGetSyncInfo(((Component)val).gameObject, out si))
 				{
 					SafeUnloadItem(ItemGetContainerInfo(val));
 					val = null;
 				}
-				if (!bitset2[j])
+				if (!bitset2[k])
 				{
 					continue;
 				}
-				if (bitset[j])
+				if (bitset[k])
 				{
 					if (!NetObjectRegistry.TryGetSyncInfo(syncid, out var si2))
 					{
@@ -797,7 +797,7 @@ internal class ItemSync : BaseObjectSynchronizerStaticSerializerFunctions
 							{
 								SafeUnloadItem(itemsContainerInfo2);
 							}
-							body.PickUpItem(si2.item, j, true);
+							body.PickUpItem(si2.item, k, true);
 							if (DebugHelp._DEV_VISUALISE_NET_EVENTS)
 							{
 								if (is_server)

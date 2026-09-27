@@ -91,9 +91,9 @@ internal class CombatStuff : KrokoshaScavSingleton
 				}
 			}
 			bool flag2 = false;
-			for (int j = 3; j < 9; j++)
+			for (int k = 3; k < 9; k++)
 			{
-				if (limb.body.limbs[j].dismembered)
+				if (limb.body.limbs[k].dismembered)
 				{
 					flag2 = true;
 					break;

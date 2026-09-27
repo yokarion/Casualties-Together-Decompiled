@@ -33,13 +33,7 @@ public class ServerMain : MonoBehaviour
 
 	public static byte AVG_CONNECTION_QUALITY = 0;
 
-	internal static StartGameAnnouncementPacket LAST_STARTGAME_ANNOUNCEMENT_PACKET = new StartGameAnnouncementPacket
-	{
-		isreal = false,
-		prefs = default(WorldgenPatches.RunPrefs).ReadPrefs(),
-		randomstate = Random.state,
-		rules = KrokoshaScavMultiplayer.rules
-	};
+	internal static StartGameAnnouncementPacket LAST_STARTGAME_ANNOUNCEMENT_PACKET;
 
 	public static bool _DEV_ENABLE_HP_SYNC = true;
 
@@ -129,7 +123,7 @@ public class ServerMain : MonoBehaviour
 		DeliveryMethod delivery = (DeliveryMethod)2;
 		IEnumerable<knetid> clientIds = targets ?? AllClientIdsExceptHost;
 		Net.Server_SendToClients(in delivery, in writer, in clientIds);
-		if (Net.is_playing_with_steam)
+		if (Net.IsRunningSteam)
 		{
 			KSteam.Server_UpdateLobbyData();
 		}
@@ -992,6 +986,15 @@ public class ServerMain : MonoBehaviour
 
 	private void Start()
 	{
+		//IL_0027: Unknown result type (might be due to invalid IL or missing references)
+		//IL_002c: Unknown result type (might be due to invalid IL or missing references)
+		LAST_STARTGAME_ANNOUNCEMENT_PACKET = new StartGameAnnouncementPacket
+		{
+			isreal = false,
+			prefs = default(WorldgenPatches.RunPrefs).ReadPrefs(),
+			randomstate = Random.state,
+			rules = KrokoshaScavMultiplayer.rules
+		};
 		((MonoBehaviour)this).InvokeRepeating("update10s", 10f, 10f);
 		NetPlayer.OnPlayerLeft += delegate(NetPlayer plr)
 		{

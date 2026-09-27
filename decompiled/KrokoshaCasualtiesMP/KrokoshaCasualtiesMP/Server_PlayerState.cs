@@ -82,9 +82,9 @@ public class Server_PlayerState
 		}
 		for (int i = 0; i < 32; i++)
 		{
-			for (int j = 0; j < 32; j++)
+			for (int k = 0; k < 32; k++)
 			{
-				known_chunks[j, i] = true;
+				known_chunks[k, i] = true;
 			}
 		}
 	}

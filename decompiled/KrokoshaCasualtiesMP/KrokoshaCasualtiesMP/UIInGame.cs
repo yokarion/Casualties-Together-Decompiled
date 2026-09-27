@@ -167,7 +167,7 @@ public class UIInGame : MonoBehaviour
 		float num = 32f * UIBullshit.uiScale;
 		val2 -= Vector2.one * num * 0.5f;
 		GUIUtility.RotateAroundPivot(Vector2.SignedAngle(Vector2.right, val), val2);
-		GUI.DrawTexture(new Rect(val2.x, val2.y, num, num), (Texture)(object)KrokoshaCoopModAssets.arrowicon.texture, (ScaleMode)0, true, 0f, color, 0f, 0f);
+		GUI.DrawTexture(new Rect(val2.x, val2.y, num, num), (Texture)(object)CoopModAssets.arrowicon.texture, (ScaleMode)0, true, 0f, color, 0f, 0f);
 		GUI.matrix = matrix;
 		GUI.skin.label.normal.textColor = Color.white;
 	}
@@ -730,7 +730,7 @@ public class UIInGame : MonoBehaviour
 		if (interaction_menu_target_body.is_player)
 		{
 			NetPlayer plr = interaction_menu_target_body.plr;
-			GUI.skin.label.normal.textColor = plr.plrcolor;
+			GUI.skin.label.normal.textColor = plr.playerColor;
 			text = interaction_menu_target_body.playername + "  ID:" + plr.clientId.ToString();
 		}
 		else

@@ -1,7 +1,7 @@
 using System.Reflection;
 using System.Text;
 
-namespace KrokoshaCasualtiesMP;
+namespace Together;
 
 public static class StatePrinter
 {
