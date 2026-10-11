@@ -29,42 +29,33 @@ internal class FileOperations
 
 	public static async Task<string> DownloadArchive(string url)
 	{
-		HttpClient client = new HttpClient();
+		using HttpClient client = new HttpClient();
+		Uri requestUri = new Uri(url);
+		string zipFilename = GetZipFilename(url);
+		string tempFolderFilePath = string.Join(Path.DirectorySeparatorChar.ToString(), Constants.TempDirectory, zipFilename);
+		client.Timeout = new TimeSpan(0, 0, 30);
 		try
 		{
-			Uri uri = new Uri(url);
-			string zipFilename = GetZipFilename(url);
-			char directorySeparatorChar = Path.DirectorySeparatorChar;
-			string tempFolderFilePath = string.Join(directorySeparatorChar.ToString(), Constants.TempDirectory, zipFilename);
-			client.Timeout = new TimeSpan(0, 0, 30);
-			try
+			HttpResponseMessage httpResponseMessage = await client.GetAsync(requestUri);
+			using (FileStream fs = new FileStream(tempFolderFilePath, FileMode.Create))
 			{
-				HttpResponseMessage val = await client.GetAsync(uri);
-				using (FileStream fs = new FileStream(tempFolderFilePath, FileMode.Create))
-				{
-					await val.Content.CopyToAsync((Stream)fs);
-				}
-				return tempFolderFilePath;
+				await httpResponseMessage.Content.CopyToAsync(fs);
 			}
-			catch (TaskCanceledException ex) when (ex.InnerException is TimeoutException)
-			{
-				throw new TimeoutException();
-			}
-			catch (HttpRequestException)
-			{
-				throw new TimeoutException();
-			}
+			return tempFolderFilePath;
 		}
-		finally
+		catch (TaskCanceledException ex) when (ex.InnerException is TimeoutException)
 		{
-			((IDisposable)client)?.Dispose();
+			throw new TimeoutException();
+		}
+		catch (HttpRequestException)
+		{
+			throw new TimeoutException();
 		}
 	}
 
 	public static void UnzipFiles(string zippedPath)
 	{
-		char directorySeparatorChar = Path.DirectorySeparatorChar;
-		string destinationDirectoryName = string.Join(directorySeparatorChar.ToString(), Constants.TempDirectory, "MULTIPLAYER_STAGED");
+		string destinationDirectoryName = string.Join(Path.DirectorySeparatorChar.ToString(), Constants.TempDirectory, "MULTIPLAYER_STAGED");
 		ZipFile.ExtractToDirectory(zippedPath, destinationDirectoryName);
 	}
 }

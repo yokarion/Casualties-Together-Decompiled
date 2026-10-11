@@ -6,7 +6,7 @@ using BepInEx;
 using BepInEx.Bootstrap;
 using BepInEx.Logging;
 using HarmonyLib;
-using KrokoshaCasualtiesMP;
+using Together;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -42,7 +42,18 @@ public class AutoUpdater : BaseUnityPlugin
 	{
 		try
 		{
-			KrokMPAssembly = Assembly.GetAssembly(typeof(KrokoshaScavSingleton));
+			KrokMPAssembly = Assembly.GetAssembly(typeof(CasualtiesTogetherSingleton));
+		}
+		catch (Exception)
+		{
+		}
+	}
+
+	private void AddDrawUpdateButtonUI()
+	{
+		try
+		{
+			UIMainMenu.DrawUpdateButton = TogetherUIOverride.DrawUpdateButton;
 		}
 		catch (Exception)
 		{
@@ -52,6 +63,13 @@ public class AutoUpdater : BaseUnityPlugin
 	private async void Awake()
 	{
 		_LoadKrokMPAssembly();
+		try
+		{
+			AddDrawUpdateButtonUI();
+		}
+		catch (Exception)
+		{
+		}
 		Logger = ((BaseUnityPlugin)this).Logger;
 		bool flag = true;
 		try

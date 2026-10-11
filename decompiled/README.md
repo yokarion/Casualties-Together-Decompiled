@@ -4,8 +4,8 @@ Generated automatically by [dotnet-autodecompiler](https://github.com/Yokarion/d
 
 This is a reconstruction produced by a decompiler, not the author's original source. Local variable names and compiler-generated members will not match what was written.
 
-- Upstream release: `v4.1.2`
-- Source: https://github.com/creaturefeaturelarry/casualties-together/releases/tag/v4.1.2
+- Upstream release: `v5.0.2`
+- Source: https://github.com/creaturefeaturelarry/casualties-together/releases/tag/v5.0.2
 - Decompiler: ICSharpCode.Decompiler 10.1.1.8388
 - Language version: C# 10.0
 - Embedded resources: none
@@ -14,9 +14,7 @@ This is a reconstruction produced by a decompiler, not the author's original sou
 
 | Assembly | Version | Target framework | Source files | Folder |
 | --- | --- | --- | ---: | --- |
-| KrokoshaCasualtiesMP | 4.1.2.0 | .NET Framework 4.8 | 396 | [`KrokoshaCasualtiesMP/`](KrokoshaCasualtiesMP/) |
-| Multiupdater | 1.0.0.0 | .NET Framework 4.8 | 9 | [`Multiupdater/`](Multiupdater/) |
-| autoupdater_patcher | 1.0.0.0 | .NET Framework 4.8 | 2 | [`autoupdater_patcher/`](autoupdater_patcher/) |
+| Multiupdater | 1.0.0.0 | .NET Standard 2.1 | 10 | [`Multiupdater/`](Multiupdater/) |
 
 ## Third-party dependencies
 
@@ -24,38 +22,15 @@ Referenced by the code below but not part of this mirror. They belong to the gam
 
 | Dependency | Version | Referenced by | Available |
 | --- | --- | --- | --- |
-| 0Harmony | 2.7.0.0 | KrokoshaCasualtiesMP, Multiupdater | no |
-| Assembly-CSharp | 0.0.0.0 | KrokoshaCasualtiesMP, Multiupdater | no |
-| BepInEx | 5.4.23.5 | KrokoshaCasualtiesMP, Multiupdater | no |
-| DiscordRPC | 1.0.0.0 | KrokoshaCasualtiesMP | no |
-| LiteNetLib | 1.3.5.0 | KrokoshaCasualtiesMP | no |
-| Mono.Cecil | 0.11.6.0 | autoupdater_patcher | no |
-| Mono.Security | 4.0.0.0 | KrokoshaCasualtiesMP | no |
-| MonoMod.Utils | 21.12.13.1 | KrokoshaCasualtiesMP | no |
-| Newtonsoft.Json | 13.0.0.0 | KrokoshaCasualtiesMP, Multiupdater | no |
-| OpusSharp.Core | 1.0.0.0 | KrokoshaCasualtiesMP | no |
-| Steamworks.NET | 2025.163.0.0 | KrokoshaCasualtiesMP | no |
-| Unity.Burst | 0.0.0.0 | KrokoshaCasualtiesMP | no |
-| Unity.RenderPipelines.Core.Runtime | 0.0.0.0 | KrokoshaCasualtiesMP | no |
-| Unity.RenderPipelines.Universal.Runtime | 0.0.0.0 | KrokoshaCasualtiesMP | no |
-| Unity.TextMeshPro | 0.0.0.0 | KrokoshaCasualtiesMP | no |
-| Unity.VisualScripting.Core | 0.0.0.0 | KrokoshaCasualtiesMP, Multiupdater | no |
-| UnityEngine.AnimationModule | 0.0.0.0 | KrokoshaCasualtiesMP | no |
-| UnityEngine.AssetBundleModule | 0.0.0.0 | KrokoshaCasualtiesMP | no |
-| UnityEngine.AudioModule | 0.0.0.0 | KrokoshaCasualtiesMP | no |
-| UnityEngine.CoreModule | 0.0.0.0 | KrokoshaCasualtiesMP, Multiupdater | no |
-| UnityEngine.GridModule | 0.0.0.0 | KrokoshaCasualtiesMP | no |
-| UnityEngine.IMGUIModule | 0.0.0.0 | KrokoshaCasualtiesMP, Multiupdater | no |
-| UnityEngine.ImageConversionModule | 0.0.0.0 | KrokoshaCasualtiesMP | no |
-| UnityEngine.InputLegacyModule | 0.0.0.0 | KrokoshaCasualtiesMP | no |
-| UnityEngine.ParticleSystemModule | 0.0.0.0 | KrokoshaCasualtiesMP | no |
-| UnityEngine.Physics2DModule | 0.0.0.0 | KrokoshaCasualtiesMP | no |
-| UnityEngine.ScreenCaptureModule | 0.0.0.0 | KrokoshaCasualtiesMP | no |
-| UnityEngine.TextRenderingModule | 0.0.0.0 | KrokoshaCasualtiesMP | no |
-| UnityEngine.TilemapModule | 0.0.0.0 | KrokoshaCasualtiesMP | no |
-| UnityEngine.UI | 1.0.0.0 | KrokoshaCasualtiesMP | no |
-| UnityEngine.UIModule | 0.0.0.0 | KrokoshaCasualtiesMP | no |
-| UnityEngine.UnityWebRequestModule | 0.0.0.0 | KrokoshaCasualtiesMP | no |
+| 0Harmony | 2.7.0.0 | Multiupdater | no |
+| Assembly-CSharp | 0.0.0.0 | Multiupdater | no |
+| BepInEx | 5.4.23.5 | Multiupdater | no |
+| CasualtiesMP | 5.0.1.0 | Multiupdater | no |
+| Newtonsoft.Json | 13.0.0.0 | Multiupdater | no |
+| Unity.VisualScripting.Core | 0.0.0.0 | Multiupdater | no |
+| UnityEngine.CoreModule | 0.0.0.0 | Multiupdater | no |
+| UnityEngine.IMGUIModule | 0.0.0.0 | Multiupdater | no |
+| UnityEngine.TextRenderingModule | 0.0.0.0 | Multiupdater | no |
 
 ## Not decompiled
 
