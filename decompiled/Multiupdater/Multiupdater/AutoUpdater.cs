@@ -6,6 +6,7 @@ using BepInEx;
 using BepInEx.Bootstrap;
 using BepInEx.Logging;
 using HarmonyLib;
+using TMPro;
 using Together;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -60,12 +61,30 @@ public class AutoUpdater : BaseUnityPlugin
 		}
 	}
 
+	private void AddBuildUpdateButtonUI()
+	{
+		try
+		{
+			UIMainMenu.BuildUpdateButton = TogetherUIOverride.BuildUpdateButton;
+		}
+		catch (Exception)
+		{
+		}
+	}
+
 	private async void Awake()
 	{
 		_LoadKrokMPAssembly();
 		try
 		{
 			AddDrawUpdateButtonUI();
+		}
+		catch (Exception)
+		{
+		}
+		try
+		{
+			AddBuildUpdateButtonUI();
 		}
 		catch (Exception)
 		{
@@ -157,6 +176,10 @@ public class AutoUpdater : BaseUnityPlugin
 			Logger.LogError((object)$"Failed to log ingame: {arg}");
 		}
 		Logger.LogMessage((object)str);
+		if ((Object)(object)TogetherUIOverride.RealUpdateStatusText != (Object)null)
+		{
+			((TMP_Text)TogetherUIOverride.RealUpdateStatusText).text = Status;
+		}
 	}
 
 	internal static void LogError(in string str)
@@ -171,6 +194,10 @@ public class AutoUpdater : BaseUnityPlugin
 			Logger.LogError((object)$"Failed to log ingame: {arg}");
 		}
 		Logger.LogError((object)str);
+		if ((Object)(object)TogetherUIOverride.RealUpdateStatusText != (Object)null)
+		{
+			((TMP_Text)TogetherUIOverride.RealUpdateStatusText).text = Status;
+		}
 	}
 
 	public static async Task ParseVersions()
@@ -264,7 +291,7 @@ public class AutoUpdater : BaseUnityPlugin
 
 	private static Version GetLocalVersion()
 	{
-		if (Chainloader.PluginInfos.TryGetValue("KrokoshaCasualtiesMP", out var value))
+		if (Chainloader.PluginInfos.TryGetValue("CasualtiesMP", out var value))
 		{
 			return value.Metadata.Version;
 		}

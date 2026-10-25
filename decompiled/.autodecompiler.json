@@ -11,9 +11,9 @@
       "assemblyName": "Multiupdater",
       "assemblyVersion": "1.0.0.0",
       "targetFramework": ".NETStandard,Version=v2.1",
-      "sha256": "e11e0ef36cb8fbd7d5a5096bb4ae78a406854c80c6038a62ee72657095095ad2",
-      "sourceUrl": "https://github.com/creaturefeaturelarry/casualties-together/releases/tag/v5.0.2",
-      "sourceRef": "v5.0.2",
+      "sha256": "6bb0d5b64309f281f3603e6c5f8f748c3b885e4ed1f05bb86fc509568402d44e",
+      "sourceUrl": "https://github.com/creaturefeaturelarry/casualties-together/releases/tag/v5.1.5",
+      "sourceRef": "v5.1.5",
       "sourceFileCount": 10,
       "references": [
         {
@@ -30,19 +30,25 @@
         },
         {
           "name": "BepInEx",
-          "version": "5.4.23.5",
+          "version": "5.4.20.0",
           "resolved": false,
           "framework": false
         },
         {
           "name": "CasualtiesMP",
-          "version": "5.0.1.0",
+          "version": "5.1.4.0",
           "resolved": false,
           "framework": false
         },
         {
           "name": "Newtonsoft.Json",
           "version": "13.0.0.0",
+          "resolved": false,
+          "framework": false
+        },
+        {
+          "name": "Unity.TextMeshPro",
+          "version": "0.0.0.0",
           "resolved": false,
           "framework": false
         },
@@ -67,6 +73,12 @@
         {
           "name": "UnityEngine.TextRenderingModule",
           "version": "0.0.0.0",
+          "resolved": false,
+          "framework": false
+        },
+        {
+          "name": "UnityEngine.UI",
+          "version": "1.0.0.0",
           "resolved": false,
           "framework": false
         },

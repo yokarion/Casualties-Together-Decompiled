@@ -16,9 +16,11 @@
     <Reference Include="BepInEx" />
     <Reference Include="CasualtiesMP" />
     <Reference Include="Newtonsoft.Json" />
+    <Reference Include="Unity.TextMeshPro" />
     <Reference Include="Unity.VisualScripting.Core" />
     <Reference Include="UnityEngine.CoreModule" />
     <Reference Include="UnityEngine.IMGUIModule" />
     <Reference Include="UnityEngine.TextRenderingModule" />
+    <Reference Include="UnityEngine.UI" />
   </ItemGroup>
 </Project>

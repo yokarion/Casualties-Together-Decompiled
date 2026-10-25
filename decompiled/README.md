@@ -4,8 +4,8 @@ Generated automatically by [dotnet-autodecompiler](https://github.com/Yokarion/d
 
 This is a reconstruction produced by a decompiler, not the author's original source. Local variable names and compiler-generated members will not match what was written.
 
-- Upstream release: `v5.0.2`
-- Source: https://github.com/creaturefeaturelarry/casualties-together/releases/tag/v5.0.2
+- Upstream release: `v5.1.5`
+- Source: https://github.com/creaturefeaturelarry/casualties-together/releases/tag/v5.1.5
 - Decompiler: ICSharpCode.Decompiler 10.1.1.8388
 - Language version: C# 10.0
 - Embedded resources: none
@@ -24,13 +24,15 @@ Referenced by the code below but not part of this mirror. They belong to the gam
 | --- | --- | --- | --- |
 | 0Harmony | 2.7.0.0 | Multiupdater | no |
 | Assembly-CSharp | 0.0.0.0 | Multiupdater | no |
-| BepInEx | 5.4.23.5 | Multiupdater | no |
-| CasualtiesMP | 5.0.1.0 | Multiupdater | no |
+| BepInEx | 5.4.20.0 | Multiupdater | no |
+| CasualtiesMP | 5.1.4.0 | Multiupdater | no |
 | Newtonsoft.Json | 13.0.0.0 | Multiupdater | no |
+| Unity.TextMeshPro | 0.0.0.0 | Multiupdater | no |
 | Unity.VisualScripting.Core | 0.0.0.0 | Multiupdater | no |
 | UnityEngine.CoreModule | 0.0.0.0 | Multiupdater | no |
 | UnityEngine.IMGUIModule | 0.0.0.0 | Multiupdater | no |
 | UnityEngine.TextRenderingModule | 0.0.0.0 | Multiupdater | no |
+| UnityEngine.UI | 1.0.0.0 | Multiupdater | no |
 
 ## Not decompiled
 
