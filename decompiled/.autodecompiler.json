@@ -11,9 +11,9 @@
       "assemblyName": "Multiupdater",
       "assemblyVersion": "1.0.0.0",
       "targetFramework": ".NETStandard,Version=v2.1",
-      "sha256": "6bb0d5b64309f281f3603e6c5f8f748c3b885e4ed1f05bb86fc509568402d44e",
-      "sourceUrl": "https://github.com/creaturefeaturelarry/casualties-together/releases/tag/v5.1.5",
-      "sourceRef": "v5.1.5",
+      "sha256": "6189dc1ce34dc05ddc2af24aa2037af17fcca3d4cd5df11d30620ac0197141ac",
+      "sourceUrl": "https://github.com/creaturefeaturelarry/casualties-together/releases/tag/v5.2.0",
+      "sourceRef": "v5.2.0",
       "sourceFileCount": 10,
       "references": [
         {
@@ -36,7 +36,7 @@
         },
         {
           "name": "CasualtiesMP",
-          "version": "5.1.4.0",
+          "version": "5.2.0.0",
           "resolved": false,
           "framework": false
         },
